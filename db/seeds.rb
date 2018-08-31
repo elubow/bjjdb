@@ -19,3 +19,13 @@ Link.create!(
   url: 'https://www.bjjglobetrotters.com/summer-camp-2017-turtle-seminar-with-priit-mihkelson/',
   user_id: 42
 )
+Link.create!(
+  title: "Fall Camp 2018: Super Fundamental principles / White Belt Survival Course (for all belts) with Christian Graugart",
+  url: 'https://www.bjjglobetrotters.com/fall-camp-2018-super-fundamental-principles-white-belt-survival-course-with-christian-graugart/',
+  user_id: 42
+)
+Link.create!(
+  title: "Omoplata Setup with Options",
+  url: 'https://www.instagram.com/p/BnIMOvllheq/',
+  user_id: 42
+)

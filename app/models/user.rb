@@ -1,6 +1,8 @@
 class User < ApplicationRecord
-  enum role: [:user, :vip, :admin]
+  enum role: [:user, :moderator, :admin]
   after_initialize :set_default_role, :if => :new_record?
+
+  has_many :links
 
   def set_default_role
     self.role ||= :user
