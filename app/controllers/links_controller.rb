@@ -10,6 +10,8 @@ class LinksController < ApplicationController
   # GET /links/1
   # GET /links/1.json
   def show
+    @link.comments.all
+    @comment = @link.comments.build
   end
 
   # GET /links/new
