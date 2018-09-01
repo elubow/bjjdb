@@ -3,11 +3,9 @@
 one:
   category: MyString
   name: MyString
-  value: MyString
   description: MyText
 
 two:
   category: MyString
   name: MyString
-  value: MyString
   description: MyText
