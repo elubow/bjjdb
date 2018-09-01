@@ -211,7 +211,7 @@ positions = [
   {
     id: 2003,
     name: 'back-mount',
-    description: 'side mount'
+    description: 'back mount'
   },
   {
     id: 2004,
