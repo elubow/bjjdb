@@ -1,6 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Links</h1>
+<p>
+  <strong>Category:</strong>
+  <%= @tag.category %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @tag.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @tag.description %>
+</p>
+
+<%= link_to 'Edit', edit_tag_path(@tag) %> |
+<%= link_to 'Back', tags_path %>
+
+<br />
+<br />
+
+<h2>Links</h2>
 
 <table class="table table-hover">
   <thead>
@@ -14,7 +35,7 @@
   </thead>
 
   <tbody>
-    <% @links.each do |link| %>
+    <% @tag.links.each do |link| %>
       <tr>
         <td><%= link.title %></td>
         <td><%= link.url %></td>
@@ -31,7 +52,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Link', new_link_path %>

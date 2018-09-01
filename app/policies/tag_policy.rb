@@ -1,9 +1,9 @@
-class LinkPolicy
+class TagPolicy
   attr_reader :current_user, :model
 
   def initialize(current_user, model)
     @current_user = current_user
-    @link = model
+    @tag = model
   end
 
   def index?
@@ -14,16 +14,20 @@ class LinkPolicy
     @current_user.user
   end
 
+  def new?
+    @current_user.admin?
+  end
+
   def create?
-    @current_user.user
+    @current_user.admin?
   end
 
   def update?
-    @current_user.id == @link.user_id
+    @current_user.admin?
   end
 
   def destroy?
-    @current_user.id == @link.user_id
+    @current_user.admin?
   end
 
 end
