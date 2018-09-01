@@ -11,6 +11,13 @@
 </p>
 
 <p>
+  <strong>Tags:</strong>
+  <% @link.tags.each do |tag| %>
+    <%= link_to "#{tag.category}::#{tag.name}", tag %>
+  <% end %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @link.description %>
 </p>
