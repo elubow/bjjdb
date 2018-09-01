@@ -29,10 +29,10 @@
 
 <h2>
   Comments
-  (<%= @link.comments.count %>)
+  (<%= @comments.count %>)
 </h2>
 
-<% @link.comments.each do |c| %>
+<% @comments.each do |c| %>
   <p><%= c.user.name %> says:</p>
   <p><%= c.body %></p>
   <p>
@@ -40,4 +40,9 @@
     <%= link_to 'Delete', comment_path(c), method: :delete, data: { confirm: 'Are you sure?' } %>
   </p>
   --
+<% end if @comments.count > 0%>
+<% if current_user %>
+  <%= render partial: 'comments/form', locals: { comment: @comment } %>
+<% else %>
+  Must be logged in to comment.
 <% end %>

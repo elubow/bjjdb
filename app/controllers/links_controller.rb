@@ -10,7 +10,7 @@ class LinksController < ApplicationController
   # GET /links/1
   # GET /links/1.json
   def show
-    @link.comments.all
+    @comments = @link.comments.all
     @comment = @link.comments.build
   end
 
