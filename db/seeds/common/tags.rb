@@ -180,6 +180,16 @@ puts '  Move types'
     name: 'throw',
     description: 'explanation of a throw'
   },
+  {
+    id: 1110,
+    name: 'drill',
+    description: 'explanation of a drill'
+  },
+  {
+    id: 1111,
+    name: 'flow',
+    description: 'explanation of a flow'
+  },
 ].each do |t|
   Tag.create!(
     id: t[:id],
