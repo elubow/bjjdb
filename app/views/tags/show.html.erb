@@ -1,67 +1,80 @@
-<p id="notice"><%= notice %></p>
+<div class="col-lg-8">
+  <h1 class="mt-4">
+    <%= @tag.category.capitalize %> - <%= @tag.name.capitalize %>
+  </h1>
 
-<p>
-  <strong>Category:</strong>
-  <%= @tag.category %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @tag.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @tag.description %>
-</p>
-
-<% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
-  <%= link_to 'Edit', edit_tag_path(@tag) %> |
-  <%= link_to 'Back', tags_path %>
-<% end %>
-
-<br />
-<br />
-
-<h2>
-  Links
-  (<%= @tag.links.count %>)
-</h2>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Url</th>
-      <th>Tags</th>
-      <th>Added By</th>
-      <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
-        <th colspan="3">Actions</th>
-      <% end %>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tag.links.each do |link| %>
+  <p>
+    <strong>Category:</strong>
+    <%= @tag.category %>
+  </p>
+  
+  <p>
+    <strong>Name:</strong>
+    <%= @tag.name %>
+  </p>
+  
+  <p>
+    <strong>Description:</strong>
+    <%= @tag.description %>
+  </p>
+  
+  <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
+    <%= link_to 'Edit', edit_tag_path(@tag) %> |
+  <% end %>
+  <% if @current_user and @current_user.admin? %>
+    <%= link_to 'Delete', @tag, method: :delete, data: {confirm: 'Deleting this tag is irreversible. Are you sure?' } %>
+  <% end %>
+  
+  <br />
+  <br />
+  
+  <h2>
+    Links
+    (<%= @tag.links.count %>)
+  </h2>
+  
+  <table class="table table-hover">
+    <thead>
       <tr>
-        <td><%= link_to link.title, link %></td>
-        <td><%= link_to link.url, link.url %></td>
-        <td>
-          <% link.tags.each do |tag| %>
-            <%= link_to "#{tag.category}::#{tag.name}", tag %>
-          <% end %>
-        </td>
-        <td><%= link.user.name %> - <%= time_ago_in_words(link.created_at) %> ago</td>
+        <th>Video</th>
+        <th>Title</th>
+        <th>Tags</th>
         <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
-          <td><%= link_to 'Show', link %></td>
-          <td><%= link_to 'Edit', edit_link_path(link) %></td>
-          <td><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <th colspan="2">Actions</th>
         <% end %>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+  
+    <tbody>
+      <% @tag.links.each do |link| %>
+        <tr>
+          <td><%= link_to "Video", link.url %></td>
+          <td><%= link_to link.title, link %></td>
+          <td>
+            <% link.tags.each do |tag| %>
+              <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
+            <% end %>
+          </td>
+          <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
+            <td><%= link_to 'Edit', edit_link_path(link) %></td>
+            <td><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <% if @tag.links.count == 0 %>
+    I'm lonely. People must not like me.
+  <% end %>
+</div>
 
-<% if @tag.links.count == 0 %>
-  I'm lonely. Please add some links for me.
-<% end %>
+<!-- sidebars -->
+<div class="col-md-4">
+  <div class="card my-4">
+    <h5 class="card-header">Related Stuff</h5>
+    <div class="card-body">
+      This is where some tag shit will go.
+    </div>
+  </div>
+</div>

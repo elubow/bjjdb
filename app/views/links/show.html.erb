@@ -3,7 +3,7 @@
   
   <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
     <%= link_to 'Edit', edit_link_path(@link) %> |
-    <%= link_to 'Back', links_path %>
+    <%= link_to 'Delete', @link, method: :delete, data: {confirm: 'Deleting this link is irreversible. Are you sure?' } %>
   <% end %>
   
   <hr />
