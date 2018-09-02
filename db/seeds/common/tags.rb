@@ -235,11 +235,84 @@ positions = [
   },
   {
     id: 2006,
-    name: 'turle',
-    description: 'Turle'
+    name: 'turtle',
+    description: 'Turtle'
+  },
+  {
+    id: 2007,
+    name: 'single-leg-x',
+    description: 'Single Leg X Guard'
+  },
+  {
+    id: 2008,
+    name: 'x-guard',
+    description: 'X Guard'
+  },
+  {
+    id: 2009,
+    name: 'butterfly-guard',
+    description: 'Butterfly Guard'
+  },
+  {
+    id: 2010,
+    name: 'half-butterfly-guard',
+    description: 'Half Butterfly Guard'
+  },
+  {
+    id: 2011,
+    name: 'z-guard',
+    description: 'Z Guard'
+  },
+  {
+    id: 2012,
+    name: 'quarter-guard',
+    description: 'Quarter Guard (1/4)'
+  },
+  {
+    id: 2013,
+    name: 'half-guard',
+    description: 'Half Guard (1/2)'
+  },
+  {
+    id: 2014,
+    name: 'three-quarter-guard',
+    description: 'Three Quarter Guard (3/4)'
+  },
+  {
+    id: 2015,
+    name: 'quarter-z-guard',
+    description: 'Quarter Z Guard (1/4 Z)'
+  },
+  {
+    id: 2016,
+    name: 'spider-guard',
+    description: 'Spider Guard'
+  },
+  {
+    id: 2017,
+    name: 'deep-half-guard',
+    description: 'Deep Half Guard'
+  },
+  {
+    id: 2018,
+    name: 'knee-shield',
+    description: 'Knee Shield'
+  },
+  {
+    id: 2019,
+    name: 'whizzer',
+    description: 'Whizzer'
+  },
+  {
+    id: 2020,
+    name: 'ashi-garami',
+    description: 'Ashi Garami'
   },
 ]
 
+# position 2XXX
+# start-position 3XXX
+# end-position 4XXX
 [['position', 0], ['start-position', 1000], ['end-position', 2000]].each do |cat, incr|
   puts "    Positions -- #{cat}"
   positions.each do |t|
@@ -253,5 +326,3 @@ positions = [
     )
   end
 end
-
-

@@ -26,3 +26,10 @@ Link.create!(
   user_id: 42,
   tags: [101, 1000, 1051].map{|t|  Tag.find(t)}
 )
+
+Link.create!(
+  title: "Triangle From Side Control",
+  url: 'https://www.instagram.com/p/BnMduRMlqoS/',
+  user_id: 42,
+  tags: [101, 1000, 1051, 1076, 1101, 3002].map{|t|  Tag.find(t)}
+)
