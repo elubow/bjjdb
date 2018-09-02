@@ -7,23 +7,21 @@ class LinkPolicy
   end
 
   def index?
-    @current_user.user
   end
 
   def show?
-    @current_user.user
   end
 
   def create?
-    @current_user.user
+    @current_user.admin? or @current_user.moderator?
   end
 
   def update?
-    @current_user.id == @link.user_id
+    @current_user.admin? or @current_user.moderator?
   end
 
   def destroy?
-    @current_user.id == @link.user_id
+    @current_user.admin? or @current_user.moderator?
   end
 
 end
