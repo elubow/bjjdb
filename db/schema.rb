@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_01_135758) do
+ActiveRecord::Schema.define(version: 2018_09_02_032632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_09_01_135758) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "location"
     t.index ["url"], name: "index_links_on_url", unique: true
   end
 
@@ -64,6 +65,6 @@ ActiveRecord::Schema.define(version: 2018_09_01_135758) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "comments", "links", column: "link_id"
+  add_foreign_key "comments", "links"
   add_foreign_key "comments", "users"
 end
