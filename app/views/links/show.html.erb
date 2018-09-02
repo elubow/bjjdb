@@ -26,7 +26,7 @@
   <p>
     <strong>Tags:</strong>
     <% @link.tags.each do |tag| %>
-      <%= link_to "#{tag.category}::#{tag.name}", tag %>
+      <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
     <% end %>
   </p>
   
