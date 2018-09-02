@@ -13,13 +13,14 @@
   at <%= @link.created_at %>
   </p>
   
-  
   <hr />
+
   <p>
     TODO preview image
   </p>
   <p>
-    <strong>From</strong>
+    <%= link_to @link.url, "HERE" %> <br />
+    <strong>via</strong>
     <%= @link.location %>
   </p>
   
@@ -55,6 +56,7 @@
       <img class="d-flex mr-3 rounded-circle" src="https://placehold.it/50x50" alt>
       <div class="media-body">
         <h5 class="mt-0"><%= c.user.name %></h5>
+        <h6><%= time_ago_in_words(c.created_at) %></h5>
         <p><%= c.body %></p>
         <% if current_user and c.user == current_user %>
           <p>
