@@ -23,7 +23,10 @@
 <br />
 <br />
 
-<h2>Links</h2>
+<h2>
+  Links
+  (<%= @tag.links.count %>)
+</h2>
 
 <table class="table table-hover">
   <thead>
@@ -58,3 +61,7 @@
     <% end %>
   </tbody>
 </table>
+
+<% if @tag.links.count == 0 %>
+  I'm lonely. Please add some links for me.
+<% end %>
