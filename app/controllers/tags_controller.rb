@@ -1,30 +1,36 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
 
   # GET /tags
   # GET /tags.json
   def index
     @tags = Tag.all
+    authorize @tags
   end
 
   # GET /tags/1
   # GET /tags/1.json
   def show
+    authorize @tag
   end
 
   # GET /tags/new
   def new
     @tag = Tag.new
+    authorize @tag
   end
 
   # GET /tags/1/edit
   def edit
+    authorize @tag
   end
 
   # POST /tags
   # POST /tags.json
   def create
     @tag = Tag.new(tag_params)
+    authorize @tag
 
     respond_to do |format|
       if @tag.save
@@ -40,6 +46,7 @@ class TagsController < ApplicationController
   # PATCH/PUT /tags/1
   # PATCH/PUT /tags/1.json
   def update
+    authorize @tag
     respond_to do |format|
       if @tag.update(tag_params)
         format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
@@ -54,6 +61,7 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
+    authorize @tag
     @tag.destroy
     respond_to do |format|
       format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }

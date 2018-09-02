@@ -1,20 +1,24 @@
 class CommentsController < ApplicationController
   before_action :get_link, only: [:create]
   before_action :get_comment, only: [:edit, :update, :destroy]
+  after_action :verify_authorized
 
   # GET /comments/new
   def new
     @comment = Comment.new
+    authorize @comment
   end
 
   # GET /comments/1/edit
   def edit
+    authorize @comment
   end
 
   # POST /comments
   # POST /comments.json
   def create
     @comment = @link.comments.new(comment_params)
+    authorize @comment
     @comment.user_id = current_user.id
 
     respond_to do |format|
@@ -31,6 +35,7 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
+    authorize @comment
     @link = Link.find(@comment.link_id)
     respond_to do |format|
       if @comment.update(comment_params)
@@ -46,6 +51,7 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    authorize @comment
     @link = Link.find(@comment.link_id)
     @comment.destroy
 
