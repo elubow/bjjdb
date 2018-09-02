@@ -11,15 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body, id: :comment_body %>
-  </div>
+  <div class="card my-4">
+    <h5 class="card-header">Share your Thoughts:</h5>
+    <div class="card-body">
+      <div class="form-group">
+        <%= form.label :body %>
+        <%= form.text_area :body, id: :comment_body, class: 'form-control' %>
+      </div>
 
-    <%= form.hidden_field :user_id, value: current_user.id %>
-    <%= form.hidden_field :link_id %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      <%= form.hidden_field :link_id %>
 
-  <div class="actions">
-    <%= form.submit %>
+      <div class="form-group">
+        <%= form.submit :Submit, class: 'btn btn-primary' %>
+      </div>
+    </div>
   </div>
 <% end %>
