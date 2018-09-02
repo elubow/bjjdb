@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  enum role: [:user, :moderator, :admin]
+  enum role: {user: 0, moderator: 5, admin: 10}
   after_initialize :set_default_role, :if => :new_record?
 
   has_many :comments, dependent: :destroy
@@ -13,4 +13,5 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
 end

@@ -2,25 +2,31 @@
 
 <h1>Tags</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
+      <th>Links</th>
       <th>Category</th>
       <th>Name</th>
       <th>Description</th>
-      <th colspan="3"></th>
+      <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
+        <th colspan="3">Actions</th>
+      <% end %>
     </tr>
   </thead>
 
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
-        <td><%= tag.category %></td>
-        <td><%= tag.name %></td>
+        <td><%= link_to tag.links.count, tag %></td>
+        <td><%= link_to tag.category, tag %></td>
+        <td><%= link_to tag.name, tag %></td>
         <td><%= tag.description %></td>
-        <td><%= link_to 'Show', tag %></td>
-        <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
+          <td><%= link_to 'Show', tag %></td>
+          <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
+          <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

@@ -7,15 +7,17 @@ class CommentPolicy
   end
 
   def create?
-    @current_user.user
+    !@current_user.nil?
   end
 
   def update?
-    @current_user.id == @comment.user_id
+    !@current_user.nil? and
+      (@current_user.id == @comment.user_id)
   end
 
   def destroy?
-    @current_user.id == @comment.user_id
+    !@current_user.nil? and
+      (@current_user.id == @comment.user_id)
   end
 
 end
