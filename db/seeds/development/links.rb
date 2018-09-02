@@ -33,3 +33,17 @@ Link.create!(
   user_id: 42,
   tags: [101, 1000, 1051, 1076, 1101, 3002].map{|t|  Tag.find(t)}
 )
+
+Link.create!(
+  title: "Fall Camp 2018: Ass up head down passing with David Morcegao",
+  url: "https://www.bjjglobetrotters.com/fall-camp-2018-ass-up-head-down-passing-with-david-morcegao/",
+  user_id: 42,
+  tags: [101, 1001, 1051, 1106, 4002].map{|t|  Tag.find(t)}
+)
+
+Link.create!(
+  title: "Summer Camp 2017: Arm drag from closed guard with David Morcegao",
+  url: "https://www.bjjglobetrotters.com/summer-camp-2017-arm-drag-from-closed-guard-with-david-morcegao/",
+  user_id: 42,
+  tags: [101, 1001, 1050, 1106, 3000, 4003].map{|t|  Tag.find(t)}
+)
