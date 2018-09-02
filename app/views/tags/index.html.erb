@@ -1,37 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="col">
 
-<h1>Tags</h1>
+  <h1 class="mt-4">Tags</h1>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Links</th>
-      <th>Category</th>
-      <th>Name</th>
-      <th>Description</th>
-      <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
-        <th colspan="3">Actions</th>
-      <% end %>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tags.each do |tag| %>
+  <table class="table table-hover">
+    <thead>
       <tr>
-        <td><%= link_to tag.links.count, tag %></td>
-        <td><%= link_to tag.category, tag %></td>
-        <td><%= link_to tag.name, tag %></td>
-        <td><%= tag.description %></td>
+        <th>Links</th>
+        <th>Category</th>
+        <th>Name</th>
+        <th>Description</th>
         <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
-          <td><%= link_to 'Show', tag %></td>
-          <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-          <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <th colspan="2">Actions</th>
         <% end %>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+  
+    <tbody>
+      <% @tags.each do |tag| %>
+        <tr>
+          <td><%= link_to tag.links.count, tag %></td>
+          <td><%= link_to tag.category, tag %></td>
+          <td><%= link_to tag.name, tag %></td>
+          <td><%= tag.description %></td>
+          <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
+            <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
+            <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <br />
+  
+  <%= link_to 'New Tag', new_tag_path, class: 'btn btn-primary btn-large' %>
 
-<br>
+  <br />
+  <br />
 
-<%= link_to 'New Tag', new_tag_path %>
+</div>

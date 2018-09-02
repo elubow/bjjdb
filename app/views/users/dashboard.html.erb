@@ -1,0 +1,33 @@
+<% content_for :title do %>Dashboard<% end %>
+<div class="col">
+  <h1 class="mt-4">Dashboard</h1>
+
+  <div class="card-columns">
+    <% @links.each do |link| %>
+      <div class="card">
+          <img class="card-img-top img-fluid" src="//placehold.it/286x160" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title"><%= link_to link.title, link %></h4>
+            <% if link.comments.count > 0 %>
+              <p class="card-text">
+                <%= link_to pluralize(link.comments.count, "opinion"), link.url %>
+              </p>
+            <% end %>
+            <p class="card-text">
+              <%= link_to "video", link.url %>
+            </p>
+            <p class="card-text">
+              Tags:
+              <% link.tags.each do |tag| %>
+                <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
+              <% end %>
+            </p>
+            <% if link.description.present? %>
+              <p class="card-text"><%= truncate(link.description, length: 254, separator: /\w+/) %></p>
+            <% end %>
+            <p class="card-text"><small class="text-muted">Added <%= time_ago_in_words(link.created_at) %> by <%= link_to link.user.name, link.user %></small></p>
+          </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,55 +1,82 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @link.title %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @link.url %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @link.location %>
-</p>
-
-<p>
-  <strong>Tags:</strong>
-  <% @link.tags.each do |tag| %>
-    <%= link_to "#{tag.category}::#{tag.name}", tag %>
+<div class="col-lg-8">
+  <h1 class="mt-4"><%= @link.title %></h1>
+  
+  <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
+    <%= link_to 'Edit', edit_link_path(@link) %> |
+    <%= link_to 'Delete', @link, method: :delete, data: {confirm: 'Deleting this link is irreversible. Are you sure?' } %>
   <% end %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @link.description %>
-</p>
-
-<% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
-  <%= link_to 'Edit', edit_link_path(@link) %> |
-  <%= link_to 'Back', links_path %>
-<% end %>
-
-<hr>
-
-<h2>
-  Comments
-  (<%= @comments.count %>)
-</h2>
-
-<% @comments.each do |c| %>
-  <p><%= c.user.name %> says:</p>
-  <p><%= c.body %></p>
+  
+  <hr />
+  
   <p>
-    <%= link_to 'Edit', edit_comment_path(c) %>
-    <%= link_to 'Delete', comment_path(c), method: :delete, data: { confirm: 'Are you sure?' } %>
+  Added by <%= link_to @link.user.name, @link.user %>
+  at <%= @link.created_at %>
   </p>
-  --
-<% end if @comments.count > 0%>
-<% if current_user %>
-  <%= render partial: 'comments/form', locals: { comment: @comment } %>
-<% else %>
-  Must be logged in to comment.
-<% end %>
+  
+  <hr />
+
+  <p>
+    TODO preview image
+  </p>
+  <p>
+    <%= link_to "Video", @link.url %> <br />
+  </p>
+  <p>
+    <strong>via</strong>
+    <%= @link.location %>
+  </p>
+  
+  <p>
+    <strong>Tags:</strong>
+    <% @link.tags.each do |tag| %>
+      <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
+    <% end %>
+  </p>
+  
+  <% if @link.description %>
+    <hr />
+    
+    <p>
+      <%= @link.description %>
+    </p>
+  <% end %>
+  
+  <hr>
+  
+  <h2>
+    <%= pluralize(@comments.count, "Opinion") %>
+  </h2>
+  
+  <% if current_user %>
+    <%= render partial: 'comments/form', locals: { comment: @comment } %>
+  <% else %>
+    Must be logged in to comment.
+  <% end %>
+  
+  <% @comments.each do |c| %>
+    <div class="media mb-4">
+      <img class="d-flex mr-3 rounded-circle" src="https://placehold.it/50x50" alt>
+      <div class="media-body">
+        <h5 class="mt-0"><%= c.user.name %></h5>
+        <h6><%= time_ago_in_words(c.created_at) %></h5>
+        <p><%= c.body %></p>
+        <% if current_user and c.user == current_user %>
+          <p>
+            <%= link_to 'Edit', edit_comment_path(c) %>
+            <%= link_to 'Delete', comment_path(c), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  <% end if @comments.count > 0%>
+</div>  
+
+<!-- sidebars -->
+<div class="col-md-4">
+  <div class="card my-4">
+    <h5 class="card-header">Tag Stuff</h5>
+    <div class="card-body">
+      This is where some tag shit will go.
+    </div>
+  </div>
+</div>

@@ -13,8 +13,30 @@
       <%= render 'layouts/navigation' %>
     </header>
     <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <%= render 'layouts/messages' %>
+          </div>
+        </div>
+       <div class="row">
+         <%= yield %>
+       </div>
+      </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="footer-copyright text-center py-5 bg-primary">© 2018 Copyright:
+              <a href="https://eric.lubow.org/bjjdb/">BJJ DB</a>
+            </div>
+           </div>
+        </div>
+      </div>
+    </footer>
+
   </body>
 </html>

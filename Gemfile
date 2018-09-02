@@ -41,3 +41,7 @@ group :development, :test do
   gem 'pry-rescue'
   gem 'rubocop'
 end
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap-sass-official', '3.3.7'
+end
