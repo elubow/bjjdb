@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   resources :links do
     resources :comments, only: [:create, :index, :destroy]
   end
-  root to: 'visitors#index'
   devise_for :users
   resources :users
+
+  authenticated :user do
+    root 'users#dashboard'
+  end
+  root to: 'visitors#index'
 end
