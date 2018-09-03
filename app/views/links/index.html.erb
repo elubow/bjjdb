@@ -1,7 +1,7 @@
 <div class="col">
   <h1 class="mt-4">Links</h1>
   
-  <table class="table table-hover">
+  <table class="table">
     <thead>
       <tr>
         <th>Video</th>
@@ -20,14 +20,16 @@
           <td><%= link_to "Video", link.url %></td>
           <td><%= link_to link.title, link %></td>
           <td>
+            <ul class="tags">
             <% link.tags.each do |tag| %>
-              <%= link_to "#{tag.category}::#{tag.name}", tag %>
+              <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
             <% end %>
+            </ul>
           </td>
           <td><%= link.user.name %> - <%= time_ago_in_words(link.created_at) %> ago</td>
           <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
             <td><%= link_to 'Edit', edit_link_path(link) %></td>
-            <td><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>
         </tr>
       <% end %>
