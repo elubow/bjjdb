@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get :search, controller: :search, action: :input
+  get 'search/autocomplete', controller: :search, action: :autocomplete
+
   resources :comments
   resources :tags
   resources :links do
