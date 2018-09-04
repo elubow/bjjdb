@@ -1,3 +1,9 @@
-<h3>User</h3>
-<p>Name: <%= @user.name if @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+<% content_for :title do %><%= @user.name %><% end %>
+<div class="col">
+  <h1 class="mt-4">User</h1>
+  <p>Name: <%= @user.name if @user.name %></p>
+  <p>Email: <%= @user.email if @user.email %></p>
+
+  <%= render partial: 'links/list', locals: { links: @user.links } %>
+
+</div>
