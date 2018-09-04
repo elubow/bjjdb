@@ -3,30 +3,6 @@
   <h1 class="mt-4">Dashboard</h1>
 
   <div class="card-columns">
-    <% @links.each do |link| %>
-      <div class="card rounded">
-          <h4 class="card-title text-center pt-3 pl-3 pr-3"><%= link_to link.title, link %></h4>
-          <img class="card-img-top img-fluid pl-3 pr-3" src="//placehold.it/286x160" alt="Card image cap">
-          <div class="card-body">
-            <% if link.comments.count > 0 %>
-              <p class="card-text">
-                <%= link_to pluralize(link.comments.count, "opinion"), link.url %>
-              </p>
-            <% end %>
-            <p class="card-text">
-              <%= link_to "video", link.url %>
-            </p>
-            <ul class="tags">
-              <% link.tags.each do |tag| %>
-                <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
-              <% end %>
-            </ul>
-            <% if link.description.present? %>
-              <p class="card-text"><%= truncate(link.description, length: 254, separator: /\w+/) %></p>
-            <% end %>
-            <p class="card-text"><small class="text-muted">Added <%= time_ago_in_words(link.created_at) %> by <%= link_to link.user.name, link.user %></small></p>
-          </div>
-      </div>
-    <% end %>
+    <%= render partial: 'links/cards', locals: { links: @links } %>
   </div>
 </div>

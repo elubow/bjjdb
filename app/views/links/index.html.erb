@@ -3,11 +3,8 @@
   
   <%= render partial: 'links/list', locals: { links: @links } %>
   
-  <br />
-  
-  <%= link_to 'New Link', new_link_path, class: 'btn btn-primary btn-large' %>
-
-  <br />
-  <br />
+  <% if @current_user %>
+    <%= link_to 'New Link', new_link_path, class: 'btn btn-primary btn-large mt-1' %>
+  <% end %>
 
 </div>
