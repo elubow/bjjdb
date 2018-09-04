@@ -3,6 +3,7 @@
   <h1 class="mt-4">User</h1>
   <p>Name: <%= @user.name if @user.name %></p>
   <p>Email: <%= @user.email if @user.email %></p>
+  <p>Level: <%= @user.role.capitalize %></p>
 
   <%= render partial: 'links/list', locals: { links: @user.links } %>
 

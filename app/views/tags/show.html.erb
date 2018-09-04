@@ -3,6 +3,15 @@
     <%= @tag.category.capitalize %> - <%= @tag.name.capitalize %>
   </h1>
 
+  <% if @current_user %>
+    <% if @current_user.moderator? or @current_user.admin? %>
+      <%= link_to 'Edit', edit_tag_path(@tag) %>
+    <% end %>
+    <% if @current_user.admin? %>
+      | <%= link_to 'Delete', @tag, method: :delete, data: {confirm: 'Deleting this tag is irreversible. Are you sure?' } %>
+    <% end %>
+  <% end %>
+ 
   <p>
     <strong>Category:</strong>
     <%= @tag.category %>
@@ -18,17 +27,11 @@
     <%= @tag.description %>
   </p>
   
-  <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
-    <%= link_to 'Edit', edit_tag_path(@tag) %> |
+  <% if @tag.links.count > 0 %>
+    <%= render partial: 'links/list', locals: { links: @tag.links } %>
+  <% else %>
+    There are no videos tagged with <%= link_to @tag.full_name, @tag, class: 'tag' %> Add one <%= link_to 'here', new_link_path %>.
   <% end %>
-  <% if @current_user and @current_user.admin? %>
-    <%= link_to 'Delete', @tag, method: :delete, data: {confirm: 'Deleting this tag is irreversible. Are you sure?' } %>
-  <% end %>
-  
-  <br />
-  <br />
-
-  <%= render partial: 'links/list', locals: { links: @tag.links } %>
   
 </div>
 
