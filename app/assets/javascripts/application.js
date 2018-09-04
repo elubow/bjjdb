@@ -21,3 +21,5 @@
 //
 //= require_self
 //= require_tree .
+//
+//= require "easy-autocomplete/jquery.easy-autocomplete"
