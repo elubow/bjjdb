@@ -1,0 +1,41 @@
+  <h2>
+    Videos
+    (<%= links.count %>)
+  </h2>
+  
+  <% if links.count > 0 %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Video</th>
+          <th>Title</th>
+          <th>Tags</th>
+          <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
+            <th colspan="2">Actions</th>
+          <% end %>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% links.each do |link| %>
+          <tr>
+            <td><%= link_to "Video", link.url %></td>
+            <td><%= link_to link.title, link %></td>
+            <td>
+              <% link.tags.each do |tag| %>
+                <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
+              <% end %>
+            </td>
+            <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
+              <td><%= link_to 'Edit', edit_link_path(link) %></td>
+              <td><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  
+  <% else %>
+    No videos.
+  <% end %>
+
