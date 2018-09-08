@@ -1,6 +1,10 @@
-<h1>Editing Link</h1>
-
-<%= render 'form', link: @link %>
-
-<%= link_to 'Show', @link %> |
-<%= link_to 'Back', links_path %>
+<div class="col">
+  <div class="card">
+    <div class="card-header">
+      <h1 class="mt-4">Edit Video</h1>
+    </div>
+    <div class="card-body">   
+      <p>Don't worry about anything other than entering everything correctly. We'll grab a new screenshot if we need.</p>
+      <%= render 'form', link: @link %>
+    </div>
+</div>

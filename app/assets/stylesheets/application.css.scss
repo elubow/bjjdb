@@ -14,7 +14,5 @@
  *= require_self
  */
 
-//= @import "bootstrap";
-//= @import "bootswatch/lumen/variables";
-//= @import "bootstrap-sass-official";
-//= @import "bootswatch/lumen/bootswatch";
+@import "bootstrap";
+@import "chosen/chosen";
