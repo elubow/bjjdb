@@ -190,6 +190,11 @@ puts '  Move types'
     name: 'flow',
     description: 'explanation of a flow'
   },
+  {
+    id: 1112,
+    name: 'sweep',
+    description: 'explanation of a flow'
+  },
 ].each do |t|
   Tag.create!(
     id: t[:id],
@@ -325,4 +330,57 @@ positions = [
       updated_at: initial_timestamp
     )
   end
+end
+
+puts '  Submissions'
+[
+  {
+    id: 10001,
+    name: 'guillotine',
+    description: 'Any guillotine or guillotine variation should be tagged with this'
+  },
+  {
+    id: 10002,
+    name: 'arm-lock',
+    description: 'Any arm lock or arm lock variation should be tagged with this'
+  },
+  {
+    id: 10003,
+    name: 'wrist-lock',
+    description: 'Any wrist lock or wrist lock variation should be tagged with this'
+  },
+  {
+    id: 10004,
+    name: 'leg-lock',
+    description: 'Any leg lock or leg lock variation should be tagged with this'
+  },
+  {
+    id: 10005,
+    name: 'shoulder-lock',
+    description: 'Any shoulder lock or shoulder lock variation should be tagged with this. Kimura, Americana, etc.'
+  },
+  {
+    id: 10006,
+    name: 'ankle-lock',
+    description: 'Any ankle lock or ankle lock variation should be tagged with this'
+  },
+  {
+    id: 10007,
+    name: 'knee-bar',
+    description: 'Any knee bar or knee bar variation should be tagged with this'
+  },
+  {
+    id: 10050,
+    name: 'triangle',
+    description: 'Any triangle or triangle variation should be tagged with this'
+  },
+].each do |t|
+  Tag.create!(
+    id: t[:id],
+    name: t[:name],
+    description: t[:description],
+    category: 'submission',
+    created_at: initial_timestamp,
+    updated_at: initial_timestamp
+  )
 end
