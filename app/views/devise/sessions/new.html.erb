@@ -6,44 +6,44 @@
       <h1>Sign in</h1>
     </div>
     <div class="card-body">
-  <div class="authform p-3">
-    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
-      <%= devise_error_messages! %>
-      <div class="form-group row">
-        <%= f.label :email, class: 'col-sm-3 col-form-label-lg' %>
-        <div class="col-sm-9">
-          <%= f.email_field :email, :autofocus => true, class: 'form-control', placeholder: 'Email' %>
-        </div>
+      <div class="authform p-3">
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="form-group row">
+            <%= f.label :email, class: 'col-sm-3 col-form-label-lg' %>
+            <div class="col-sm-9">
+              <%= f.email_field :email, :autofocus => true, class: 'form-control', placeholder: 'Email' %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <%= f.label :password, class: 'col-sm-3 col-form-label-lg' %>
+            <div class="col-sm-9">
+              <%= f.password_field :password, class: 'form-control', placeholder: 'Password'%>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-5">
+              <% if devise_mapping.rememberable? -%>
+                <label>
+                  <%= f.check_box :remember_me, class: 'left' %> Remember me
+                </label>
+              <% end -%>
+            </div>
+            <div class="col-sm-4 text-right">
+            <%- if devise_mapping.recoverable? %>
+              <%= link_to "Forgot password?", new_password_path(resource_name) %>
+            <% end -%>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+              <%= f.submit 'Sign in', :class => 'btn-lg btn-primary btn-block' %>
+            </div>
+          </div>
+        <% end %>
       </div>
-      <div class="form-group row">
-        <%= f.label :password, class: 'col-sm-3 col-form-label-lg' %>
-        <div class="col-sm-9">
-          <%= f.password_field :password, class: 'form-control', placeholder: 'Password'%>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-5">
-          <% if devise_mapping.rememberable? -%>
-            <label>
-              <%= f.check_box :remember_me, class: 'left' %> Remember me
-            </label>
-          <% end -%>
-        </div>
-        <div class="col-sm-4 text-right">
-        <%- if devise_mapping.recoverable? %>
-          <%= link_to "Forgot password?", new_password_path(resource_name) %>
-        <% end -%>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-9">
-          <%= f.submit 'Sign in', :class => 'btn-lg btn-primary btn-block' %>
-        </div>
-      </div>
-    <% end %>
-  </div>
   </div>
 </div>
 <div class="col-3">
