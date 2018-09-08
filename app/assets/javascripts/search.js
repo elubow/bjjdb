@@ -3,6 +3,8 @@ document.addEventListener("turbolinks:load", function() {
 
   var options = {
     getValue: "name",
+    requestDelay: 100, // value in ms
+    theme: "bootstrap",
     url: function(phrase) {
       return "/search/a?q=" + phrase;
     },
