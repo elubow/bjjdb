@@ -1,3 +1,27 @@
 <div class="col">
   <h1 class="mt-4">Search Results</h1>
+  <div class="col">
+    <h2>Search: <%= params[:q] %></h2>
+  </div>
+  <% if @tags.count > 0 %>
+    <div class="col">
+      <h3><%= pluralize(@tags.count, "tag") %></h3>
+      <% @tags.each do |tag| %>
+        <%= link_to tag.full_name, tag, class: 'tag' %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @links.count > 0 %>
+    <div class="col">
+      <h3><%= pluralize(@links.count, "link") %></h3>
+      <% @links.each do |link| %>
+        <%= link_to link.title, link %><br />
+        Added <%= link.created_at.strftime("%Y-%b-%d") %> by <%= link_to link.user.name, link.user %>
+        <% if !link.description.nil? %>
+          <p><%= link.description %></p>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
