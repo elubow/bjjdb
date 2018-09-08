@@ -23,7 +23,9 @@
         <% if @current_user %>
           <% if (@current_user.moderator? or @current_user.admin?) or @current_user == link.user %>
             <td><%= link_to 'Edit', edit_link_path(link) %></td>
-            <td><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td>
+              <%= render partial: 'shared/delete_modal', locals: { model: link } %>
+            </td>
           <% end %>
         <% end %>
       </tr>

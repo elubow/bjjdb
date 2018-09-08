@@ -13,6 +13,7 @@
 //= require jquery3
 //= require chosen
 //= require multiselect
+//= require tags
 //= require popper
 //= require rails-ujs
 //= require turbolinks
