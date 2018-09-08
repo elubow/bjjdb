@@ -11,8 +11,12 @@
 // about supported directives.
 //
 //= require jquery3
+//= require chosen
+//= require multiselect
 //= require popper
 //= require rails-ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//
+//= require_self
 //= require_tree .
