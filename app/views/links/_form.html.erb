@@ -1,7 +1,7 @@
 <%= form_with(model: link, local: true) do |form| %>
   <% if link.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(link.errors.count, "error") %> prohibited this link from being saved:</h2>
+      <h2><%= pluralize(link.errors.count, "error") %> prohibited this video from being saved:</h2>
 
       <ul>
       <% link.errors.full_messages.each do |message| %>
@@ -11,27 +11,37 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group form-row">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: 'form-control', required: true %>
+    <small id="link_title_help" class="form-text text-muted">This is the video title.</small>
+    <div class="invalid-feedback">
+      Video must have a title.
+    </div>
   </div>
 
-  <div class="field">
+  <div class="form-group form-row">
     <%= form.label :url %>
-    <%= form.text_field :url %>
+    <%= form.text_field :url, class: 'form-control', required: true %>
+    <small id="link_url_help" class="form-text text-muted">URL of the video.</small>
   </div>
 
-  <div class="field">
-    <%= form.label :location %>
-    <small>Automatically updated based on URL</small><br />
+  <div class="form-group form-row">
+    <%= form.label :tags %>
+    <%= form.select :tag_ids,
+      Tag.all.map {|t|  [t.full_name, t.id]},
+      { include_blank: true },
+      { multiple: true, required: true }
+    %>
+    <small id="link_url_help" class="form-text text-muted">Add all the tags that relate to this video.</small>
   </div>
 
-  <div class="field">
+  <div class="form-group form-row">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Save Video', class: 'btn btn-primary' %>
   </div>
 <% end %>
