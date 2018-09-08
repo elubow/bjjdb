@@ -11,7 +11,7 @@ class Link < ApplicationRecord
 
   private
     def set_location
-        self.location = URI.parse(self.url).host.downcase
-        self.location.sub!('www.', '') if self.location.starts_with?('www.')
+      self.location = URI.parse(self.url).host.downcase
+      self.location.sub!('www.', '') if self.location.starts_with?('www.')
     end
 end
