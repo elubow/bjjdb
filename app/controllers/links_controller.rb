@@ -37,7 +37,7 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if @link.save
-        format.html { redirect_to @link, notice: 'Link was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Video added.' }
         format.json { render :show, status: :created, location: @link }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class LinksController < ApplicationController
     authorize @link
     respond_to do |format|
       if @link.update(link_params)
-        format.html { redirect_to @link, notice: 'Link was successfully updated.' }
+        format.html { redirect_to @link, notice: 'Video updated.' }
         format.json { render :show, status: :ok, location: @link }
       else
         format.html { render :edit }
@@ -67,7 +67,7 @@ class LinksController < ApplicationController
     authorize @link
     @link.destroy
     respond_to do |format|
-      format.html { redirect_to links_url, notice: 'Cideo was successfully removed.' }
+      format.html { redirect_to links_url, notice: 'Video removed.' }
       format.json { head :no_content }
     end
   end

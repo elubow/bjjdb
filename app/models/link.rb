@@ -2,7 +2,7 @@ class Link < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_and_belongs_to_many :tags
-  has_one :thumbnail
+  has_one :thumbnail, dependent: :destroy
 
   after_validation :set_location, on: [:create, :update]
   after_commit { GetVideoMetadataJob.perform_later self}
@@ -11,6 +11,14 @@ class Link < ApplicationRecord
   validates :title, presence: true, length: { minimum: 3 }
   validates :url, format: {with: Regexp.new(URI::regexp(%w(http https)))}, presence: true
 
+
+  def thumbnail_image_location(width, height)
+    if self.thumbnail.nil? or self.thumbnail.source.nil?
+      return "//via.placeholder.com/#{width}x#{height}"
+    else
+      self.thumbnail.source
+    end
+  end
 
   def description_exists?
     if (!self.description.nil? and self.description.length > 0) or

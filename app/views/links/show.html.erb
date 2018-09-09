@@ -16,7 +16,7 @@
   <hr />
 
   <p>
-    <%= link_to image_tag(@link.thumbnail.source, alt: @link.title, height: '375px', width: '400px'), @link.url %>
+    <%= link_to image_tag(@link.thumbnail_image_location(400,375), alt: @link.title, height: '375px', width: '400px'), @link.url %>
   </p>
 
   <p>
