@@ -49,6 +49,8 @@ GEM
       io-like (~> 0.3.0)
     arel (9.0.0)
     ast (2.4.0)
+    attr_encrypted (3.0.3)
+      encryptor (~> 3.0.0)
     authtrail (0.1.2)
       activerecord (>= 5)
       geocoder
@@ -101,6 +103,7 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    encryptor (3.0.0)
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.25)
@@ -267,6 +270,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  attr_encrypted (~> 3.0.0)
   authtrail
   better_errors
   binding_of_caller

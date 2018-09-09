@@ -33,6 +33,7 @@ gem 'pg'
 gem 'pundit'
 gem 'authtrail'
 gem 'maxminddb'
+gem "attr_encrypted", "~> 3.0.0"
 group :development do
   gem 'better_errors'
   gem 'hub', :require=>nil
