@@ -1,6 +1,6 @@
 		<article class="search-result row">
 			<div class="col-xs-12 col-sm-12 col-md-3">
-        <%= link_to image_tag("//lorempixel.com/250/140/people", alt: "Lorem ipsum"), link %>
+        <%= link_to image_tag(link.thumbnail.source, alt: link.title, height: '140px', width: '250px'), link.url %>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-2">
 				<ul class="meta-search">
@@ -10,8 +10,8 @@
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
         <h3><%= link_to link.title, link %></h3>
-        <% if !link.description.nil? %>
-          <p><%= link.description %></p>
+        <% if link.description_exists? %>
+          <p><%= link.show_description %></p>
         <% end %>
         <ul>
           <% link.tags.each do |tag| %>
@@ -20,7 +20,3 @@
         </ul>
 			</div>
 		</article>
-
-
-
-
