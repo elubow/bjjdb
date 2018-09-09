@@ -1,12 +1,7 @@
-<td>
-  <%= link_to user.email, user %>
-</td>
-<td>
-  <%= form_for(user) do |f| %>
-    <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
-    <%= f.submit 'Change Role', :class => 'button-xs' %>
-  <% end %>
-</td>
-<td>
-  <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
-</td>
+<td><%= link_to user.name, user %></td>
+<td><%= link_to user.email, user %></td>
+<td><%= time_ago_in_words(user.created_at) %> ago</td>
+<td><%= user.links.count %></td>
+<td><%= user.login_activities.where(success: true).count %></td>
+<td><%= time_ago_in_words(user.login_activities.where(success: true).order(created_at: :desc).limit(1).first.created_at) %> ago</td>
+<td><%= user.deleted_at? %></td>

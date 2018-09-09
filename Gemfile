@@ -31,6 +31,8 @@ gem 'high_voltage'
 gem 'jquery-rails'
 gem 'pg'
 gem 'pundit'
+gem 'authtrail'
+gem 'maxminddb'
 group :development do
   gem 'better_errors'
   gem 'hub', :require=>nil

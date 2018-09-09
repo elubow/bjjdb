@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :links
+  has_many :login_activities, as: :user
 
   def set_default_role
     self.role ||= :user
