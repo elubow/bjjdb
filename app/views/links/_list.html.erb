@@ -3,6 +3,7 @@
     <tr>
       <th>Video</th>
       <th>Title</th>
+      <th>Description</th>
       <th>Tags</th>
       <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
         <th colspan="2">Actions</th>
@@ -15,6 +16,11 @@
       <tr>
         <td><%= link_to "Video", link.url %></td>
         <td><%= link_to link.title, link %></td>
+        <td>
+          <% if link.description_exists? %>
+            <%= truncate(link.show_description, length: 255, separator: /\w+/) %>
+          <% end %>
+        </td>
         <td>
           <% link.tags.each do |tag| %>
             <%= link_to "#{tag.full_name}", tag, class: 'tag' %>

@@ -16,7 +16,7 @@
   <hr />
 
   <p>
-    <%= link_to image_tag("//lorempixel.com/400/325/people", alt: "Lorem ipsum"), @link.url %>
+    <%= link_to image_tag(@link.thumbnail.source, alt: @link.title, height: '375px', width: '400px'), @link.url %>
   </p>
 
   <p>

@@ -1,23 +1,20 @@
 <% links.each do |link| %>
   <div class="card rounded">
       <h4 class="card-title text-center pt-3 pl-3 pr-3"><%= link_to link.title, link %></h4>
-      <img class="card-img-top img-fluid pl-3 pr-3" src="//lorempixel.com/250/140/people" alt="Card image cap">
+      <%= link_to image_tag(link.thumbnail.source, alt: link.title, height: '250px', width: '140px', class: 'card-img-top img-fluid pl-3 pr-3'), link.url %>
       <div class="card-body">
         <% if link.comments.count > 0 %>
           <p class="card-text">
             <%= link_to pluralize(link.comments.count, "opinion"), link.url %>
           </p>
         <% end %>
-        <p class="card-text">
-          <%= link_to "video", link.url %>
-        </p>
         <ul class="tags">
           <% link.tags.each do |tag| %>
             <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
           <% end %>
         </ul>
-        <% if link.description.present? %>
-          <p class="card-text"><%= truncate(link.description, length: 254, separator: /\w+/) %></p>
+        <% if link.description_exists? %>
+          <p class="card-text"><%= truncate(link.show_description, length: 254, separator: /\w+/) %></p>
         <% end %>
         <p class="card-text"><small class="text-muted">Added <%= time_ago_in_words(link.created_at) %> by <%= link_to link.user.name, link.user %></small></p>
       </div>
