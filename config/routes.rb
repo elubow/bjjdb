@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :links do
     resources :comments, only: [:create, :index, :destroy]
   end
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => 'users/registrations' }
   resources :users
 
   authenticated :user do
