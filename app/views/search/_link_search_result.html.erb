@@ -1,0 +1,26 @@
+		<article class="search-result row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+        <%= link_to image_tag("//lorempixel.com/250/140/people", alt: "Lorem ipsum"), link %>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-2">
+				<ul class="meta-search">
+          <li><i class="pt-1 pr-3 mr-2 glyphicon-calendar"></i> <span><%= link.created_at.strftime("%Y-%b-%d") %></span></li>
+          <li><i class="pt-1 pr-3 mr-2 glyphicon-user"></i> <span><%= link_to link.user.name, link.user %></span></li>
+				</ul>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+        <h3><%= link_to link.title, link %></h3>
+        <% if !link.description.nil? %>
+          <p><%= link.description %></p>
+        <% end %>
+        <ul>
+          <% link.tags.each do |tag| %>
+            <%= link_to tag.full_name, tag, class: 'tag' %>
+          <% end %>
+        </ul>
+			</div>
+		</article>
+
+
+
+

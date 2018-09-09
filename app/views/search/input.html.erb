@@ -1,11 +1,18 @@
 <div class="col">
   <h1 class="mt-4">Search Results</h1>
   <div class="col">
-    <h2>Search: <%= params[:q] %></h2>
+    <% if @total_results > 0 %>
+      <h2 class="lead"><strong class="text-danger"><%= @total_results %></strong> results were found for the search for <strong class="text-danger"><%= params[:q] %></strong></h2>
+    <% else %>
+      <h2 class="lead">No results found for <strong class="text-danger"><%= params[:q] %></strong></h2>
+    <% end %>
   </div>
+
+  <hr />
+
   <% if @tags.count > 0 %>
     <div class="col">
-      <h3><%= pluralize(@tags.count, "tag") %></h3>
+      <h3><%= pluralize(@tags.count, "tag").capitalize %></h3>
       <% @tags.each do |tag| %>
         <%= link_to tag.full_name, tag, class: 'tag' %>
       <% end %>
@@ -14,13 +21,9 @@
 
   <% if @links.count > 0 %>
     <div class="col">
-      <h3><%= pluralize(@links.count, "link") %></h3>
+      <h3><%= pluralize(@links.count, "video").capitalize %></h3>
       <% @links.each do |link| %>
-        <%= link_to link.title, link %><br />
-        Added <%= link.created_at.strftime("%Y-%b-%d") %> by <%= link_to link.user.name, link.user %>
-        <% if !link.description.nil? %>
-          <p><%= link.description %></p>
-        <% end %>
+        <%= render partial: 'search/link_search_result', locals: { link: link } %>
       <% end %>
     </div>
   <% end %>

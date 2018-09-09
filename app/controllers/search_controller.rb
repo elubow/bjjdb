@@ -9,6 +9,7 @@ class SearchController < ApplicationController
   def input
     @tags = Tag.ransack(full_tag_cont: params[:q]).result(distinct: true)
     @links = Link.ransack(title_cont: params[:q]).result(distinct: true)
+    @total_results = @links.count + @tags.count
   end
 
   private
