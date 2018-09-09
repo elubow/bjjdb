@@ -34,6 +34,7 @@ gem 'pundit'
 gem 'authtrail'
 gem 'maxminddb'
 gem "attr_encrypted", "~> 3.0.0"
+gem 'ransack'
 group :development do
   gem 'better_errors'
   gem 'hub', :require=>nil

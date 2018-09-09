@@ -1,0 +1,30 @@
+<div class="col">
+  <h1 class="mt-4">Search Results</h1>
+  <div class="col">
+    <% if @total_results > 0 %>
+      <h2 class="lead"><strong class="text-danger"><%= @total_results %></strong> results were found for the search for <strong class="text-danger"><%= params[:q] %></strong></h2>
+    <% else %>
+      <h2 class="lead">No results found for <strong class="text-danger"><%= params[:q] %></strong></h2>
+    <% end %>
+  </div>
+
+  <hr />
+
+  <% if @tags.count > 0 %>
+    <div class="col">
+      <h3><%= pluralize(@tags.count, "tag").capitalize %></h3>
+      <% @tags.each do |tag| %>
+        <%= link_to tag.full_name, tag, class: 'tag' %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @links.count > 0 %>
+    <div class="col">
+      <h3><%= pluralize(@links.count, "video").capitalize %></h3>
+      <% @links.each do |link| %>
+        <%= render partial: 'search/link_search_result', locals: { link: link } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

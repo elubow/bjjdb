@@ -10,17 +10,15 @@
   
   <p>
   Added by <%= link_to @link.user.name, @link.user %>
-  at <%= @link.created_at %>
+  on <%= @link.created_at.strftime("%Y-%b-%d") %>
   </p>
   
   <hr />
 
   <p>
-    TODO preview image
+    <%= link_to image_tag("//lorempixel.com/400/325/people", alt: "Lorem ipsum"), @link.url %>
   </p>
-  <p>
-    <%= link_to "Video", @link.url %> <br />
-  </p>
+
   <p>
     <strong>via</strong>
     <%= @link.location %>
