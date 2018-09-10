@@ -86,11 +86,32 @@
 </div>  
 
 <!-- sidebars -->
-<div class="col-md-4">
-  <div class="card my-4">
-    <h5 class="card-header">Tag Stuff</h5>
-    <div class="card-body">
-      This is where some tag shit will go.
+<% if has_start_position?(@link) %>
+  <div class="col-md-4">
+    <div class="card my-4">
+      <h5 class="card-header">Similar Starting Position</h5>
+      <div class="card-body">
+        <ul>
+          <% same_start_position(@link).each do |l| %>
+            <li><%= link_to l.title, l %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
+
+<% if has_end_position?(@link) %>
+  <div class="col-md-4">
+    <div class="card my-4">
+      <h5 class="card-header">Next Steps</h5>
+      <div class="card-body">
+        <ul>
+          <% same_end_position(@link).each do |l| %>
+            <li><%= link_to l.title, l %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>
