@@ -1,6 +1,6 @@
 module LinksHelper
   def has_start_position?(link)
-    link.tags.collect(&:category).uniq.include?("start-position")
+    link.tags.collect(&:category).uniq.include?("start-position") and Tag.find(get_start_position_id(link)).links.count > 0
   end
 
   def has_end_position?(link)
@@ -31,5 +31,18 @@ module LinksHelper
   def same_end_position(link)
     end_pos_id = get_end_position_id(link)
     Tag.find_by_full_name("start-position::#{Tag.find(end_pos_id).name}").links.order(created_at: :desc).limit(5)
+  end
+
+  # find videos where the end-position of previous video
+  # is the same as the start-position of current video
+  def end_position_same_as_start_position(link)
+    start_pos_id = get_start_position_id(link)
+    Tag.find_by_full_name("end-position::#{Tag.find(start_pos_id).name}").links.order(created_at: :desc).limit(5)
+  end
+
+  # drills exist for getting into start-position or about 
+  # the position or getting into the specified submssion 
+  def has_drills?(link)
+    false
   end
 end
