@@ -23,9 +23,14 @@ module LinksHelper
     link.tags.select {|t|  t.category == "position"}.first.id
   end
 
+  def has_same_start_position_videos?(link)
+    start_pos_id = get_start_position_id(link)
+    Tag.find(start_pos_id).links.order(created_at: :desc).limit(5).reject{|l|  l.id}.count > 0
+  end
+
   def same_start_position(link)
     start_pos_id = get_start_position_id(link)
-    Tag.find(start_pos_id).links.order(created_at: :desc).limit(5)
+    Tag.find(start_pos_id).links.order(created_at: :desc).limit(5).reject{|l|  l.id}[0..4]
   end
 
   def same_end_position(link)
@@ -35,9 +40,15 @@ module LinksHelper
 
   # find videos where the end-position of previous video
   # is the same as the start-position of current video
+  def has_end_position_same_as_start_position_videos?(link)
+    start_pos_id = get_start_position_id(link)
+    Tag.find_by_full_name("end-position::#{Tag.find(start_pos_id).name}").links.order(created_at: :desc).limit(6).reject{|l|  l.id == link.id}.count > 0
+  end
+
   def end_position_same_as_start_position(link)
     start_pos_id = get_start_position_id(link)
-    Tag.find_by_full_name("end-position::#{Tag.find(start_pos_id).name}").links.order(created_at: :desc).limit(5)
+    # this feels painfully wrong to write this
+    Tag.find_by_full_name("end-position::#{Tag.find(start_pos_id).name}").links.order(created_at: :desc).limit(6).reject{|l|  l.id == link.id}[0..4]
   end
 
   # drills exist for getting into start-position or about 

@@ -87,58 +87,6 @@
 
 <!-- sidebars -->
 <div class="col-md-4">
-  <h2 class="mt-4">Lots of Possibilities</h2>
-  <% if has_start_position?(@link) %>
-    <div class="card my-4">
-      <h5 class="card-header">How To Get Here</h5>
-      <div class="card-body">
-        <ul>
-          <% end_position_same_as_start_position(@link).each do |l| %>
-            <li><%= link_to l.title, l %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-
-  <% if has_start_position?(@link) %>
-    <div class="card my-4">
-      <h5 class="card-header">Similar Starting Position</h5>
-      <div class="card-body">
-        <ul>
-          <% same_start_position(@link).each do |l| %>
-            <li><%= link_to l.title, l %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-
-  <% if has_end_position?(@link) %>
-    <div class="card my-4">
-      <h5 class="card-header">Next Steps from <%= Tag.find(get_end_position_id(@link)).clean_name %></h5>
-      <div class="card-body">
-        <ul>
-          <% same_end_position(@link).each do |l| %>
-            <li><%= link_to l.title, l %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-
-  <% if has_drills?(@link) %>
-    <div class="card my-4">
-      <h5 class="card-header">Drills for <%= Tag.find(get_end_position_id(@link)).clean_name %></h5>
-      <div class="card-body">
-        <ul>
-          <% same_end_position(@link).each do |l| %>
-            <li><%= link_to l.title, l %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-
-  <% end %>
-
+  <h2 class="mt-4">Other Stuff To Do</h2>
+  <%= render partial: 'links/related_videos', locals: { link: @link } %>
 </div>
