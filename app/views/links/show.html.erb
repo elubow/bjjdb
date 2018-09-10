@@ -1,3 +1,19 @@
+<% title @link.title %>
+<% description truncate(@link.show_description, length: 254, separator: /\w+/) %>
+<% set_meta_tags canonical: request.url %>
+<% set_meta_tags keywords: @link.tags.map{|t| t.full_name} %>
+<% set_meta_tags og: {
+  title: @link.title,
+  description: truncate(@link.show_description, length: 254, separator: /\w+/),
+  type: 'article',
+  url: @link.url,
+  image: @link.thumbnail.source
+} %>
+<% set_meta_tags article: {
+  published_time: @link.created_at,
+  modified_time: @link.updated_at
+} %>
+
 <div class="col-lg-8">
   <h1 class="mt-4"><%= @link.title %></h1>
   
