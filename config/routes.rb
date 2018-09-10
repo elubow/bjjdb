@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   get :search, controller: :search, action: :input
   get 'search/a', controller: :search, action: :autocomplete
 
+  get 'validate/email', to: 'validations#email'
+  get 'validate/url', to: 'validations#url'
+
   resources :comments
   resources :tags
   resources :links do

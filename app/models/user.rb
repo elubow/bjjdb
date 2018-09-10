@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :links
   has_many :login_activities, as: :user
 
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "only allows valid emails" }
+
   def set_default_role
     self.role ||= :user
   end

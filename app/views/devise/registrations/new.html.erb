@@ -16,6 +16,8 @@
           <div class="form-group">
             <%= f.label :email, class: 'col-form-label-lg' %>
             <%= f.email_field :email, class: 'form-control' %>
+            <div class="p-2 mt-2 bg-danger text-white" id="email_taken">Error: <span id="email_error"></span></div>
+            <div class="p-2 mt-2 bg-success text-white" id="email_valid">Email Available!</div>
           </div>
           <div class="form-group">
             <%= f.label :password, class: 'col-form-label-lg' %>
