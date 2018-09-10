@@ -7,6 +7,10 @@ class Tag < ApplicationRecord
 
   TAG_SEPARATOR = '::'
 
+  def clean_name
+    self.name.gsub('-', ' ').titleize
+  end
+
   private
     def create_full_name
       self.full_name = "#{self.category}#{TAG_SEPARATOR}#{self.name}"
