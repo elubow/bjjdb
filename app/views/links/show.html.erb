@@ -31,11 +31,11 @@
     <% end %>
   </p>
   
-  <% if @link.description %>
+  <% if @link.description_exists? %>
     <hr />
     
     <p>
-      <%= @link.description %>
+      <%= @link.show_description %>
     </p>
   <% end %>
   

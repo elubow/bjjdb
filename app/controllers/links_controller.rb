@@ -35,6 +35,11 @@ class LinksController < ApplicationController
     authorize @link
     @link.user_id = current_user.id
 
+    if Link.find_by_url(@link.url).kind_of?(Link)
+      redirect_to root_path, alert: 'We already have that video.'
+      return
+    end
+
     respond_to do |format|
       if @link.save
         format.html { redirect_to root_path, notice: 'Video added.' }

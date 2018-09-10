@@ -6,6 +6,8 @@ class GetVideoMetadataJob < ApplicationJob
       @lt = LinkThumbnailer.generate(link.url)
     rescue LinkThumbnailer::Exceptions => e
       Rails.logger.error("Could not retrieve thumbnail for #{link.url}: #{e}")
+      Rails.logger.error("Deleting link: #{link.url}")
+      Link.find(link).destroy
       return
     end
     @thumbnail = Thumbnail.where(link_id: link.id).first_or_create

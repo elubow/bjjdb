@@ -10,10 +10,10 @@ class ValidationsController < ApplicationController
   end
 
   def url
-    if params[:url].size <= 8
-      render json: { valid: false }
+    if params[:url].size <= 8 or URI::regexp.match(params[:url]).nil?
+      render json: { valid: false, error: "Invalid URL" }
     elsif Link.find_by_url(params[:url])
-      render json: { valid: false }
+      render json: { valid: false, error: "We already have that video" }
     else
       render json: { valid: true }
     end

@@ -37,8 +37,6 @@ class Link < ApplicationRecord
     if !self.thumbnail.description.nil? and self.thumbnail.description.length > 0
       return self.thumbnail.description
     end
-
-    return ""
   end
 
   private
