@@ -1,0 +1,43 @@
+<% title "Videos taught by #{@instructor.display_name}" %>
+<% description @instructor.description %>
+<% set_meta_tags canonical: request.url %>
+<% set_meta_tags keywords: [@instructor.display_name] %>
+<% set_meta_tags og: {
+  title: "Videos taught by #{@instructor.display_name}",
+  description: truncate(@instructor.description, length: 254, separator: /\w+/),
+} %>
+
+
+<div class="col">
+  <h1 class="mt-4">
+    <%= @instructor.display_name %>
+  </h1>
+
+  <%= image_tag(@instructor.links.first.thumbnail.source, alt: @instructor.display_name, height: '375px', width: '400px') %>
+  
+  <% if @instructor.description? %>
+  <p>
+    <%= @instructor.description %>
+  </p>
+  <% end %>
+  
+  <% if current_user %>
+    <div class="row">
+      <div class="col-9">
+      </div>
+      <div class="col-3 text-right">
+        <% if current_user.moderator? or current_user.admin? %>
+          <%= link_to 'Edit', edit_instructor_path(@instructor), class: 'btn btn-primary' %>
+        <% end %>
+        <% if current_user.admin? %>
+          | <%= link_to 'Delete', @instructor, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @instructor.video_count > 0 %>
+    <h4><%= pluralize(@instructor.video_count, "Videos").titleize %></h4>
+    <%= render partial: 'links/list', locals: {links: @instructor.links} %>
+  <% end %>
+</div>

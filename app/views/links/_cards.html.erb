@@ -3,20 +3,45 @@
       <h4 class="card-title text-center pt-3 pl-3 pr-3"><%= link_to link.title, link %></h4>
       <%= link_to image_tag(link.thumbnail_image_location(140,250), alt: link.title, height: '250px', width: '140px', class: 'card-img-top img-fluid pl-3 pr-3'), link.url, target: '_blank' %>
       <div class="card-body">
-        <% if link.comments.count > 0 %>
-          <p class="card-text">
-            <%= link_to pluralize(link.comments.count, "opinion"), link.url %>
-          </p>
-        <% end %>
-        <ul class="tags">
-          <% link.tags.each do |tag| %>
-            <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
-          <% end %>
-        </ul>
-        <% if link.description_exists? %>
-          <p class="card-text"><%= truncate(link.show_description, length: 254, separator: /\w+/) %></p>
-        <% end %>
-        <p class="card-text"><small class="text-muted">Added <%= time_ago_in_words(link.created_at) %> by <%= link_to link.user.name, link.user %></small></p>
+
+        <div class="row mb-2">
+          <div class="col">
+            <% if link.has_instructors? %>
+              <% link.instructors.each do |i| %>
+                <%= link_to i.display_name, i, class: 'btn btn-light btn-sm' %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <% link.tags.each do |tag| %>
+              <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <% if link.description_exists? %>
+              <p class="card-text"><%= truncate(link.show_description, length: 254, separator: /\w+/) %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <p class="card-text"><small class="text-muted">Added <%= time_ago_in_words(link.created_at) %> by <%= link_to link.user.name, link.user %></small></p>
+          </div>
+          <div class="col-6 text-right">
+            <% if link.comments.count > 0 %>
+              <p class="card-text">
+                <%= link_to pluralize(link.comments.count, "opinion"), link.url %>
+              </p>
+            <% end %>
+          </div>
+        </div>
       </div>
   </div>
 <% end %>

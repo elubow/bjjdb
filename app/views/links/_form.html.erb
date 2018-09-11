@@ -28,6 +28,16 @@
   </div>
 
   <div class="form-group form-row">
+    <%= form.label :instructors, class: 'col-form-label-lg' %>
+    <%= form.select :instructor_ids,
+      Instructor.all.map {|t|  [t.display_name, t.id]},
+      { include_blank: true },
+      { multiple: true }
+    %>
+  <small id="link_url_help" class="form-text text-muted">Type the name of the instructor. If (s)he doesn't exist when you type their name, you'll have to add them to the instructors database.</small>
+  </div>
+
+  <div class="form-group form-row">
     <%= form.label :tags, class: 'col-form-label-lg' %>
     <%= form.select :tag_ids,
       Tag.all.map {|t|  [t.full_name, t.id]},
