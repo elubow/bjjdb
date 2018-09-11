@@ -18,6 +18,11 @@ class Link < ApplicationRecord
     self.instructors.count > 0
   end
 
+  def videos_by_instructors(limit=25)
+    instructor_ids = self.instructors.collect(&:id)
+    Link.joins(:instructors).where(instructors: {id: instructor_ids}).limit(limit).order(created_at: :desc).uniq.reject{|l|  l.id == self.id}[0..limit]
+  end
+
   def thumbnail_image_location(width, height)
     if self.thumbnail.nil? or self.thumbnail.source.nil?
       return "//via.placeholder.com/#{width}x#{height}"
