@@ -64,7 +64,7 @@ class InstructorsController < ApplicationController
     authorize @instructor
     @instructor.destroy
     respond_to do |format|
-      format.html { redirect_to instructors_url, notice: 'Instructor was successfully destroyed.' }
+      format.html { redirect_to instructors_url, notice: 'Instructor was successfully removed.' }
       format.json { head :no_content }
     end
   end

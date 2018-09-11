@@ -11,22 +11,26 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="form-group form-row">
+    <%= form.label :name, class: 'col-form-label-lg' %>
+    <%= form.text_field :name, :autofocus => true, class: 'form-control', required: true %>
+    <small id="instructor_name_help" class="form-text text-muted w-100">Unique name for every instructor.</small>
+    <div id="instructor_name_validation" class="w-100">
+      Instructor name already taken
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :nickname %>
-    <%= form.text_field :nickname %>
+  <div class="form-group form-row">
+    <%= form.label :nickname, class: 'col-form-label-lg' %>
+    <%= form.text_field :nickname, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="form-group form-row">
+    <%= form.label :description, class: 'col-form-label-lg' %>
+    <%= form.text_area :description, class: 'form-control' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group mt-4">
+    <%= form.submit 'Save Instructor', class: 'btn btn-secondary' %>
   </div>
 <% end %>

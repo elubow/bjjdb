@@ -1,6 +1,7 @@
 <div class="col">
 
   <h1 class="mt-4"><%= title "Instructors" %></h1>
+  <%= link_to 'New Instructor', new_instructor_path, class: 'btn btn-secondary float-right mb-2' %>
 
   <table class="table table-hover">
     <thead>
@@ -25,7 +26,7 @@
               <td><%= link_to 'Edit', edit_instructor_path(instructor), class: 'btn btn-primary' %></td>
             <% end %>
             <% if current_user.admin? %>
-              <td><%= link_to 'Destroy', instructor, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+              <td><%= link_to 'Delete', instructor, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
             <% end %>
           <% end %>
         </tr>
@@ -35,4 +36,4 @@
 
 <br>
 
-<%= link_to 'New Instructor', new_instructor_path %>
+<%= link_to 'New Instructor', new_instructor_path, class: 'btn btn-primary' %>

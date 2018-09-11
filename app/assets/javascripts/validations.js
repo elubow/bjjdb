@@ -47,4 +47,27 @@ document.addEventListener("turbolinks:load", function() {
       });
     return false;
   }
+
+  if (window.location.pathname == "/instructors/new") {
+    $('#instructor_name_validation').hide();
+    $('#instructor_name').on('blur', function(event){
+      $.ajax({
+        dataType: 'json',
+        url: '/validate/instructor?name=' + $('#instructor_name').val(),
+        type: 'GET',
+        error: function(jqXHR, textStatus, errorThrown){},
+        success: function(data, textStatus, jqXHR) {
+          if (data.valid==true) {
+            $('#instructor_name_validation').hide();
+          } else if (data.valid==false) {
+            $('#instructor_name_validation').attr("class", "p-2 mt-2 text-white bg-danger").text(data.error).show();
+          }
+        },
+      });
+      event.stopImmediatePropagation();
+      return false;
+      });
+    return false;
+  }
+
 });

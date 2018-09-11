@@ -9,6 +9,16 @@ class ValidationsController < ApplicationController
     end
   end
 
+  def instructor
+    if params[:name].size <= 2
+      render json: { valid: false, error: "Must be at least 2 characters" }
+    elsif Instructor.find_by_name(params[:name])
+      render json: { valid: false, error: "Name already taken" }
+    else
+      render json: { valid: true }
+    end
+  end
+
   def url
     if params[:url].size <= 8 or URI::regexp.match(params[:url]).nil?
       render json: { valid: false, error: "Invalid URL" }
