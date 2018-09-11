@@ -33,7 +33,7 @@ class Link < ApplicationRecord
 
   def description_exists?
     if (!self.description.nil? and self.description.length > 0) or
-    (!self.thumbnail.description.nil? and self.thumbnail.description.length > 0)
+      (!self.thumbnail.nil? and !self.thumbnail.description.nil? and self.thumbnail.description.length > 0)
       return true
     end
 
