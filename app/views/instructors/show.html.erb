@@ -13,7 +13,9 @@
     <%= @instructor.display_name %>
   </h1>
 
-  <%= image_tag(@instructor.links.first.thumbnail.source, alt: @instructor.display_name, height: '375px', width: '400px') %>
+  <% if @instructor.has_videos? %>
+    <%= image_tag(@instructor.links.first.thumbnail_image_location(), alt: @instructor.display_name, class: 'link_image') %>
+  <% end %>
   
   <% if @instructor.description? %>
   <p>
@@ -36,8 +38,17 @@
     </div>
   <% end %>
 
-  <% if @instructor.video_count > 0 %>
+  <% if @instructor.has_videos? %>
     <h4><%= pluralize(@instructor.video_count, "Videos").titleize %></h4>
     <%= render partial: 'links/list', locals: {links: @instructor.links} %>
+  <% else %>
+    <p>
+      There are no videos for this instructor. 
+    </p>
+    <p>
+      <% if current_user %>
+        <%= link_to "Add Video", new_link_path, class: 'btn btn-primary' %>
+      <% end %>
+    </p>
   <% end %>
 </div>

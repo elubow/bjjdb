@@ -6,6 +6,9 @@
 				<ul class="meta-search">
           <li><i class="pt-1 pr-3 mr-2 glyphicon-calendar"></i> <span><%= link.created_at.strftime("%Y-%b-%d") %></span></li>
           <li><i class="pt-1 pr-3 mr-2 glyphicon-user"></i> <span><%= link_to link.user.name, link.user %></span></li>
+          <% link.instructors.take(2).each do |i| %>
+            <li><span><%= link_to i.nickname_or_name, i, class: 'btn btn-sm btn-seconary' %></span></li>
+          <% end %>
 				</ul>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">

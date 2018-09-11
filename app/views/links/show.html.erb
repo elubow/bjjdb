@@ -58,7 +58,7 @@
   <hr />
 
   <p>
-    <%= link_to image_tag(@link.thumbnail_image_location(400,375), alt: @link.title, height: '375px', width: '400px'), @link.url, target: '_blank' %>
+    <%= link_to image_tag(@link.thumbnail_image_location(), alt: @link.title, class: "link_image"), @link.url, target: '_blank' %>
   </p>
 
   <p>

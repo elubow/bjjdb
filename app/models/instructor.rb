@@ -6,6 +6,10 @@ class Instructor < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 3 }
 
+  def has_videos?
+    self.links.count > 0
+  end
+
   def video_count
     self.links.count
   end
@@ -14,5 +18,9 @@ class Instructor < ApplicationRecord
     rv = "#{self.name}"
     rv = rv + " (#{self.nickname})" if self.nickname.present?
     return rv
+  end
+
+  def nickname_or_name
+    self.nickname.present? ? self.nickname : self.name
   end
 end
