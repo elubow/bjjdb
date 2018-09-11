@@ -23,9 +23,9 @@
         <ul class="list-group">
           <% @link.instructors.each do |i| %>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              <%= link_to i.name, i %>
+              <%= link_to i.display_name, i, class: 'btn btn-light btn-sm' %>
               <span class="badge bage-primary badge-bill">
-                <%= i.video_count %>
+                <%= link_to i.video_count, i %>
               </span>
             </li>
           <% end %>

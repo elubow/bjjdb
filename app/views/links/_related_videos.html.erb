@@ -1,7 +1,7 @@
   <!-- start related videos -->
-  <% if @link.has_instructors? %>
+  <% if @link.has_instructors? and @link.videos_by_instructors.count > 0 %>
     <div class="card my-4">
-      <h5 class="card-header">Same <%= "instructor".pluralize(@link.instructors.count).capitalize %></h5>
+      <h5 class="card-header">Videos From The Same <%= "instructor".pluralize(@link.instructors.count).capitalize %></h5>
       <div class="card-body">
         <ul>
           <% @link.videos_by_instructors(5).each do |l| %>
