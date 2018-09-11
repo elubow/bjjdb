@@ -1,7 +1,9 @@
 <div class="col">
 
   <h1 class="mt-4"><%= title "Instructors" %></h1>
-  <%= link_to 'New Instructor', new_instructor_path, class: 'btn btn-secondary float-right mb-2' %>
+  <% if current_user %>
+    <%= link_to 'New Instructor', new_instructor_path, class: 'btn btn-secondary float-right mb-2' %>
+  <% end %>
 
   <table class="table table-hover">
     <thead>
@@ -10,7 +12,9 @@
         <th>Name</th>
         <th>Nickname</th>
         <th>Description</th>
-        <th colspan="3">Actions</th>
+        <% if current_user %>
+          <th colspan="3">Actions</th>
+        <% end %>
       </tr>
     </thead>
   
@@ -36,4 +40,6 @@
 
 <br>
 
-<%= link_to 'New Instructor', new_instructor_path, class: 'btn btn-primary' %>
+<% if current_user %>
+  <%= link_to 'New Instructor', new_instructor_path, class: 'btn btn-secondary' %>
+<% end %>
