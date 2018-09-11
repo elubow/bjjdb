@@ -83,7 +83,7 @@ class Link < ApplicationRecord
 
   def end_position_same_as_start_position(limit=5)
     start_pos_id = self.get_start_position_id
-    Tag.find_by_full_name("end-position::#{Tag.find(start_pos_id).name}").links.order(created_at: :desc).limit(limit+1).reject{|l|  l.id == self.id}[0..limit]
+    Tag.find_by_full_name("end-position::#{Tag.find(start_pos_id).name}").links.order(created_at: :desc).limit(limit+1).reject{|l|  l.id == self.id}.take(limit)
   end
 
   def has_same_start_position_videos?(limit=5)
@@ -93,7 +93,7 @@ class Link < ApplicationRecord
 
   def same_start_position(limit=5)
     start_pos_id = self.get_start_position_id
-    Tag.find(start_pos_id).links.order(created_at: :desc).limit(limit+1).reject{|l|  l.id == self.id}[0..limit]
+    Tag.find(start_pos_id).links.order(created_at: :desc).limit(limit+1).reject{|l|  l.id == self.id}.take(limit)
   end
 
   def has_end_position?
