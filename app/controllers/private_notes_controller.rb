@@ -3,10 +3,17 @@ class PrivateNotesController < ApplicationController
   before_action :set_private_note, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
 
+  # GET /notebook
+  # GET /notebook.json
+  def notebook
+    @private_notes = PrivateNote.where(user: current_user)
+    authorize @private_notes
+  end
+
   # GET /private_notes
   # GET /private_notes.json
   def index
-    @private_notes = PrivateNote.where(user: current_user)
+    @private_notes = PrivateNote.all
     authorize @private_notes
   end
 
@@ -23,6 +30,7 @@ class PrivateNotesController < ApplicationController
 
   # GET /private_notes/1/edit
   def edit
+    authorize @private_note
   end
 
   # POST /private_notes

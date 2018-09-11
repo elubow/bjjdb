@@ -1,40 +1,27 @@
-  <div class="card my-4">
-    <h5 class="card-header">
-      My Notebook
-      (<%= @private_notes_link_count %>)
-      <button type="button" id="notebook_toggle" class="float-right btn btn-primary">+</button>
-    </h5>
-    <div id="notebook_body">
-      <div class="card-body">
-        <h5 class="card-title">New Note</h5>
-        <%= render template: 'private_notes/new', locals: { private_note: private_note, link: link } %>
-      </div>
+<div class="col">
+<h1 class="mt-4">My Notebook</h1>
+<table "table table-hover">
+  <thead>
+    <tr>
+      <th scope=col">Link</th>
+      <th>Title</th>
+      <th>Body</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
 
-      <% if @private_notes.present? %>
-        <ul class="list-group list-group-flush">
-          <% @private_notes.each do |note| %>
-            <li class="list-group-item">
-              <div class="card my-2">
-                <h6 class="card-header"><%= note.title %></h6>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <%= note.body %>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-4">
-                      <%= link_to 'Delete', note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-                    </div>
-                    <div class="col-8 text-right">
-                    <%= note.created_at.strftime("%Y-%b-%d") %>
-                  </div>
-                </div>
-              </div>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-  </div>
+  <tbody>
+    <% @private_notes.each do |private_note| %>
+      <tr>
+        <td><%= link_to private_note.link.title, private_note.link %></td>
+        <td><%= private_note.title %></td>
+        <td><%= private_note.body %></td>
+        <td><%= link_to 'Edit', edit_private_note_path(private_note), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Destroy', private_note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
+
+</div>

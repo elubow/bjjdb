@@ -1,8 +1,7 @@
-<p id="notice"><%= notice %></p>
+<div class="col">
 
-<h1>Private Notes</h1>
-
-<table>
+  <h1 class="mt-4">Notebook</h1>
+<table "table table-hover">
   <thead>
     <tr>
       <th>User</th>
@@ -16,13 +15,13 @@
   <tbody>
     <% @private_notes.each do |private_note| %>
       <tr>
-        <td><%= private_note.user %></td>
-        <td><%= private_note.link %></td>
+        <td><%= link_to private_note.user.name, private_note.user.name %></td>
+        <td><%= link_to private_note.link.title, private_note.link %></td>
         <td><%= private_note.body %></td>
         <td><%= private_note.title %></td>
         <td><%= link_to 'Show', private_note %></td>
         <td><%= link_to 'Edit', edit_private_note_path(private_note) %></td>
-        <td><%= link_to 'Destroy', private_note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', private_note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +29,5 @@
 
 <br>
 
-<%= link_to 'New Private Note', new_private_note_path %>
+</div>
+

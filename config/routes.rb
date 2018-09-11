@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :comments
   resources :private_notes
+  get 'notebook', controller: :private_notes, action: :notebook
   resources :tags
   resources :links do
     resources :comments, only: [:create, :index, :destroy]
