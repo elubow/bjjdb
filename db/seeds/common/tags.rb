@@ -313,6 +313,11 @@ positions = [
     name: 'ashi-garami',
     description: 'Ashi Garami'
   },
+  {
+    id: 2021,
+    name: 'north-south',
+    description: 'North South'
+  },
 ]
 
 # position 2XXX
