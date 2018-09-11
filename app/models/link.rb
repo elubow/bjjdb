@@ -50,6 +50,67 @@ class Link < ApplicationRecord
     end
   end
 
+  # BEGIN related videos
+  def has_position?
+    self.tags.collect(&:category).uniq.include?("position")
+  end
+
+  def get_position_id
+    self.tags.select {|t|  t.category == "position"}.first.id
+  end
+
+  def get_start_position_id
+    self.tags.select {|t|  t.category == "start-position"}.first.id
+  end
+
+  def has_start_position?
+    self.tags.collect(&:category).uniq.include?("start-position") and Tag.find(self.get_start_position_id).links.count > 0
+  end
+
+  # find videos where the end-position of previous video
+  # is the same as the start-position of current video
+  def has_end_position_same_as_start_position_videos?(limit=6)
+    start_pos_id = self.get_start_position_id
+    Tag.find_by_full_name("end-position::#{Tag.find(start_pos_id).name}").links.order(created_at: :desc).limit(limit).reject{|l|  l.id == self.id}.count > 0
+  end
+
+  def end_position_same_as_start_position(limit=5)
+    start_pos_id = self.get_start_position_id
+    Tag.find_by_full_name("end-position::#{Tag.find(start_pos_id).name}").links.order(created_at: :desc).limit(limit+1).reject{|l|  l.id == self.id}[0..limit]
+  end
+
+  def has_same_start_position_videos?(limit=5)
+    start_pos_id = self.get_start_position_id
+    Tag.find(start_pos_id).links.order(created_at: :desc).limit(limit).reject{|l|  l.id == self.id}.count > 0
+  end
+
+  def same_start_position(limit=5)
+    start_pos_id = self.get_start_position_id
+    Tag.find(start_pos_id).links.order(created_at: :desc).limit(limit+1).reject{|l|  l.id == self.id}[0..limit]
+  end
+
+  def has_end_position?
+    self.tags.collect(&:category).uniq.include?("end-position")
+  end
+
+  def get_end_position_id
+    self.tags.select {|t|  t.category == "end-position"}.first.id
+  end
+
+  def same_end_position(limit=5)
+    end_pos_id = self.get_end_position_id
+    Tag.find_by_full_name("start-position::#{Tag.find(end_pos_id).name}").links.order(created_at: :desc).limit(limit+1)
+  end
+
+  # drills exist for getting into start-position or about 
+  # the position or getting into the specified submssion 
+  def has_drills?
+    # TODO false until there are drill videos to test with
+    false
+  end
+
+  # END related videos
+
   private
     def set_location
       self.location = URI.parse(self.url).host.downcase
