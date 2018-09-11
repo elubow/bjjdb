@@ -1,6 +1,7 @@
 class InstructorsController < ApplicationController
   before_action :set_instructor, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
+  impressionist :actions => [:show]
 
   # GET /instructors
   # GET /instructors.json

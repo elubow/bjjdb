@@ -1,6 +1,7 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
+  impressionist :actions => [:show]
 
   # GET /links
   # GET /links.json

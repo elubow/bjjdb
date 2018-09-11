@@ -1,4 +1,7 @@
 class Instructor < ApplicationRecord
+  include Impressionist::IsImpressionable
+  is_impressionable
+
   has_and_belongs_to_many :links
 
   validates :name, presence: true, length: { minimum: 3 }

@@ -1,4 +1,7 @@
 class Link < ApplicationRecord
+  include Impressionist::IsImpressionable
+  is_impressionable
+
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :private_notes, dependent: :destroy

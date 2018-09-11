@@ -127,6 +127,8 @@ GEM
       image_size
       typhoeus
     image_size (2.0.0)
+    impressionist (1.6.1)
+      nokogiri (~> 1)
     interception (0.5)
     io-like (0.3.0)
     iso8601 (0.9.1)
@@ -356,6 +358,7 @@ DEPENDENCIES
   devise
   high_voltage
   hub
+  impressionist
   jbuilder (~> 2.5)
   jquery-rails
   link_thumbnailer

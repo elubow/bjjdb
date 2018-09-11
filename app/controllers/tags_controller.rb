@@ -1,6 +1,7 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
+  impressionist :actions => [:show]
 
   # GET /tags
   # GET /tags.json

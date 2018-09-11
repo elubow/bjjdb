@@ -1,4 +1,7 @@
 class Tag < ApplicationRecord
+  include Impressionist::IsImpressionable
+  is_impressionable
+
   has_and_belongs_to_many :links
 
   after_validation :create_full_name, on: [:create, :update]
