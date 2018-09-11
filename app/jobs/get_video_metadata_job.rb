@@ -15,6 +15,13 @@ class GetVideoMetadataJob < ApplicationJob
     @thumbnail.link = link
     @thumbnail.title = @lt.title
     @thumbnail.description = @lt.description
+    if @lt.favicon.present?
+      if URI.parse(@lt.favicon).host.nil?
+        @thumbnail.favicon = "//#{link.location}#{@lt.favicon}"
+      else
+        @thumbnail.favicon = @lt.favicon
+      end
+    end
     if @lt.images.count > 0
       img = @lt.images.first
       @thumbnail.source = img.src

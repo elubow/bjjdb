@@ -55,7 +55,11 @@
 
   <p>
     <strong>via</strong>
-    <%= @link.location %>
+    <% if @link.has_favicon? %>
+      <%= image_tag(@link.thumbnail.favicon, height: '32px', width: '32px', alt: @link.description) %>
+    <% else %>
+      <%= @link.location %>
+    <% end %>
   </p>
   
   <p>

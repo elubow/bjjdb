@@ -50,6 +50,10 @@ class Link < ApplicationRecord
     end
   end
 
+  def has_favicon?
+    self.thumbnail.favicon.present?
+  end
+
   # BEGIN related videos
   def has_position?
     self.tags.collect(&:category).uniq.include?("position")
