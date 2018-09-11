@@ -25,12 +25,12 @@ module LinksHelper
 
   def has_same_start_position_videos?(link)
     start_pos_id = get_start_position_id(link)
-    Tag.find(start_pos_id).links.order(created_at: :desc).limit(5).reject{|l|  l.id}.count > 0
+    Tag.find(start_pos_id).links.order(created_at: :desc).limit(5).reject{|l|  l.id == link.id}.count > 0
   end
 
   def same_start_position(link)
     start_pos_id = get_start_position_id(link)
-    Tag.find(start_pos_id).links.order(created_at: :desc).limit(5).reject{|l|  l.id}[0..4]
+    Tag.find(start_pos_id).links.order(created_at: :desc).limit(5).reject{|l|  l.id == link.id}[0..4]
   end
 
   def same_end_position(link)
