@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :instructors
   get :search, controller: :search, action: :input
   get 'search/a', controller: :search, action: :autocomplete
 

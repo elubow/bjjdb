@@ -2,6 +2,7 @@ class Link < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :private_notes, dependent: :destroy
+  has_and_belongs_to_many :instructors
   has_and_belongs_to_many :tags
   has_one :thumbnail, dependent: :destroy
 
@@ -12,6 +13,10 @@ class Link < ApplicationRecord
   validates :title, presence: true, length: { minimum: 3 }
   validates :url, format: {with: Regexp.new(URI::regexp(%w(http https)))}, presence: true
 
+
+  def has_instructors?
+    self.instructors.count > 0
+  end
 
   def thumbnail_image_location(width, height)
     if self.thumbnail.nil? or self.thumbnail.source.nil?
