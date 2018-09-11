@@ -3,6 +3,7 @@ class User < ApplicationRecord
   after_initialize :set_default_role, :if => :new_record?
 
   has_many :comments, dependent: :destroy
+  has_many :private_notes, dependent: :destroy
   has_many :links
   has_many :login_activities, as: :user
 

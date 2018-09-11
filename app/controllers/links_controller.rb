@@ -15,6 +15,12 @@ class LinksController < ApplicationController
     authorize @link
     @comments = @link.comments.all.order(created_at: :desc)
     @comment = @link.comments.build
+
+    if current_user
+      @private_notes_link_count = current_user.private_notes.where(link: @link).count
+      @private_notes = current_user.private_notes.where(link: @link).order(created_at: :desc).limit(3)
+      @private_note = @link.private_notes.build
+    end
   end
 
   # GET /links/new

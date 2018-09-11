@@ -13,6 +13,7 @@
 //= require jquery3
 //= require chosen
 //= require multiselect
+//= require private_notes
 //= require validations
 //= require tags
 //= require popper

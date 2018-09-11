@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @private_note.user %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @private_note.link %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @private_note.body %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @private_note.title %>
+</p>
+
+<%= link_to 'Edit', edit_private_note_path(@private_note) %> |
+<%= link_to 'Back', private_notes_path %>

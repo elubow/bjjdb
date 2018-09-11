@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Private Notes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Link</th>
+      <th>Body</th>
+      <th>Title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @private_notes.each do |private_note| %>
+      <tr>
+        <td><%= private_note.user %></td>
+        <td><%= private_note.link %></td>
+        <td><%= private_note.body %></td>
+        <td><%= private_note.title %></td>
+        <td><%= link_to 'Show', private_note %></td>
+        <td><%= link_to 'Edit', edit_private_note_path(private_note) %></td>
+        <td><%= link_to 'Destroy', private_note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Private Note', new_private_note_path %>
