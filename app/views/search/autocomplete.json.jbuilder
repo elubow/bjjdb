@@ -11,3 +11,10 @@ json.tags do
     json.url tag_path(tag)
   end
 end
+
+json.instructors do
+  json.array!(@instructors) do |instructor|
+    json.name truncate(instructor.display_name, length: 24)
+    json.url instructor_path(instructor)
+  end
+end

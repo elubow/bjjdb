@@ -6,6 +6,8 @@ class Instructor < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 3 }
 
+  ransack_alias :all_names, :nickname_or_name
+
   def has_videos?
     self.links.count > 0
   end

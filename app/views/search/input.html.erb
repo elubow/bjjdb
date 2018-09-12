@@ -10,21 +10,34 @@
 
   <hr />
 
-  <% if @tags.count > 0 %>
-    <div class="col">
-      <h3><%= pluralize(@tags.count, "tag").capitalize %></h3>
-      <% @tags.each do |tag| %>
-        <%= link_to tag.full_name, tag, class: 'tag' %>
-      <% end %>
-    </div>
-  <% end %>
+  <div class="row">
+    <% if @tags.count > 0 %>
+      <div class="col">
+        <h3><%= pluralize(@tags.count, "tag").capitalize %></h3>
+        <% @tags.each do |tag| %>
+          <%= link_to tag.full_name, tag, class: 'tag' %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @instructors.count > 0 %>
+      <div class="col border-left">
+        <h3><%= pluralize(@instructors.count, "instructor").capitalize %></h3>
+        <% @instructors.each do |instructor| %>
+          <%= link_to instructor.nickname_or_name, instructor, class: 'btn btn-light' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
   <% if @links.count > 0 %>
-    <div class="col">
-      <h3><%= pluralize(@links.count, "video").capitalize %></h3>
-      <% @links.each do |link| %>
-        <%= render partial: 'search/link_search_result', locals: { link: link } %>
-      <% end %>
+    <div class="row">
+      <div class="col">
+        <h3><%= pluralize(@links.count, "video").capitalize %></h3>
+        <% @links.each do |link| %>
+          <%= render partial: 'search/link_search_result', locals: { link: link } %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
