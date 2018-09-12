@@ -8,10 +8,22 @@ class SearchController < ApplicationController
   end
 
   def input
+    render 'new' if params[:q].blank? or params[:q].length < 2
     @tags = Tag.ransack(full_tag_cont: params[:q]).result(distinct: true)
-    @links = Link.ransack(title_cont: params[:q]).result(distinct: true)
+    @links = Link.ransack(title_cont: params[:q]).result(distinct: true).order(created_at: :desc)
     @instructors = Instructor.ransack(all_names_cont: params[:q]).result(distinct: true)
     @total_results = @links.count + @tags.count + @instructors.count
+  end
+
+  def advanced
+    @links = params[:tag_ids] ?
+      Link.by_tags(params[:tag_ids]).ransack(title_cont: params[:q]).result(distinct: true).order(created_at: :desc) :
+      Link.ransack(title_cont: params[:q]).result(distinct: true).order(created_at: :desc)
+    
+    @tags = []
+    @instructors = []
+    @total_results = @links.count
+    render 'input'
   end
 
   private

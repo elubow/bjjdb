@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :instructors
   get :search, controller: :search, action: :input
+  post :search, controller: :search, action: :advanced
   get 'search/a', controller: :search, action: :autocomplete
 
   get 'validate/email', to: 'validations#email'

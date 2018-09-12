@@ -16,6 +16,21 @@ class Link < ApplicationRecord
   validates :title, presence: true, length: { minimum: 3 }
   validates :url, format: {with: Regexp.new(URI::regexp(%w(http https)))}, presence: true
 
+  ransack_alias :title_description, :title_or_description
+  scope :by_tags, -> (tag_ids) {
+        sql = sanitize_sql_array [<<-SQL, tag_ids, tag_ids]
+    (WITH links_tags_cte AS (
+      SELECT link_id, array_agg(tag_id) as tags
+      FROM links_tags
+      WHERE tag_id in (?)
+      GROUP BY link_id
+    )
+    SELECT links.* FROM links_tags_cte JOIN links ON links.id = links_tags_cte.link_id
+    WHERE links_tags_cte.tags @> array[?]::int8[]) as links
+    SQL
+
+    from(sql)
+  }
 
   def has_instructors?
     self.instructors.count > 0

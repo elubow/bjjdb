@@ -1,0 +1,53 @@
+<div class="col">
+  <h1 class="mt-4">Search</h1>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <%= form_tag(search_path method: :post) do %>
+        <div class="form-row">
+          <div class="my-1 col-2 text-left">
+            <%= label_tag "Videos", nil, class: "col-form-label-lg pr-2" %>
+          </div>
+          <div class="my-1 col-4">
+            <%= text_field_tag :q, params[:q], class: 'form-control', placeholder: "Search string" %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="my-1 col-2 text-left">
+            <%= label_tag "tagged with", nil, class: "col-form-label-lg pr-2" %>
+          </div>
+          <div class="my-1 col-4">
+            <%= select_tag :tag_ids,
+              options_for_select(Tag.all.map {|t|  [t.full_name, t.id]}),
+              { include_blank: true, multiple: true, id: 'search_tag_ids' }
+            %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="my-1 col-6">
+            <%= submit_tag 'Search', class: 'btn btn-light' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card my-4">
+        <h5 class="card-header">Search Help</h5>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">
+              Tags are optional. When they are included, they are AND'd. "art::bjj AND uniform::nogi"
+            </li>
+            <li class="list-group-item">
+              Search box with no tags will just search all videos, instructors, and tags.
+            </li>
+            <li class="list-group-item">
+              Search box and tags will ONLY search videos tagged with the AND'd tag list for the text in the search box.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
