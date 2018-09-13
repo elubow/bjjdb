@@ -7,17 +7,18 @@ module SearchHelper
  ####       <h2 class="lead">No results found for <strong class="text-danger"><%= params[:q] %></strong></h2>
  ####     <% end %>
 
-    rv = '<h2 class="lead">' + pluralize(result_count, "result") + ' for '
+    rv = '<h2 class="lead">' + pluralize(result_count, "result") + '</h2>'
 
     if params[:q]
-      rv = rv + "<strong class='text-danger'>#{params[:q]}</strong>"
+      rv = rv + "<h2 class='lead'>Term: <strong class='text-danger'>#{params[:q]}</strong></h2>"
     end
 
     if params[:tag_ids].present? and params[:tag_ids].length > 0
-      rv = rv + " tags: "
+      rv = rv + "<h2 class='lead'>Tags: "
       Tag.where(id: params[:tag_ids]).each do |tag|
         rv = rv + link_to(tag.full_name, tag, class: 'tag')
       end
+      rv = rv + "</h2>"
     end
     rv.html_safe
   end
