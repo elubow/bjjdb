@@ -5,7 +5,7 @@ ruby '2.5.1'
 gem 'attr_encrypted', '~> 3.0.0'
 gem 'authtrail'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap', '~> 4.1.2'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'high_voltage'
