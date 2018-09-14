@@ -51,11 +51,11 @@ test:
   template: template0
 
 production:
-  adapter:  postgresql
-  host:     localhost
+  adapter: postgresql
   encoding: unicode
-  database: bjjdb_production
-  pool:     5
-  username: bjjdb
-  password:
-  template: template0
+  database: <%= ENV['RDS_DB_NAME'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  port: <%= ENV['RDS_PORT'] %>
+
