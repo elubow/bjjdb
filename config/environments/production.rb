@@ -56,7 +56,7 @@ Rails.application.configure do
   config.log_tags = [ :request_id ]
 
   # Use a different cache store in production.
-  config.cache_store = :redis_store, "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}"
+  #config.cache_store = :redis_store, "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}"
   config.action_controller.perform_caching = true
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
