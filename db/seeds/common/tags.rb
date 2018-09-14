@@ -318,6 +318,21 @@ positions = [
     name: 'north-south',
     description: 'North South'
   },
+  {
+    id: 2022,
+    name: 'standing',
+    description: 'Standing'
+  },
+  {
+    id: 2023,
+    name: '50-50',
+    description: '50-50'
+  },
+  {
+    id: 2024,
+    name: 'kneeling',
+    description: 'on your knees'
+  },
 ]
 
 # position 2XXX
