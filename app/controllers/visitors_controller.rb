@@ -1,5 +1,5 @@
 class VisitorsController < ApplicationController
   def index
-    @links = Link.order(created_at: :desc).limit(10)
+    @pagy, @links = pagy(Link.all.order(created_at: :desc), items: 25)
   end
 end

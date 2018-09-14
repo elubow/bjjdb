@@ -6,7 +6,7 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    @links = Link.all
+    @pagy, @links = pagy(Link.all, items: 25)
     authorize @links
   end
 

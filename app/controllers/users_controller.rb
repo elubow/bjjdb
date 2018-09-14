@@ -5,12 +5,13 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     authorize User
+    @pagy, @users = pagy(User.all.order(created_at: :desc), items: 25)
   end
 
   def dashboard
     @user = User.find(current_user.id)
     authorize @user
-    @links = Link.all.order(created_at: :desc).limit(25)
+    @pagy, @links = pagy(Link.all.order(created_at: :desc), items: 25)
   end
 
   def show

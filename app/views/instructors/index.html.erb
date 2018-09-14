@@ -38,8 +38,14 @@
     </tbody>
   </table>
 
-<br>
-
+  <div class="row">
+    <div class="col">
+      <div class="d-flex justify-content-center">
+        <%== pagy_nav_bootstrap(@pagy) %>
+      </div>
+    </div>
+  </div>
+ 
 <% if current_user %>
   <%= link_to 'New Instructor', new_instructor_path, class: 'btn btn-secondary' %>
 <% end %>

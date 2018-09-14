@@ -6,7 +6,7 @@ class InstructorsController < ApplicationController
   # GET /instructors
   # GET /instructors.json
   def index
-    @instructors = Instructor.all
+    @pagy, @instructors = pagy(Instructor.all, items: 25)
     authorize @instructors
   end
 
