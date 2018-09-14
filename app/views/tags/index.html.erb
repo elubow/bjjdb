@@ -37,7 +37,9 @@
     </tbody>
   </table>
   
-  <br />
+   <div class="d-flex justify-content-center">
+    <%== pagy_nav_bootstrap(@pagy) %>
+  </div>
   
   <%= link_to 'New Tag', new_tag_path, class: 'btn btn-primary btn-large' %>
 

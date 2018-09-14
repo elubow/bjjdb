@@ -6,20 +6,22 @@ class PrivateNotesController < ApplicationController
   # GET /notebook
   # GET /notebook.json
   def notebook
-    @private_notes = PrivateNote.where(user: current_user)
+    @pagy, @private_notes = pagy(PrivateNote.where(user: current_user).order(created_at: :desc), items: 25)
     authorize @private_notes
   end
 
   # GET /private_notes
   # GET /private_notes.json
   def index
-    @private_notes = PrivateNote.all
+    @pagy, @private_notes = pagy(PrivateNote.order(created_at: :desc), items: 25)
     authorize @private_notes
   end
 
   # GET /private_notes/1
   # GET /private_notes/1.json
   def show
+    @private_note = PrivateNote.find(params[:id])
+    authorize @private_note
   end
 
   # GET /private_notes/new

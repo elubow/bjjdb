@@ -5,4 +5,12 @@
   <div class="card-columns">
     <%= render partial: 'links/cards', locals: { links: @links } %>
   </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="d-flex justify-content-center">
+        <%== pagy_nav_bootstrap(@pagy) %>
+      </div>
+    </div>
+  </div>
 </div>

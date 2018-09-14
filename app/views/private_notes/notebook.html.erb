@@ -17,11 +17,18 @@
         <td><%= private_note.title %></td>
         <td><%= private_note.body %></td>
         <td><%= link_to 'Edit', edit_private_note_path(private_note), class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Destroy', private_note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        <td><%= link_to 'Delete', private_note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+  <div class="row">
+    <div class="col">
+      <div class="d-flex justify-content-center">
+        <%== pagy_nav_bootstrap(@pagy) %>
+      </div>
+    </div>
+  </div>
 
 </div>

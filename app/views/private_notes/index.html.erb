@@ -6,9 +6,9 @@
     <tr>
       <th>User</th>
       <th>Link</th>
-      <th>Body</th>
       <th>Title</th>
-      <th colspan="3"></th>
+      <th>Note</th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
@@ -17,17 +17,23 @@
       <tr>
         <td><%= link_to private_note.user.name, private_note.user.name %></td>
         <td><%= link_to private_note.link.title, private_note.link %></td>
-        <td><%= private_note.body %></td>
         <td><%= private_note.title %></td>
-        <td><%= link_to 'Show', private_note %></td>
-        <td><%= link_to 'Edit', edit_private_note_path(private_note) %></td>
-        <td><%= link_to 'Destroy', private_note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        <td><%= private_note.body %></td>
+        <td><%= link_to 'Show', private_note, class: 'btn btn-light' %></td>
+        <td><%= link_to 'Edit', edit_private_note_path(private_note), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Delete', private_note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+  <div class="row">
+    <div class="col">
+      <div class="d-flex justify-content-center">
+        <%== pagy_nav_bootstrap(@pagy) %>
+      </div>
+    </div>
+  </div>
 
 </div>
 

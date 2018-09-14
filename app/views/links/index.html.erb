@@ -2,6 +2,10 @@
   <h1 class="mt-4">Videos</h1>
   
   <%= render partial: 'links/list', locals: { links: @links } %>
+
+  <div class="d-flex justify-content-center">
+    <%== pagy_nav_bootstrap(@pagy) %>
+  </div>
   
   <% if @current_user %>
     <%= link_to 'New Video', new_link_path, class: 'btn btn-primary btn-large mt-1' %>
