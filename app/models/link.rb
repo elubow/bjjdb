@@ -63,8 +63,10 @@ class Link < ApplicationRecord
       return self.description
     end
 
-    if !self.thumbnail.description.nil? and self.thumbnail.description.length > 0
-      return self.thumbnail.description
+    if !self.thumbnail.nil?
+      if !self.thumbnail.description.nil? and self.thumbnail.description.length > 0
+        return self.thumbnail.description
+      end
     end
   end
 
