@@ -18,7 +18,7 @@
           </div>
           <div class="my-1 col-4">
             <%= select_tag :tag_ids,
-              options_for_select(Tag.all.map {|t|  [t.full_name, t.id]}),
+              options_for_select(Tag.all.map {|t|  [t.full_name, t.id]}.sort),
               { include_blank: true, multiple: true, id: 'search_tag_ids' }
             %>
           </div>
