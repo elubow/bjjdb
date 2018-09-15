@@ -17,6 +17,13 @@ class Link < ApplicationRecord
   validates :url, format: {with: Regexp.new(URI::regexp(%w(http https)))}, presence: true
 
   ransack_alias :title_description, :title_or_description
+  scope :without_thumbnails, -> {
+    where("
+      NOT EXISTS (
+        SELECT 1 FROM thumbnails
+        WHERE thumbnails.link_id = links.id
+      )")
+  }
   scope :by_tags, -> (tag_ids) {
         sql = sanitize_sql_array [<<-SQL, tag_ids, tag_ids]
     (WITH links_tags_cte AS (
@@ -31,6 +38,10 @@ class Link < ApplicationRecord
 
     from(sql)
   }
+
+  def enqueue_thumbnails
+    self.without_thumbnails.each{|lnk|  GetVideoMetadataJob.perform_now(lnk)}
+  end
 
   def has_instructors?
     self.instructors.count > 0
