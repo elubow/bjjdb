@@ -348,6 +348,11 @@ positions = [
     name: 'crucifix',
     description: 'crucifix position'
   },
+  {
+    id: 2028,
+    name: 'knee-on-belly',
+    description: 'knee on belly'
+  },
 ]
 
 # position 2XXX
