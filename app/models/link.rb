@@ -132,9 +132,14 @@ class Link < ApplicationRecord
     self.tags.select {|t|  t.category == "end-position"}.first.id
   end
 
-  def same_end_position(limit=5)
+  def videos_starting_from_end_position(limit=5)
     end_pos_id = self.get_end_position_id
     Tag.find_by_full_name("start-position::#{Tag.find(end_pos_id).name}").links.order(created_at: :desc).limit(limit+1)
+  end
+
+  def has_videos_starting_from_end_position?(limit=5)
+    end_pos_id = self.get_end_position_id
+    Tag.find_by_full_name("start-position::#{Tag.find(end_pos_id).name}").links.order(created_at: :desc).limit(limit+1).reject{|l|  l.id == self.id}.count > 0
   end
 
   # drills exist for getting into start-position or about 
