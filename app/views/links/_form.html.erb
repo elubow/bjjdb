@@ -30,7 +30,7 @@
   <div class="form-group form-row">
     <%= form.label :instructors, class: 'col-form-label-lg' %>
     <%= form.select :instructor_ids,
-      Instructor.all.map {|t|  [t.display_name, t.id]},
+      Instructor.all.map {|t|  [t.display_name, t.id]}.sort,
       { include_blank: true },
       { multiple: true }
     %>
@@ -40,7 +40,7 @@
   <div class="form-group form-row">
     <%= form.label :tags, class: 'col-form-label-lg' %>
     <%= form.select :tag_ids,
-      Tag.all.map {|t|  [t.full_name, t.id]},
+      Tag.all.map {|t|  [t.full_name, t.id]}.sort,
       { include_blank: true },
       { multiple: true, required: true }
     %>

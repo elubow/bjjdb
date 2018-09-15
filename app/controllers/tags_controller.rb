@@ -6,7 +6,7 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
-    @pagy, @tags = pagy(Tag.all, items: 25)
+    @pagy, @tags = pagy(Tag.order(category: :asc).order(name: :asc), items: 25)
     authorize @tags
   end
 
