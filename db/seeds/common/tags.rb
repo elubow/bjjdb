@@ -343,6 +343,11 @@ positions = [
     name: 'truck',
     description: 'truck position'
   },
+  {
+    id: 2027,
+    name: 'crucifix',
+    description: 'crucifix position'
+  },
 ]
 
 # position 2XXX
@@ -423,6 +428,11 @@ puts '  Submissions'
     id: 10054,
     name: 'chokes',
     description: 'any kind of choke'
+  },
+  {
+    id: 10055,
+    name: 'crucifix',
+    description: 'yup, that one'
   },
 ].each do |t|
   Tag.create!(
