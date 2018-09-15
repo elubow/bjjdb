@@ -6,7 +6,7 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    @pagy, @links = pagy(Link.order(created_at: :descO), items: 25)
+    @pagy, @links = pagy(Link.order(created_at: :desc), items: 25)
     authorize @links
   end
 
