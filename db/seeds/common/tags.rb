@@ -333,6 +333,16 @@ positions = [
     name: 'kneeling',
     description: 'on your knees'
   },
+  {
+    id: 2025,
+    name: 'seated',
+    description: 'on your butt'
+  },
+  {
+    id: 2026,
+    name: 'truck',
+    description: 'truck position'
+  },
 ]
 
 # position 2XXX
@@ -393,6 +403,21 @@ puts '  Submissions'
     id: 10050,
     name: 'triangle',
     description: 'Any triangle or triangle variation should be tagged with this'
+  },
+  {
+    id: 10051,
+    name: 'heel-hook',
+    description: 'Any heel hook or heel hook variation should be tagged with this'
+  },
+  {
+    id: 10052,
+    name: 'slicer',
+    description: 'Any slicer or slicer variation should be tagged with this'
+  },
+  {
+    id: 10053,
+    name: 'crush',
+    description: 'Any crush or crush variation should be tagged with this'
   },
 ].each do |t|
   Tag.create!(
