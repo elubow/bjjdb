@@ -37,8 +37,11 @@
   </p>
   
   <% if @tag.links.count > 0 %>
-    <%= render partial: 'links/list', locals: { links: @tag.links } %>
-  <% else %>
+    <%= render partial: 'links/list', locals: { links: @links } %>
+    <div class="d-flex justify-content-center">
+      <%== pagy_nav_bootstrap(@pagy) %>
+    </div>
+   <% else %>
     There are no videos tagged with <%= link_to @tag.full_name, @tag, class: 'tag' %> Add one <%= link_to 'here', new_link_path %>.
   <% end %>
   

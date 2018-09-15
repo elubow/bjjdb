@@ -14,6 +14,7 @@ class TagsController < ApplicationController
   # GET /tags/1.json
   def show
     authorize @tag
+    @pagy, @links = pagy(@tag.links.order(created_at: :desc), items: 25)
   end
 
   # GET /tags/new
