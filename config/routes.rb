@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post :search, controller: :search, action: :advanced
   get 'search/a', controller: :search, action: :autocomplete
 
+  get 'stats/site', controller: :stats, action: :site
+
   get 'validate/email', to: 'validations#email'
   get 'validate/instructor', to: 'validations#instructor'
   get 'validate/url', to: 'validations#url'

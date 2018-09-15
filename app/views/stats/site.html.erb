@@ -1,0 +1,31 @@
+<div class="col">
+  <h1 class="mt-4">Sitewide Stats</h1>
+
+  <div class="row">
+      <div class="col">
+        <div class="card">
+          <h5 class="card-header">Links</h5>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <% @links.each do |k,v| %>
+                <li class="list-group-item">
+                  <%= k %> <%= v %>
+                </li>
+                <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    <% @stats.each do |model, total| %>
+      <div class="col">
+        <div class="card">
+          <h5 class="card-header"><%= model.capitalize %></h5>
+          <div class="card-body">
+            <p class="card-text"><%= pluralize(total, model.capitalize) %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    </div>
+</div>
