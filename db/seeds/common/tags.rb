@@ -419,6 +419,11 @@ puts '  Submissions'
     name: 'crush',
     description: 'Any crush or crush variation should be tagged with this'
   },
+  {
+    id: 10054,
+    name: 'chokes',
+    description: 'any kind of choke'
+  },
 ].each do |t|
   Tag.create!(
     id: t[:id],
