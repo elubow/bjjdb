@@ -3,9 +3,8 @@ class UsersController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @users = User.all
-    authorize User
     @pagy, @users = pagy(User.all.order(created_at: :desc), items: 25)
+    authorize @users
   end
 
   def dashboard
