@@ -18,7 +18,7 @@ development:
   encoding: unicode
   database: bjjdb_development
   pool:     5
-  username: bjjdb
+  username: webdevstarjus730
   password:
   template: template0
 
@@ -46,7 +46,7 @@ test:
   encoding: unicode
   database: bjjdb_test
   pool:     5
-  username: bjjdb
+  username: webdevstarjus730
   password:
   template: template0
 

@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(version: 2018_09_11_141924) do
   create_table "links_tags", id: false, force: :cascade do |t|
     t.bigint "link_id", null: false
     t.bigint "tag_id", null: false
-    t.index ["link_id"], name: "index_links_tags_on_link_id"
-    t.index ["tag_id"], name: "index_links_tags_on_tag_id"
+    t.index ["link_id", "tag_id"], name: "index_links_tags_on_link_id_and_tag_id"
+    t.index ["tag_id", "link_id"], name: "index_links_tags_on_tag_id_and_link_id"
   end
 
   create_table "login_activities", force: :cascade do |t|
