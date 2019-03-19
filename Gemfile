@@ -29,6 +29,8 @@ gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'uglifier', '>= 1.3.0'
 gem 'carrierwave', '~> 1.3', '>= 1.3.1'
+gem "fog-aws"
+gem 'mini_magick'
 
 group :development do
   gem 'better_errors'
@@ -38,6 +40,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rails_layout'
+  gem "dotenv-rails"
   gem 'web-console', '>= 3.3.0'
 end
 
