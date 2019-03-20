@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-ruby '2.5.1'
+ruby '2.5.3'
 
 gem 'attr_encrypted', '~> 3.0.0'
 gem 'authtrail'
