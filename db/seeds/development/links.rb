@@ -47,3 +47,5 @@ Link.create!(
   user_id: 42,
   tags: [101, 1001, 1050, 1106, 3000, 4003].map{|t|  Tag.find(t)}
 )
+
+Link.enqueue_thumbnails

@@ -39,8 +39,8 @@ class Link < ApplicationRecord
     from(sql)
   }
 
-  def enqueue_thumbnails
-    self.without_thumbnails.each{|lnk|  GetVideoMetadataJob.perform_now(lnk)}
+  def self.enqueue_thumbnails
+    Link.without_thumbnails.each{|lnk|  GetVideoMetadataJob.perform_now(lnk)}
   end
 
   def has_instructors?

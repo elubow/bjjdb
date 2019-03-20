@@ -25,7 +25,17 @@ class GetVideoMetadataJob < ApplicationJob
     if @lt.images.count > 0
       img = @lt.images.first
       @thumbnail.source = img.src
+      dir_path = File.join Rails.root, 'public', 'downloads', 'users', link.user_id.to_s, 'images'
+      FileUtils.mkdir_p(dir_path) unless File.exist?(dir_path)
+      download_image(img.src, File.join(dir_path, (URI(img.src).path).split('/').last))
+      @thumbnail.remote_remote_image_url = img.src
     end
     @thumbnail.save!
+  end
+  
+  def download_image(url, dest)
+    open(url) do |u|
+      File.open(dest, 'wb') { |f| f.write(u.read) }
+    end
   end
 end

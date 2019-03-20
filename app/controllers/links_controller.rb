@@ -49,6 +49,7 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if @link.save
+        Link.enqueue_thumbnails
         format.html { redirect_to root_path, notice: 'Video added.' }
         format.json { render :show, status: :created, location: @link }
       else
