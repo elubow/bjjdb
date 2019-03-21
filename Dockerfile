@@ -29,7 +29,6 @@ COPY --chown=app:app . /opt/app
 RUN set -ex \
 # precompile assets
     && RAILS_ENV= \
-    && bundle update \
     && bundle exec rake assets:precompile \
 # cleanup
     && bundle config --local without "development test" \
