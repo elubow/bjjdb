@@ -2,6 +2,8 @@ class Tag < ApplicationRecord
   include Impressionist::IsImpressionable
   is_impressionable
 
+  scope :with_tag, -> (id) { where(id: id) }
+
   has_and_belongs_to_many :links
 
   after_validation :create_full_name, on: [:create, :update]
@@ -10,8 +12,35 @@ class Tag < ApplicationRecord
 
   TAG_SEPARATOR = '::'
 
+  def self.send_chain(methods)
+    methods.inject(self, :send)
+  end
+
   def clean_name
     self.name.gsub('-', ' ').titleize
+  end
+
+  # should only be called with a position tag and not a start/end position tag
+  def create_start_end_position_tags
+    ts = Time.now
+
+    start_tag = Tag.new
+    start_tag.id = self.id + 1000
+    start_tag.category = 'start-position'
+    start_tag.name = self.name
+    start_tag.description = "Starting at #{self.description}"
+    start_tag.created_at = ts
+    start_tag.updated_at = ts
+    start_tag.save
+
+    end_tag = Tag.new
+    end_tag.id = self.id + 2000
+    end_tag.category = 'end-position'
+    end_tag.name = self.name
+    end_tag.description = "Ending at #{self.description}"
+    end_tag.created_at = ts
+    end_tag.updated_at = ts
+    end_tag.save
   end
 
   private

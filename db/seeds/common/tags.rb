@@ -195,6 +195,11 @@ puts '  Move types'
     name: 'sweep',
     description: 'explanation of a flow'
   },
+  {
+    id: 1113,
+    name: 'theory',
+    description: 'general bjj theory'
+  },
 ].each do |t|
   Tag.create!(
     id: t[:id],
@@ -353,23 +358,37 @@ positions = [
     name: 'knee-on-belly',
     description: 'knee on belly'
   },
+  {
+    id: 2029,
+    name: 'worm-guard',
+    description: 'Worm Guard'
+  },
+  {
+    id: 2030,
+    name: 'lasso-guard',
+    description: 'Lasso Guard'
+  },
+  {
+    id: 2031,
+    name: 'spider-guard',
+    description: 'Spider Guard'
+  },
 ]
 
 # position 2XXX
 # start-position 3XXX
 # end-position 4XXX
-[['position', 0], ['start-position', 1000], ['end-position', 2000]].each do |cat, incr|
-  puts "    Positions -- #{cat}"
-  positions.each do |t|
-    Tag.create!(
-      id: t[:id] + incr,
-      name: t[:name],
-      description: t[:description],
-      category: cat,
-      created_at: initial_timestamp,
-      updated_at: initial_timestamp
-    )
-  end
+positions.each do |t|
+  puts "    Positions -- position::#{t[:name]} >> {start, end}"
+  t = Tag.create!(
+    id: t[:id],
+    name: t[:name],
+    description: t[:description],
+    category: 'position',
+    created_at: initial_timestamp,
+    updated_at: initial_timestamp
+  )
+  t.create_start_end_position_tags
 end
 
 puts '  Submissions'
@@ -410,6 +429,91 @@ puts '  Submissions'
     description: 'Any knee bar or knee bar variation should be tagged with this'
   },
   {
+    id: 10008,
+    name: 'toe-hold',
+    description: 'Toe Hold'
+  },
+  {
+    id: 10009,
+    name: 'bow-and-arrow',
+    description: 'Bow and Arrow Choke'
+  },
+  {
+    id: 10010,
+    name: 'ezekiel',
+    description: 'Ezekiel Choke'
+  },
+  {
+    id: 10011,
+    name: 'rear-naked',
+    description: 'Rear Naked Choke'
+  },
+  {
+    id: 10012,
+    name: 'bulldog',
+    description: 'Bulldog Choke'
+  },
+  {
+    id: 10013,
+    name: 'collar-choke',
+    description: 'Collar Choke'
+  },
+  {
+    id: 10014,
+    name: 'short-choke',
+    description: 'Short Choke'
+  },
+  {
+    id: 10015,
+    name: 'baseball-choke',
+    description: 'Baseball Bat Choke'
+  },
+  {
+    id: 10016,
+    name: 'darce',
+    description: 'D\'arce Choke'
+  },
+  {
+    id: 10017,
+    name: 'bicep-slicer',
+    description: 'Bicep Slicer'
+  },
+  {
+    id: 10018,
+    name: 'calf-slicer',
+    description: 'Calf Slicer'
+  },
+  {
+    id: 10019,
+    name: 'clock-choke',
+    description: 'Clock Choke'
+  },
+  {
+    id: 10020,
+    name: 'anaconda-choke',
+    description: 'Anaconda Choke'
+  },
+  {
+    id: 10021,
+    name: 'peruvian-necktie',
+    description: 'Peruvian Necktie'
+  },
+  {
+    id: 10022,
+    name: 'japanese-necktie',
+    description: 'Japanese Necktie'
+  },
+  {
+    id: 10023,
+    name: 'loop-choke',
+    description: 'Loop Choke'
+  },
+  {
+    id: 10024,
+    name: 'papercutter-choke',
+    description: 'Papercutter Choke'
+  },
+  {
     id: 10050,
     name: 'triangle',
     description: 'Any triangle or triangle variation should be tagged with this'
@@ -438,6 +542,41 @@ puts '  Submissions'
     id: 10055,
     name: 'crucifix',
     description: 'yup, that one'
+  },
+  {
+    id: 10056,
+    name: 'bicep-crush',
+    description: 'Bicep crush'
+  },
+  {
+    id: 10057,
+    name: 'calf-crush',
+    description: 'Calf crush'
+  },
+  {
+    id: 10058,
+    name: 'omaplata',
+    description: 'Omaplata'
+  },
+  {
+    id: 10059,
+    name: 'gogoplata',
+    description: 'gogoplata'
+  },
+  {
+    id: 10060,
+    name: 'kimura',
+    description: 'Kimura'
+  },
+  {
+    id: 10061,
+    name: 'americana',
+    description: 'Americana'
+  },
+  {
+    id: 10062,
+    name: 'armbar',
+    description: 'Armbar'
   },
 ].each do |t|
   Tag.create!(
