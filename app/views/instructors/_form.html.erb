@@ -26,6 +26,30 @@
   </div>
 
   <div class="form-group form-row">
+    <%= form.label :instagram, class: 'col-form-label-lg' %>
+    <%= form.text_field :instagram, class: 'form-control' %>
+    <small id="instructor_instagram_help" class="form-text text-muted w-100">Just the Instagram handle (eg. @elubow).</small>
+  </div>
+
+  <div class="form-group form-row">
+    <%= form.label :youtube, class: 'col-form-label-lg' %>
+    <%= form.text_field :youtube, class: 'form-control' %>
+    <small id="instructor_youtube_help" class="form-text text-muted w-100">Just the Youtube channel (eg. ericlubow).</small>
+  </div>
+
+  <div class="form-group form-row">
+    <%= form.label :facebook, class: 'col-form-label-lg' %>
+    <%= form.text_field :facebook, class: 'form-control' %>
+    <small id="instructor_facebook_help" class="form-text text-muted w-100">The entire facebook link.</small>
+  </div>
+
+  <div class="form-group form-row">
+    <%= form.label :twitter, class: 'col-form-label-lg' %>
+    <%= form.text_field :twitter, class: 'form-control' %>
+    <small id="instructor_twitter_help" class="form-text text-muted w-100">Just the Twitter handle (eg. @elubow).</small>
+  </div>
+
+  <div class="form-group form-row">
     <%= form.label :description, class: 'col-form-label-lg' %>
     <%= form.text_area :description, class: 'form-control' %>
   </div>
