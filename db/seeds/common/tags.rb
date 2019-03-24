@@ -215,7 +215,7 @@ puts '  Positions'
 positions = [
   {
     id: 2000,
-    name: 'guard',
+    name: 'have-guard',
     description: 'butt down, legs up'
   },
   {
@@ -370,8 +370,23 @@ positions = [
   },
   {
     id: 2031,
-    name: 'spider-guard',
-    description: 'Spider Guard'
+    name: 'berimbolo',
+    description: 'Rolling stuff'
+  },
+  {
+    id: 2032,
+    name: 'in-guard',
+    description: 'in someone else\'s guard'
+  },
+  {
+    id: 2033,
+    name: 'guard',
+    description: 'having or being in guard'
+  },
+  {
+    id: 2034,
+    name: 'pocket-guard',
+    description: 'pocket guard'
   },
 ]
 
@@ -514,6 +529,16 @@ puts '  Submissions'
     description: 'Papercutter Choke'
   },
   {
+    id: 10025,
+    name: 'footlock',
+    description: 'Foot locks'
+  },
+  {
+    id: 10026,
+    name: 'arm-triangle',
+    description: 'Arm Triangle'
+  },
+  {
     id: 10050,
     name: 'triangle',
     description: 'Any triangle or triangle variation should be tagged with this'
@@ -577,6 +602,11 @@ puts '  Submissions'
     id: 10062,
     name: 'armbar',
     description: 'Armbar'
+  },
+  {
+    id: 10063,
+    name: 'north-south-choke',
+    description: 'North South Choke'
   },
 ].each do |t|
   Tag.create!(
