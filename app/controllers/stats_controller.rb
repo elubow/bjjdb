@@ -6,6 +6,7 @@ class StatsController < ApplicationController
       @stats[model.to_s] = model.count
     end
     @links = Stat.collect_link_stats
+    @links["Average Tags Per Video"] = Stat.average_tags_per_video
 
   end
 end
