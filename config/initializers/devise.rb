@@ -19,7 +19,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   #config.mailer_sender = 'no-reply@' + Rails.application.secrets.domain_name
-  config.mailer_sender = 'no-reply@lubow.org'
+  config.mailer_sender = 'no-reply@bjj.help'
   
 
   # Configure the class responsible to send e-mails.
