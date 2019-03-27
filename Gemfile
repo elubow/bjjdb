@@ -31,6 +31,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'carrierwave', '~> 1.3', '>= 1.3.1'
 gem "fog-aws"
 gem 'mini_magick'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development do
   gem 'better_errors'

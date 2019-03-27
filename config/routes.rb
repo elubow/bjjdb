@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :links do
     resources :comments, only: [:create, :index, :destroy]
   end
-  devise_for :users, :controllers => { :registrations => 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :users
 
   authenticated :user do
