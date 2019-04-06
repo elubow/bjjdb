@@ -1,5 +1,5 @@
 class FavoritePolicy
-  attr_reader :current_user
+  attr_reader :current_user, :model
 
   def initialize(current_user)
     @current_user = current_user

@@ -71,7 +71,6 @@ class User < ApplicationRecord
 
   def unfavorite(link)
     favorites.where(link: link).destroy_all
-    link.reload
   end
 
   def favorited?(link)

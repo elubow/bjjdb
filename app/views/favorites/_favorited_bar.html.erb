@@ -1,0 +1,5 @@
+<% if user.favorited?(link) %>
+  <%= link_to 'Unfavorite', link_favorite_path(@link), method: :delete %>
+<% else %>
+  <%= link_to 'Favorite',  link_favorite_path(@link), method: :post %>
+<% end %>

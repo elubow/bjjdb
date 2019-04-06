@@ -32,6 +32,11 @@
       <% end %>
     </div>
     <div class="col-4 text-right">
+      <% if @current_user %>
+        <%= render partial: 'favorites/favorited_bar', locals: { link: @link, user: @current_user } %>
+        |
+      <% end %>
+
       <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
         <%= link_to 'Edit', edit_link_path(@link), class: 'btn btn-primary' %> |
         <%= link_to 'Delete', @link, method: :delete, data: {confirm: 'Deleting this link is irreversible. Are you sure?'}, class: 'btn btn-danger btn-sm' %>
