@@ -56,7 +56,7 @@ class Link < ApplicationRecord
     if self.thumbnail.nil? or self.thumbnail.source.nil?
       return "//via.placeholder.com/#{width}x#{height}"
     else
-      self.thumbnail.source
+      self.thumbnail.remote_image.url
     end
   end
 

@@ -1,6 +1,5 @@
 class GetVideoMetadataJob < ApplicationJob
   queue_as :default
-
   def perform(link)
     begin
       @lt = LinkThumbnailer.generate(link.url)
@@ -25,6 +24,8 @@ class GetVideoMetadataJob < ApplicationJob
     if @lt.images.count > 0
       img = @lt.images.first
       @thumbnail.source = img.src
+      # Is this really needed?
+      # Why are we dowloading the file to public?
       dir_path = File.join Rails.root, 'public', 'downloads', 'users', link.user_id.to_s, 'images'
       FileUtils.mkdir_p(dir_path) unless File.exist?(dir_path)
       download_image(img.src, File.join(dir_path, (URI(img.src).path).split('/').last))
