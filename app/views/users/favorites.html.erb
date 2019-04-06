@@ -4,6 +4,8 @@
 
   <% if @favorites.count > 0 %>
     <%= render partial: 'links/list', locals: { links: @favorites } %>
+  <% else %>
+    <p>You haven't actually favorited any videos. Go watch some and favorite the ones that you like. They'll be right here waiting for you.</p>
   <% end %>
 
 </div>
