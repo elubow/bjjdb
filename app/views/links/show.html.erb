@@ -52,10 +52,9 @@
   on <%= @link.created_at.strftime("%Y-%b-%d") %>
     </div>
     <div class="col-4 text-right">
+      <%= pluralize(@link.favorites_count, "favorite") %>
+      |
       <%= pluralize(@link.impressions.count, "view") %>
-      <% if current_user %>
-        (<%= @link.impressions.where(:user_id => current_user.id).count %> by you)
-      <% end %>
     </div>
   </div>
   
