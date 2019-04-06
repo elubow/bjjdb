@@ -18,6 +18,12 @@ class UsersController < ApplicationController
     authorize @user
   end
 
+  def favorites
+    @user = User.find(params[:user_id])
+    @favorites = Link.favorited_by(@user)
+    authorize @user
+  end
+
   def update
     @user = User.find(params[:id])
     authorize @user

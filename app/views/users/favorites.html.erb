@@ -1,0 +1,10 @@
+<% content_for :title do %><%= @user.name %> Favorites<% end %>
+<div class="col">
+  <h1 class="mt-4">My Favorites</h1>
+
+  <% if @favorites.count > 0 %>
+    <%= render partial: 'links/list', locals: { links: @favorites } %>
+  <% end %>
+
+</div>
+

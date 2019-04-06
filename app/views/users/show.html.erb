@@ -4,6 +4,7 @@
   <p>Name: <%= @user.name if @user.name %></p>
   <p>Email: <%= @user.email if @user.email %></p>
   <p>Level: <%= @user.role.capitalize %></p>
+  <p>Favorites: <%= link_to @user.favorites.count, user_favorites_path(@user) %></p>
 
   <% if @user.links.count > 0 %>
     <h2><%= pluralize(@user.links.count, "Video") %> Added</h2>

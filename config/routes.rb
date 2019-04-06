@@ -16,9 +16,12 @@ Rails.application.routes.draw do
   resources :tags
   resources :links do
     resources :comments, only: [:create, :index, :destroy]
+    resource :favorite, only: [:create, :destroy]
   end
   devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
-  resources :users
+  resources :users do
+    get 'favorites'
+  end
 
   authenticated :user do
     root 'users#dashboard'

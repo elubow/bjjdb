@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_25_155416) do
+ActiveRecord::Schema.define(version: 2019_03_29_003222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 2019_03_25_155416) do
     t.datetime "updated_at", null: false
     t.index ["link_id"], name: "index_comments_on_link_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "link_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_favorites_on_link_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "impressions", force: :cascade do |t|
@@ -78,6 +87,7 @@ ActiveRecord::Schema.define(version: 2019_03_25_155416) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "location"
+    t.integer "favorites_count", default: 0
     t.index ["url"], name: "index_links_on_url", unique: true
   end
 
@@ -166,6 +176,8 @@ ActiveRecord::Schema.define(version: 2019_03_25_155416) do
 
   add_foreign_key "comments", "links"
   add_foreign_key "comments", "users"
+  add_foreign_key "favorites", "links"
+  add_foreign_key "favorites", "users"
   add_foreign_key "private_notes", "links"
   add_foreign_key "private_notes", "users"
   add_foreign_key "thumbnails", "links"

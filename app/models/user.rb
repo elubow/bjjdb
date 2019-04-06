@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :private_notes, dependent: :destroy
   has_many :links
   has_many :login_activities, as: :user
+  has_many :favorites, dependent: :destroy
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "only allows valid emails" }
   devise :omniauthable, omniauth_providers: [:facebook]
@@ -62,5 +63,18 @@ class User < ApplicationRecord
   # provide a custom message for a deleted account
   def inactive_message
   	!deleted_at ? super : :deleted_account
+  end
+
+  def favorite(link)
+    favorites.find_or_create_by(link: link)
+  end
+
+  def unfavorite(link)
+    favorites.where(link: link).destroy_all
+    link.reload
+  end
+
+  def favorited?(link)
+    favorites.find_by(link_id: link.id).present?
   end
 end
