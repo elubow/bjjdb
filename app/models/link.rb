@@ -82,7 +82,9 @@ class Link < ApplicationRecord
   end
 
   def has_favicon?
-    self.thumbnail.favicon.present?
+    if self.thumbnail.present?
+      self.thumbnail.favicon.present?
+    end
   end
 
   # BEGIN related videos

@@ -6,8 +6,7 @@
   title: @link.title,
   description: truncate(@link.show_description, length: 254, separator: /\w+/),
   type: 'article',
-  url: @link.url,
-  image: @link.thumbnail.source
+  url: @link.url
 } %>
 <% set_meta_tags article: {
   published_time: @link.created_at,
