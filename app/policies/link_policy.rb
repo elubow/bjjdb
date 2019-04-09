@@ -10,11 +10,6 @@ class LinkPolicy
     true
   end
 
-  def admin_index?
-    !@current_user.nil? and
-      (@current_user.admin? or @current_user.moderator?)
-  end
-
   def show?
     true
   end

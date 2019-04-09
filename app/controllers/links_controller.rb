@@ -10,25 +10,13 @@ class LinksController < ApplicationController
     authorize @links
   end
 
-  def admin_index
-    @admin = true
-    @pagy, @links = pagy(Link.select('id, title, url, description, location, created_at').order(created_at: :desc), items: 25)
-    authorize @links
-    render "index"
-  end
-
   # GET /links/1
   # GET /links/1.json
   def show
     authorize @link
 
     #Ratings
-    @ratings = Rating.new
-    if !current_user.nil?
-      if @link.ratings.find_by(user_id: current_user.id)
-        @ratings = @link.ratings.find_by(user_id: current_user.id)
-      end
-    end
+    @rating = @link.ratings.find_by(user_id: current_user&.id) || Rating.new
 
     @comments = @link.comments.all.order(created_at: :desc)
     @comment = @link.comments.build

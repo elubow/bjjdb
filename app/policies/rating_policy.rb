@@ -1,9 +1,9 @@
 class RatingPolicy
-    attr_reader :current_user, :model
+    attr_reader :current_user, :rating
 
-    def initialize(current_user, model)
+    def initialize(current_user, rating)
         @current_user = current_user
-        @link = model
+        @rating = rating
     end
 
     def rate?

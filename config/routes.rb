@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   get 'search/a', controller: :search, action: :autocomplete
 
   get 'stats/site', controller: :stats, action: :site
-  #For video display unique to admin
-  get 'links/admin', controller: :links, action: :admin_index
 
   get 'validate/email', to: 'validations#email'
   get 'validate/instructor', to: 'validations#instructor'
