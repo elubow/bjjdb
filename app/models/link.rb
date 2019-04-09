@@ -170,8 +170,12 @@ class Link < ApplicationRecord
     star_ratings_4 = all_ratings.where(value: 4).count
     star_ratings_5 = all_ratings.where(value: 5).count
 
-    return ((star_ratings_1 + star_ratings_2 * 2 + star_ratings_3 * 3 + star_ratings_4 * 4 + star_ratings_5 * 5) /
-            (star_ratings_1 + star_ratings_2 + star_ratings_3 + star_ratings_4 + star_ratings_5))
+    return (((star_ratings_1 * 1) +
+             (star_ratings_2 * 2) +
+             (star_ratings_3 * 3) +
+             (star_ratings_4 * 4) +
+             (star_ratings_5 * 5)) /
+             (star_ratings_1 + star_ratings_2 + star_ratings_3 + star_ratings_4 + star_ratings_5))
   end
 
   private
