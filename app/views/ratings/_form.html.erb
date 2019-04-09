@@ -1,12 +1,14 @@
-<%= form_for @rating, url: link_ratings_path(@link) do |f| %>
-    <%= f.radio_button :value, 1, :onclick => "this.parentNode.submit();" %> 
-    <%= label :rating_one_star, '1' %>
-    <%= f.radio_button :value, 2, :onclick => "this.parentNode.submit();" %>
-    <%= label :rating_two_stars, '2' %>
-    <%= f.radio_button :value, 3, :onclick => "this.parentNode.submit();" %> 
-    <%= label :rating_three_stars, '3' %>
-    <%= f.radio_button :value, 4, :onclick => "this.parentNode.submit();" %>
-    <%= label :rating_four_stars, '4' %>
-    <%= f.radio_button :value, 5, :onclick => "this.parentNode.submit();" %> 
-    <%= label :rating_five_stars, '5' %>
-<% end %>
+<div class="form-check form-check-inline">
+  <%= form_for @rating, url: link_ratings_path(@link) do |f| %>
+      <%= f.radio_button :value, 1, :onclick => "this.parentNode.submit();", class: 'form-check-input' %> 
+      <%= label :rating_one_star, '1', class: 'form-check-label' %>
+      <%= f.radio_button :value, 2, :onclick => "this.parentNode.submit();", class: 'form-check-input' %>
+      <%= label :rating_two_stars, '2', class: 'form-check-label' %>
+      <%= f.radio_button :value, 3, :onclick => "this.parentNode.submit();", class: 'form-check-input' %> 
+      <%= label :rating_three_stars, '3', class: 'form-check-label' %>
+      <%= f.radio_button :value, 4, :onclick => "this.parentNode.submit();", class: 'form-check-input' %>
+      <%= label :rating_four_stars, '4', class: 'form-check-label' %>
+      <%= f.radio_button :value, 5, :onclick => "this.parentNode.submit();", class: 'form-check-input' %> 
+      <%= label :rating_five_stars, '5', class: 'form-check-label' %>
+  <% end %>
+</div>
