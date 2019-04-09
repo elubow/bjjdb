@@ -12,8 +12,8 @@ class LinksController < ApplicationController
 
   def admin_index
     @admin = true
-    @pagy, @links = pagy(Link.select('id, title, url, description, location, created_at').order(created_at: :desc), items: 25)
-    authorize @links
+    @pagy, @links = pagy(Link.left_outer_joins(:instructors).where(instructors: {id: nil}).order(created_at: :desc), items: 25)
+    authorize Link
     render "index"
   end
 
