@@ -11,7 +11,7 @@ class RemoteImageUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     # "#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-    "#{SecureRandom.hex(4)}"
+    "#{Digest::MD5.hexdigest(model.id.to_s)[0..5]}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
