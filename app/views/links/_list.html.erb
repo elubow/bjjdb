@@ -23,7 +23,6 @@
               <%= link_to i.display_name, i, class: 'btn btn-light btn-sm' %>
             <% end %>
         </td>
-        <% end %>
         <td>
           <% if link.description_exists? %>
             <%= truncate(link.show_description, length: 255, separator: /\w+/) %>

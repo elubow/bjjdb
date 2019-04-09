@@ -17,7 +17,7 @@
   <h1 class="mt-4"><%= @link.title %></h1>
 
   <div class="row">
-    <div class="col-8">
+    <div class="col-6 mt-auto">
       <% if @link.has_instructors? %>
         <ul class="list-group">
           <% @link.instructors.each do |i| %>
@@ -31,9 +31,11 @@
         </ul>
       <% end %>
     </div>
-    <div class="col-4 text-right">
+    <div class="col-6 text-right mt-auto">
       <% if @current_user %>
         <%= render partial: 'favorites/favorited_bar', locals: { link: @link, user: @current_user } %>
+        |
+        <%= render partial: 'ratings/form' %>
         |
       <% end %>
 
@@ -47,14 +49,17 @@
   <hr />
   
   <div class="row">
-    <div class="col-8 text-left">
+    <div class="col-7 text-left">
   Added by <%= link_to @link.user.name, @link.user %>
   on <%= @link.created_at.strftime("%Y-%b-%d") %>
     </div>
-    <div class="col-4 text-right">
+    <div class="col-5 text-right">
       <%= pluralize(@link.favorites_count, "favorite") %>
       |
       <%= pluralize(@link.impressions.count, "view") %>
+      |
+
+      <%= @link.get_current_rating %> stars (<%= pluralize(@link.ratings.count, "rating") %>)
     </div>
   </div>
   

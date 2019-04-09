@@ -11,12 +11,14 @@ Rails.application.routes.draw do
   get 'validate/email', to: 'validations#email'
   get 'validate/instructor', to: 'validations#instructor'
   get 'validate/url', to: 'validations#url'
-
+  
   resources :comments
   resources :private_notes
   get 'notebook', controller: :private_notes, action: :notebook
   resources :tags
   resources :links do
+    post :ratings, to: 'ratings#rate'
+    patch :ratings, to: 'ratings#rate'
     resources :comments, only: [:create, :index, :destroy]
     resource :favorite, only: [:create, :destroy]
   end

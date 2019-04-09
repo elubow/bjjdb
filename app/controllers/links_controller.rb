@@ -21,6 +21,10 @@ class LinksController < ApplicationController
   # GET /links/1.json
   def show
     authorize @link
+
+    #Ratings
+    @rating = @link.ratings.find_by(user_id: current_user&.id) || Rating.new
+
     @comments = @link.comments.all.order(created_at: :desc)
     @comment = @link.comments.build
 

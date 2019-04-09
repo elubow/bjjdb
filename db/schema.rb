@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_29_003222) do
+ActiveRecord::Schema.define(version: 2019_04_08_111216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,16 @@ ActiveRecord::Schema.define(version: 2019_03_29_003222) do
     t.index ["user_id"], name: "index_private_notes_on_user_id"
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer "value", null: false
+    t.bigint "user_id"
+    t.bigint "link_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_ratings_on_link_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "category"
     t.string "name"
@@ -180,5 +190,7 @@ ActiveRecord::Schema.define(version: 2019_03_29_003222) do
   add_foreign_key "favorites", "users"
   add_foreign_key "private_notes", "links"
   add_foreign_key "private_notes", "users"
+  add_foreign_key "ratings", "links"
+  add_foreign_key "ratings", "users"
   add_foreign_key "thumbnails", "links"
 end

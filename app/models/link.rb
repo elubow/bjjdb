@@ -9,6 +9,8 @@ class Link < ApplicationRecord
   has_and_belongs_to_many :instructors
   has_and_belongs_to_many :tags
   has_one :thumbnail, dependent: :destroy
+  #Ratings
+  has_many :ratings
 
   after_validation :set_location, on: [:create, :update]
   after_commit { GetVideoMetadataJob.perform_later self}
@@ -155,6 +157,26 @@ class Link < ApplicationRecord
   end
 
   # END related videos
+
+  #Ratings related
+  def get_current_rating
+    all_ratings = self.ratings;
+    if all_ratings.count === 0
+      return 0
+    end
+    star_ratings_1 = all_ratings.where(value: 1).count
+    star_ratings_2 = all_ratings.where(value: 2).count
+    star_ratings_3 = all_ratings.where(value: 3).count
+    star_ratings_4 = all_ratings.where(value: 4).count
+    star_ratings_5 = all_ratings.where(value: 5).count
+
+    return (((star_ratings_1 * 1) +
+             (star_ratings_2 * 2) +
+             (star_ratings_3 * 3) +
+             (star_ratings_4 * 4) +
+             (star_ratings_5 * 5)) /
+             (star_ratings_1 + star_ratings_2 + star_ratings_3 + star_ratings_4 + star_ratings_5))
+  end
 
   private
     def set_location
