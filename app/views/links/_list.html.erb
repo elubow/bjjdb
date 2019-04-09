@@ -3,7 +3,9 @@
     <tr>
       <th>Video</th>
       <th>Title</th>
+      <% if !@admin %>
       <th>Instructor</th>
+      <% end %>
       <th>Description</th>
       <th>Tags</th>
       <% if @current_user and (@current_user.moderator? or @current_user.admin?) %>
@@ -17,6 +19,7 @@
       <tr>
         <td><%= link_to "Video", link.url, target: '_blank' %></td>
         <td><%= link_to link.title, link %></td>
+        <% if !@admin %>
         <td>
           <% if link.has_instructors? %>
             <% link.instructors.each do |i| %>
@@ -24,6 +27,7 @@
             <% end %>
           <% end %>
         </td>
+        <% end %>
         <td>
           <% if link.description_exists? %>
             <%= truncate(link.show_description, length: 255, separator: /\w+/) %>

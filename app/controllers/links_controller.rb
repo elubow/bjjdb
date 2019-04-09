@@ -10,6 +10,13 @@ class LinksController < ApplicationController
     authorize @links
   end
 
+  def admin_index
+    @admin = true
+    @pagy, @links = pagy(Link.select('id, title, url, description, location, created_at').order(created_at: :desc), items: 25)
+    authorize @links
+    render "index"
+  end
+
   # GET /links/1
   # GET /links/1.json
   def show
