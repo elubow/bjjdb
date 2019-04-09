@@ -9,7 +9,6 @@ class Link < ApplicationRecord
   has_and_belongs_to_many :instructors
   has_and_belongs_to_many :tags
   has_one :thumbnail, dependent: :destroy
-  #Ratings
   has_many :ratings
 
   after_validation :set_location, on: [:create, :update]
@@ -20,7 +19,6 @@ class Link < ApplicationRecord
   validates :url, format: {with: Regexp.new(URI::regexp(%w(http https)))}, presence: true
 
   ransack_alias :title_description, :title_or_description
-  #scope :favorited_by, -> (user) { joins(:favorites).where(favorites: { user: User.find(user.id) }) }
   scope :favorited_by, -> (user) { joins(:favorites).where(favorites: { user: user }) }
   scope :without_thumbnails, -> {
     where("
