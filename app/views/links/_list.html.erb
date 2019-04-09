@@ -22,6 +22,7 @@
             <% link.instructors.each do |i| %>
               <%= link_to i.display_name, i, class: 'btn btn-light btn-sm' %>
             <% end %>
+          <% end %>
         </td>
         <td>
           <% if link.description_exists? %>

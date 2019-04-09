@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'stats/site', controller: :stats, action: :site
 
-  get 'links/admin', controller: :links, action: :admin_index
+  get 'links/without_instructors', controller: :links, action: :index_without_instructors
 
   get 'validate/email', to: 'validations#email'
   get 'validate/instructor', to: 'validations#instructor'

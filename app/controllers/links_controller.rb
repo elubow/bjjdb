@@ -10,7 +10,7 @@ class LinksController < ApplicationController
     authorize @links
   end
 
-  def admin_index
+  def index_without_instructors
     @admin = true
     @pagy, @links = pagy(Link.left_outer_joins(:instructors).where(instructors: {id: nil}).order(created_at: :desc), items: 25)
     authorize Link

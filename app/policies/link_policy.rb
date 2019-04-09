@@ -14,6 +14,11 @@ class LinkPolicy
     true
   end
 
+  def index_without_instructors?
+    !@current_user.nil? and
+      (@current_user.admin? or @current_user.moderator?)
+  end
+
   def new?
     !@current_user.nil? and
       (@current_user.admin? or @current_user.moderator?)
