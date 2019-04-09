@@ -23,6 +23,10 @@
           <% @link.instructors.each do |i| %>
             <li class="list-group-item d-flex justify-content-between align-items-center">
               <%= link_to i.display_name, i, class: 'btn btn-light btn-sm' %>
+              <% if @current_user%>
+                <%= render partial: "ratings/form" %>
+              <% end %>
+              Current rating: <%= @link.get_current_rating%>
               <span class="badge bage-primary badge-bill">
                 <%= link_to i.video_count, i %>
               </span>
