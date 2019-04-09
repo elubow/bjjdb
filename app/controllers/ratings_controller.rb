@@ -1,16 +1,14 @@
 class RatingsController < ApplicationController
     after_action :verify_authorized
     def rate
+        authorize Rating
         @user = current_user
         @link = Link.find(params[:link_id])
 
-        @rating = @link.ratings.find_or_initialize_by(user_id: @user&.id) do |rating|
-            rating.value = params[:rating].values.first.to_i
-            rating.link_id = params[:link_id]
-            rating.user_id = @user&.id
+        @rating = @link.ratings.find_or_initialize_by(user_id: @user.id) do |rating|
+            rating.value = rating_params.values.first.to_i
+            rating.user_id = @user.id
         end
-
-        authorize Rating
 
         if @rating.new_record?
             if @rating.save
@@ -19,7 +17,7 @@ class RatingsController < ApplicationController
                 flash[:notice] = "There was a problem trying to save your rating!"
             end
         else
-            if @rating.update(value: params[:rating].values.first.to_i)
+            if @rating.update(value: rating_params.values.first.to_i)
                 flash[:notice] = "Rating updated!"
             else
                 flash[:notice] = "There was a problem trying to updating your rating!"
