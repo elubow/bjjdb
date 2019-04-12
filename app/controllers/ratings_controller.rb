@@ -6,6 +6,7 @@ class RatingsController < ApplicationController
         authorize Rating
         @user = current_user
         @link = Link.find(params[:link_id])
+        @previous_value = ""
 
         @rating = @link.ratings.find_or_initialize_by(user_id: @user.id) do |rating|
             rating.value = rating_params.values.first.to_i
@@ -13,27 +14,20 @@ class RatingsController < ApplicationController
         end
 
         if @rating.new_record?
-            @rating.save
-            # if @rating.save
-            #     flash[:notice] = "Rating saved!"
-            # else
-            #     flash[:notice] = "There was a problem trying to save your rating!"
-            # end
+            if !@rating.save
+                @previous_value = "new record"
+            end
         else
-            @rating.update(value: rating_params.values.first.to_i)
-            # if @rating.update(value: rating_params.values.first.to_i)
-            #     flash[:notice] = "Rating updated!"
-            # else
-            #     flash[:notice] = "There was a problem trying to updating your rating!"
-            # end
+            @previous_value = @rating.value
+            if @rating.update(value: rating_params.values.first.to_i)
+                @previous_value = ""
+            end
+        end
+        respond_to do |format|
+            format.js 
+            format.html { redirect_to link_path(@link) }
         end
     end
-
-    respond_to do |format|
-        format.js
-        format.html{redirect_to link_path(@link)}
-    end
-
     private
         # Never trust parameters from the scary internet, only allow the white list through.
         def rating_params

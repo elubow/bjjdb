@@ -7,7 +7,7 @@ class FavoritesController < ApplicationController
     current_user.favorite(@link)
 
     respond_to do |format|
-      format.html{redirect_to controller: 'links', action: 'show', id: @link.id}
+      format.html { redirect_to controller: 'links', action: 'show', id: @link.id }
       format.js
     end
   end
@@ -17,7 +17,7 @@ class FavoritesController < ApplicationController
     current_user.unfavorite(@link)
 
     respond_to do |format|
-      format.html{redirect_to controller: 'links', action: 'show', id: @link.id}
+      format.html { redirect_to controller: 'links', action: 'show', id: @link.id }
       format.js
     end
   end
