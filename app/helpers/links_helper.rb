@@ -8,9 +8,7 @@ module LinksHelper
             link_url[-1] += '/embed/captioned'
             height = 780
         end
-        #780
         iframe = "<iframe width='100%' height='" + height.to_s + "' src='" + link_url.join('/') + "'></iframe>"
-        puts iframe
         return iframe.html_safe
     end
 end
