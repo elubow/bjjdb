@@ -1,17 +1,25 @@
 class FavoritesController < ApplicationController
   before_action :get_link
-
+  respond_to :js, :html
 
   def create
+    @user = current_user
     current_user.favorite(@link)
 
-    redirect_to controller: 'links', action: 'show', id: @link.id
+    respond_to do |format|
+      format.html{redirect_to controller: 'links', action: 'show', id: @link.id}
+      format.js
+    end
   end
 
   def destroy
+    @user = current_user
     current_user.unfavorite(@link)
 
-    redirect_to controller: 'links', action: 'show', id: @link.id
+    respond_to do |format|
+      format.html{redirect_to controller: 'links', action: 'show', id: @link.id}
+      format.js
+    end
   end
 
   private

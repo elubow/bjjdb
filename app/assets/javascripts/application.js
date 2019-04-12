@@ -16,6 +16,7 @@
 //= require instructors
 //= require private_notes
 //= require validations
+//= require ratings
 //= require tags
 //= require popper
 //= require rails-ujs

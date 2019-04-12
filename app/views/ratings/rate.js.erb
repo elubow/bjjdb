@@ -1,0 +1,2 @@
+$('#ratings-display').html("<%= @link.get_current_rating %>");
+$('#total-ratings').html("<%= pluralize(@link.ratings.count, 'rating') %>");
