@@ -1,0 +1,17 @@
+<div class="form-check form-check-inline form-remove-margin">
+  <%= form_with(model:@rating, url: link_ratings_path(@link), remote:true, id:'ratings-form') do |f| %>
+      <%= f.radio_button :value, 1, :onclick => "document.getElementById('submit-rating').click();", class: 'form-check-input' %> 
+      <%= label :rating_one_star, '1', class: 'form-check-label' %>
+      <%= f.radio_button :value, 2, :onclick => "document.getElementById('submit-rating').click();", class: 'form-check-input' %>
+      <%= label :rating_two_stars, '2', class: 'form-check-label' %>
+      <%= f.radio_button :value, 3, :onclick => "document.getElementById('submit-rating').click();", class: 'form-check-input' %> 
+      <%= label :rating_three_stars, '3', class: 'form-check-label' %>
+      <%= f.radio_button :value, 4, :onclick => "document.getElementById('submit-rating').click();", class: 'form-check-input' %>
+      <%= label :rating_four_stars, '4', class: 'form-check-label' %>
+      <%= f.radio_button :value, 5, :onclick => "document.getElementById('submit-rating').click();", class: 'form-check-input' %> 
+      <%= label :rating_five_stars, '5', class: 'form-check-label' %>
+      <div style="display:none">
+        <%= f.submit id:"submit-rating"%>
+      </div>
+  <% end %>
+</div>

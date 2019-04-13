@@ -1,0 +1,21 @@
+$('#ratings-display').html("<%= @link.get_current_rating %>");
+$(function(){
+    if("<%= @previous_value %>" != ""){
+        radios = $('[name = "rating[value]"]')
+        if("<%= @previous_value %>" == "new record"){
+            for(let i = 0; i< radios.length; i++){
+                radios[i].checked = false
+            }
+        }else{
+            for(let i = 0; i< radios.length; i++){
+                if(radios[i].id == ("rating_value_" + "<%= @previous_value %>"))
+                    radios[i].checked = true
+            }
+        }
+        $(".mt-3").first().
+        html('<div class="alert alert-danger" role="alert">' +
+        '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+        '<div id="flash_notice">Error trying to save!</div></div>')
+    }
+});
+$('#total-ratings').html("<%= pluralize(@link.ratings.count, 'rating') %>");
