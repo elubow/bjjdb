@@ -66,7 +66,7 @@
   <hr />
 
   <p>
-    <%= link_to image_tag(@link.thumbnail_image_location(), alt: @link.title, class: "link_image"), @link.url, target: '_blank' %>
+    <%= link_url_helper(@link) %>
   </p>
 
   <p>
