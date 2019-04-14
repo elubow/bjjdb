@@ -1,0 +1,11 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:9.6.5
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=
+    volumes:
+      - ./tmp/db/pg_data:/var/lib/postgresql/data
+
