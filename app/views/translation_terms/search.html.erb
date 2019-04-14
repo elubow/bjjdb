@@ -1,0 +1,32 @@
+<div class="col">
+  <h1 class="mt-4">Translations</h1>
+
+  <p>
+    Choose a source language and a translation language.
+  </p>
+
+  <%= form_with(url: translations_charts_path, local: true, method: :get) do |form| %>
+
+    <div class="form-group form-row">
+      <%= form.label :src, class: 'col-form-label-lg' %>
+      <%= form.select :src,
+        TranslationTerm::LANGUAGES.sort.map{|lng, language|  ["#{lng} - #{language}", lng]},
+        {required: true},
+        id: 'translation_src'
+      %>
+    </div>
+
+    <div class="form-group form-row">
+      <%= form.label :dst, class: 'col-form-label-lg' %>
+      <%= form.select :dst,
+        TranslationTerm::LANGUAGES.sort.map{|lng, language|  ["#{lng} - #{language}", lng]},
+        {required: true},
+        id: 'translation_dst'
+      %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Show Charts', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

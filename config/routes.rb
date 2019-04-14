@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :translation_terms
+  get 'translations', controller: :translation_terms, action: :search
+  get 'translations/charts', controller: :translation_terms, action: :charts
+
   resources :instructors
   get :search, controller: :search, action: :input
   post :search, controller: :search, action: :advanced

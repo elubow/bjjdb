@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body: MyText
+  language: MyText
+  user: one
+  base_term: false
+
+two:
+  body: MyText
+  language: MyText
+  user: two
+  base_term: false

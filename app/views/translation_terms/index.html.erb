@@ -1,0 +1,40 @@
+<div class="col">
+
+    <h1 class="mt-4">Translations</h1>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Translations / Base Term</th>
+          <th>Language</th>
+          <th>Term</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% @translation_terms.each do |translation_term| %>
+          <tr>
+            <td><%= translation_term.base_term_id.zero? ? translation_term.translation_counts : link_to("#{translation_term.base_term.language} - #{translation_term.base_term.body}", translation_term_path(translation_term.base_term)) %></td>
+            <td><%= translation_term.language %></td>
+            <td><%= translation_term.body %></td>
+            <td>
+              <%= link_to 'Show', translation_term %>
+              <%= link_to 'Edit', edit_translation_term_path(translation_term) %>
+              <%= link_to 'Destroy', translation_term, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+      <%== pagy_nav_bootstrap(@pagy) %>
+    </div>
+
+    <%= link_to 'New Translation Term', new_translation_term_path, class: 'btn btn-primary' %>
+
+    <br />
+    <br />
+
+</div>

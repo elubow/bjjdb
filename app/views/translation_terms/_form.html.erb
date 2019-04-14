@@ -1,0 +1,40 @@
+<%= form_with(model: translation_term, local: true) do |form| %>
+  <% if translation_term.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(translation_term.errors.count, "error") %> prohibited this translation_term from being saved:</h2>
+
+      <ul>
+      <% translation_term.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group form-row">
+    <%= form.label :language, class: 'col-form-label-lg' %>
+    <%= form.select :language,
+      TranslationTerm::LANGUAGES.sort.map{|lng, language|  ["#{lng} - #{language}", lng]},
+      {include_blank: true},
+      {required: false} %>
+    <small id="translation_term_base_term_id_help" class="form-text text-muted">Is this a base term which other translations will be based off of?</small>
+  </div>
+
+  <div class="form-group form-row">
+    <%= form.label :body, class: 'col-form-label-lg' %>
+    <%= form.text_field :body, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group form-row">
+    <%= form.label :base_term_id, class: 'col-form-label-lg' %>
+    <%= form.select :base_term_id,
+      TranslationTerm.base_terms.pluck(:id, :language, :body).sort.map{|term_id, lng, body|  ["#{lng} - #{body}", term_id]},
+      {include_blank: true},
+      {required: false} %>
+    <small id="translation_term_base_term_id_help" class="form-text text-muted">Is this a base term which other translations will be based off of?</small>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Save Translation Term', class: 'btn btn-primary' %>
+  </div>
+<% end %>
