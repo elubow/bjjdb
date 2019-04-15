@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   get 'links/without_instructors', controller: :links, action: :index_without_instructors
   get 'links/tag_filter', controller: :links, action: :index_based_on_tags
-  get 'links/tag_picker', controller: :links, action: :filter_by_tags
   
   get 'validate/email', to: 'validations#email'
   get 'validate/instructor', to: 'validations#instructor'

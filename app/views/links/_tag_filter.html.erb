@@ -1,17 +1,24 @@
 <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span id="tag-filter">Select a tag filter</span>
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+    <span id="tag-filter">
+      <% if params[:tags].to_i == -1 %>
+        Select a tag filter
+      <% elsif params[:tags].to_i == 10 %>
+        10+ Tags
+      <% else %>
+        <%= pluralize(params[:tags].to_i, "tag") %>
+      <% end %>
+    </span>
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
-      <li><%= link_to "0 Tags", links_tag_picker_path(:tags => 0) ,remote: true, name: "filter-options" %></li>
-      <li><%= link_to "1 Tag", links_tag_picker_path(:tags => 1) ,remote: true, name: "filter-options" %></li>
-      <li><%= link_to "2 Tags", links_tag_picker_path(:tags => 2) ,remote: true, name: "filter-options" %></li>
-      <li><%= link_to "3 Tags", links_tag_picker_path(:tags => 3) ,remote: true, name: "filter-options" %></li>
-      <li><%= link_to "4 Tags", links_tag_picker_path(:tags => 4) ,remote: true, name: "filter-options" %></li>
-      <li><%= link_to "5 Tags", links_tag_picker_path(:tags => 5) ,remote: true, name: "filter-options" %></li>
-      <li><%= link_to "6 Tags", links_tag_picker_path(:tags => 6) ,remote: true, name: "filter-options" %></li>
-      <li><%= link_to "7 Tags", links_tag_picker_path(:tags => 7) ,remote: true, name: "filter-options" %></li>
-      <li><%= link_to "8 Tags", links_tag_picker_path(:tags => 8) ,remote: true, name: "filter-options" %></li>
-      <li><%= link_to "9 Tags", links_tag_picker_path(:tags => 9) ,remote: true, name: "filter-options" %></li>
-      <li><%= link_to "10+ Tags", links_tag_picker_path(:tags => 10) ,remote: true, name: "filter-options" %></li>
+      <% 11.times do |i|%>
+        <% if i == 1 %>
+          <li><%= link_to "1 Tag", links_tag_filter_path(tags: 1), name: "filter-options" %></li>
+        <% elsif i == 10 %>
+          <li><%= link_to "10+ Tags", links_tag_filter_path(tags: 10), name: "filter-options" %></li>
+        <% else %>
+          <li><%= link_to (i.to_s + " Tags"), links_tag_filter_path(tags: i), name: "filter-options" %></li>
+        <% end %>
+      <% end %>
     </ul>
   </div>

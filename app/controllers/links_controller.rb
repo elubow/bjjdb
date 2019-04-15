@@ -11,35 +11,26 @@ class LinksController < ApplicationController
   end
 
   def index_without_instructors
+    authorize Link
     @admin = true
     @pagy, @links = pagy(Link.left_outer_joins(:instructors).where(instructors: {id: nil}).order(created_at: :desc), items: 25)
-    authorize Link
     render "index"
   end
 
   def index_based_on_tags
-    @admin = true
-    @pagy, @links = pagy(Link.left_joins(:tags).group(:id).order("links.created_at DESC"), items: 25)
     authorize Link
+    @admin = true
+    @links = Link.left_joins(:tags).group(:id).order("links.created_at DESC")
+
+    if params[:tags].to_i < 10 && params[:tags].to_i >= 0
+      @links = @links.having('COUNT(tag_id) =' + params[:tags])
+    elsif params[:tags].to_i >= 10
+      @links = @links.having('COUNT(tag_id) >= ' + params[:tags])
+    end
+    @pagy, @links = pagy(@links, items: 25)
     render "index"
   end
     
-  def filter_by_tags
-    filter = ''
-    if params[:tags].to_i < 10
-      filter = '= ' + params[:tags]
-    else
-      filter = '>= 10'
-    end
-
-    @pagy, @links = pagy(Link.left_joins(:tags).having('COUNT(tag_id) ' + filter).group(:id).order("links.created_at DESC"), items: 25, link_extra: 'data-remote="true"')
-    authorize Link
-    
-    respond_to do |format|
-      format.html { redirect_to controller: 'links', action: 'index_based_on_tags' }
-      format.js
-    end
-  end
 
   # GET /links/1
   # GET /links/1.json
