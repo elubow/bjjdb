@@ -1,7 +1,7 @@
 <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
     <span id="tag-filter">
-      <% if params[:tags].to_i == -1 %>
+      <% if params[:tags].nil? %>
         Select a tag filter
       <% elsif params[:tags].to_i == 10 %>
         10+ Tags
