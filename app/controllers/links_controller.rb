@@ -17,6 +17,30 @@ class LinksController < ApplicationController
     render "index"
   end
 
+  def index_based_on_tags
+    @admin = true
+    @pagy, @links = pagy(Link.left_joins(:tags).group(:id).order("links.created_at DESC"), items: 25)
+    authorize Link
+    render "index"
+  end
+    
+  def filter_by_tags
+    filter = ''
+    if params[:tags].to_i < 10
+      filter = '= ' + params[:tags]
+    else
+      filter = '>= 10'
+    end
+
+    @pagy, @links = pagy(Link.left_joins(:tags).having('COUNT(tag_id) ' + filter).group(:id).order("links.created_at DESC"), items: 25, link_extra: 'data-remote="true"')
+    authorize Link
+    
+    respond_to do |format|
+      format.html { redirect_to controller: 'links', action: 'index_based_on_tags' }
+      format.js
+    end
+  end
+
   # GET /links/1
   # GET /links/1.json
   def show

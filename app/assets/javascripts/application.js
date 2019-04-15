@@ -17,6 +17,7 @@
 //= require private_notes
 //= require validations
 //= require ratings
+//= require links
 //= require tags
 //= require popper
 //= require rails-ujs
