@@ -1,0 +1,24 @@
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+    <span id="tag-filter">
+      <% if params[:tags].nil? %>
+        Select a tag filter
+      <% elsif params[:tags].to_i == 10 %>
+        10+ Tags
+      <% else %>
+        <%= pluralize(params[:tags].to_i, "tag") %>
+      <% end %>
+    </span>
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <% 11.times do |i|%>
+        <% if i == 1 %>
+          <li><%= link_to "1 Tag", links_tag_filter_path(tags: 1), name: "filter-options" %></li>
+        <% elsif i == 10 %>
+          <li><%= link_to "10+ Tags", links_tag_filter_path(tags: 10), name: "filter-options" %></li>
+        <% else %>
+          <li><%= link_to (i.to_s + " Tags"), links_tag_filter_path(tags: i), name: "filter-options" %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>

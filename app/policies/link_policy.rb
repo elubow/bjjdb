@@ -19,6 +19,16 @@ class LinkPolicy
       (@current_user.admin? or @current_user.moderator?)
   end
 
+  def index_based_on_tags?
+    !@current_user.nil? and
+      (@current_user.admin? or @current_user.moderator?)
+  end
+    
+  def filter_by_tags?
+    !@current_user.nil? and
+      (@current_user.admin? or @current_user.moderator?)
+  end
+
   def new?
     !@current_user.nil? and
       (@current_user.admin? or @current_user.moderator?)
