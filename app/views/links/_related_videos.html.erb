@@ -63,4 +63,19 @@
       </div>
     </div>
   <% end %>
+
+  <% if (@link.has_position? && Tag.left_joins(:links).group(:id).having("COUNT(link_id) > 1").find_by(id: @link.get_position_id)) or
+        (@link.has_submission? && Tag.left_joins(:links).group(:id).having("COUNT(link_id)> 1").find_by(id: @link.get_submission_id)) or
+        (@link.has_start_position? && Tag.left_joins(:links).group(:id).having("COUNT(link_id)> 1").find_by(id: @link.get_start_position_id)) %>
+    <div class="card my-4">
+      <h5 class="card-header">Related Drills</h5>
+      <div class="card-body">
+        <ul>
+          <% @link.has_related_drills.each do |l| %>
+            <li><%= link_to l.title, l %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
   <!-- end related videos -->

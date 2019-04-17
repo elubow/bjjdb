@@ -99,6 +99,14 @@ class Link < ApplicationRecord
     self.tags.select {|t|  t.category == "position"}.first.id
   end
 
+  def get_submission_id
+    self.tags.select { |t| t.category == "submission" }.first.id
+  end
+
+  def has_submission?
+    self.tags.collect(&:category).uniq.include?("submission") and Tag.find(self.get_submission_id).links.count > 0
+  end
+
   def get_start_position_id
     self.tags.select {|t|  t.category == "start-position"}.first.id
   end
@@ -145,6 +153,21 @@ class Link < ApplicationRecord
   def has_videos_starting_from_end_position?(limit=5)
     end_pos_id = self.get_end_position_id
     Tag.find_by_full_name("start-position::#{Tag.find(end_pos_id).name}").links.order(created_at: :desc).limit(limit+1).reject{|l|  l.id == self.id}.count > 0
+  end
+
+  def has_related_drills(limit=5)
+    flow_id = Tag.find_by_full_name("move::flow").id
+    drill_id = Tag.find_by_full_name("move::drill").id
+
+    flow_drill = Link.left_joins(:tags).group(:id, :tag_id).where("tag_id IN (?)", [flow_id,drill_id]).reject{|l|  l.id == self.id}
+
+    start_pos_id = self.get_start_position_id if self.has_start_position?
+    position_id = self.get_position_id if self.has_position?
+    submission_id = self.get_submission_id if self.has_submission?
+
+    related_videos = Link.left_joins(:tags).group(:id, :tag_id).where("links.id IN (?) AND tags.id IN (?)",flow_drill, [start_pos_id,position_id,submission_id]).uniq.take(limit)
+    
+    return related_videos
   end
 
   # drills exist for getting into start-position or about 
