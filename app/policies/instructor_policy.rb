@@ -10,6 +10,10 @@ class InstructorPolicy
     true
   end
 
+  def search_for?
+    true
+  end
+
   def show?
     true
   end

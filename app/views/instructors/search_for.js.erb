@@ -1,0 +1,7 @@
+$(function(){
+    if(document.getElementById("instructor_search").value.length >= 3){
+        console.log("Hello")
+        $('#instructor-display').html(`<%= render partial: 'instructors/list', locals: { instructors: @instructor_search } %>"`);
+        $('#pagy-div').html('<%== pagy_nav_bootstrap(@pagy) %>');
+    }
+});

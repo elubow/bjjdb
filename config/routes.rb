@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get :search, controller: :search, action: :input
   post :search, controller: :search, action: :advanced
   get 'search/a', controller: :search, action: :autocomplete
+  get 'instructor/search', controller: :instructors, action: :search_for
 
   get 'stats/site', controller: :stats, action: :site
 

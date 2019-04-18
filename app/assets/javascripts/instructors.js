@@ -5,3 +5,8 @@ document.addEventListener("turbolinks:load", function() {
     width: '100%'
   })
 });
+$(document).ready(function(){
+  $('#instructor_search').on('input', function(){
+    $('#submit-search').click()
+  })
+})
