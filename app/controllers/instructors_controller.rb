@@ -14,13 +14,13 @@ class InstructorsController < ApplicationController
   def search_for
     authorize Instructor
     @pagy, @instructor_search = pagy(Instructor.ransack(
-                                                        name_cont: params[:q],
-                                                        nickname_cont: params[:q],
-                                                        description_cont: params[:q],
-                                                        instagram_cont: params[:q],
-                                                        youtube_cont: params[:q],
-                                                        twitter_cont: params[:q],
-                                                        facebook_cont: params[:q],m:'or').result(distinct: true), items:25)
+                                                        name_cont: params[:instructor_search],
+                                                        nickname_cont: params[:instructor_search],
+                                                        description_cont: params[:instructor_search],
+                                                        instagram_cont: params[:instructor_search],
+                                                        youtube_cont: params[:instructor_search],
+                                                        twitter_cont: params[:instructor_search],
+                                                        facebook_cont: params[:instructor_search],m:'or').result(distinct: true), items:25)
     respond_to do |format|
       format.js
     end

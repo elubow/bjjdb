@@ -7,6 +7,8 @@ document.addEventListener("turbolinks:load", function() {
 });
 $(document).ready(function(){
   $('#instructor_search').on('input', function(){
-    $('#submit-search').click()
+    if(document.getElementById("instructor_search").value.length >= 3){
+      $('#submit-search').click()
+    }
   })
 })
