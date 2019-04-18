@@ -130,5 +130,5 @@
     <%= render template: 'private_notes/link_notebook', locals: { private_note: @private_note, link: @link, private_notes: @private_notes } %>
   <% end %>
 
-  <%= render partial: 'links/related_videos', locals: { link: @link } %>
+  <%= render partial: 'links/related_videos', locals: { link: @link, related_drill_videos: @related_drill_videos } %>
 </div>

@@ -63,4 +63,17 @@
       </div>
     </div>
   <% end %>
+
+  <% if !related_drill_videos.empty? %>
+    <div class="card my-4">
+      <h5 class="card-header">Related Drills</h5>
+      <div class="card-body">
+        <ul>
+          <% related_drill_videos.each do |l| %>
+            <li><%= link_to l.title, l %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
   <!-- end related videos -->
