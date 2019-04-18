@@ -44,7 +44,7 @@ class LinksController < ApplicationController
 
     @comments = @link.comments.all.order(created_at: :desc)
     @comment = @link.comments.build
-    @related_videos = @link.has_related_drills
+    @related_drill_videos = @link.has_related_drills
 
     if current_user
       @private_notes_link_count = current_user.private_notes.where(link: @link).count

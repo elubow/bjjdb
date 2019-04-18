@@ -170,9 +170,9 @@ class Link < ApplicationRecord
       return []
     end
     
-    related_videos = Link.left_joins(:tags).group(:id, :tag_id).where("links.id IN (?) AND tags.id IN (?)",flow_drill, filter_tags).uniq.take(limit)
+    related_drill_videos = Link.left_joins(:tags).group(:id, :tag_id).where("links.id IN (?) AND tags.id IN (?)",flow_drill, filter_tags).uniq.take(limit)
     
-    return related_videos
+    return related_drill_videos
   end
 
   # drills exist for getting into start-position or about 
