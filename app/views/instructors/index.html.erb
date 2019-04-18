@@ -12,6 +12,7 @@
         <th>Name</th>
         <th>Nickname</th>
         <th>Description</th>
+        <th>Social media</th>
         <% if current_user %>
           <th colspan="3">Actions</th>
         <% end %>
@@ -25,6 +26,7 @@
           <td><%= link_to instructor.name, instructor %></td>
           <td><%= instructor.nickname %></td>
           <td><%= instructor.description %></td>
+          <td><%= social_media_helper(instructor) %></td>
           <% if current_user %>
             <% if current_user.moderator? or current_user.admin? %>
               <td><%= link_to 'Edit', edit_instructor_path(instructor), class: 'btn btn-primary' %></td>
