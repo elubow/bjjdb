@@ -4,6 +4,7 @@
   <% if current_user %>
     <%= link_to 'New Instructor', new_instructor_path, class: 'btn btn-secondary float-right mb-2' %>
   <% end %>
+  
   <%= form_with url: search_instructors_path, method: :get do |f|%>
     <%= f.text_field :instructor_search %>
     <div style="display:none;"><%= f.submit id: 'submit-search' %></div>
