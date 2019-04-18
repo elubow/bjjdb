@@ -20,7 +20,7 @@ class InstructorsController < ApplicationController
                                                         instagram_cont: params[:instructor_search],
                                                         youtube_cont: params[:instructor_search],
                                                         twitter_cont: params[:instructor_search],
-                                                        facebook_cont: params[:instructor_search],m:'or').result(distinct: true), items:25)
+                                                        facebook_cont: params[:instructor_search],m:'or').result(distinct: true), items:25, link_extra: 'data-remote="true"')
     respond_to do |format|
       format.js
     end
