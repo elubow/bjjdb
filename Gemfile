@@ -44,6 +44,7 @@ group :development do
   gem 'rails_layout'
   gem "dotenv-rails"
   gem 'web-console', '>= 3.3.0'
+  gem 'rubocop-performance'
 end
 
 group :test do
