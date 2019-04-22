@@ -76,8 +76,10 @@ class TagsController < ApplicationController
         end
         @tag.update!(tag_params)
         if(previous_name != nil)
-          Tag.find_by_full_name("start-position::" + previous_name).update!(name: @tag.name)
-          Tag.find_by_full_name("end-position::" + previous_name).update!(name: @tag.name)
+          start_position = Tag.find_by_full_name("start-position::" + previous_name)
+          end_position = Tag.find_by_full_name("end-position::" + previous_name)
+          start_position.update!(name: @tag.name) if start_position != nil
+          end_position.update!(name: @tag.name) if end_position != nil
         end
         respond_to do |format|
           format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
@@ -101,8 +103,10 @@ class TagsController < ApplicationController
     @tag.transaction do
       begin
         if @tag.category == "position"
-          Tag.find_by_full_name("start-position::" + @tag.name).destroy!
-          Tag.find_by_full_name("end-position::" + @tag.name).destroy!
+          start_position = Tag.find_by_full_name("start-position::" + previous_name)
+          end_position = Tag.find_by_full_name("end-position::" + previous_name)
+          start_position.destroy! if start_position != nil
+          end_position.destroy! if end_position != nil
           @tag.destroy!
           flash[:notice] = "Position tag and all it's relative position have been successfully removed."
         elsif @tag.category == "start-position" || @tag.category == "end-position"
