@@ -38,22 +38,28 @@ class TagsController < ApplicationController
     @tag = Tag.new(tag_params)
     authorize @tag
 
-    respond_to do |format|
-      if @tag.save
+    @tag.transaction do
+      begin
+        @tag.save!
         if(@tag.category == "position")
           start_position, end_position = Tag.new(tag_params)
           start_position.category = "start-position"
           end_position.category = "end-position"
-          start_position.save()
-          end_position.save()
+          start_position.save!
+          end_position.save!
         end
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
-        format.json { render :show, status: :created, location: @tag }
-      else
-        format.html { render :new }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
+        respond_to do |format| 
+          format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
+          format.json { render :show, status: :created, location: @tag }
+        end
+      rescue ActiveRecord::RecordInvalid
+        respond_to do |format| 
+          format.html { render :new }
+          format.json { render json: @tag.errors, status: :unprocessable_entity }
+        end
       end
     end
+
   end
 
   # PATCH/PUT /tags/1
@@ -61,45 +67,56 @@ class TagsController < ApplicationController
   def update
     authorize @tag
 
-    respond_to do |format|
-      if(@tag.category == "position")
-        previous_name = @tag.name
-      end
-      if @tag.update(tag_params)
-        if(previous_name != nil)
-          Tag.find_by_full_name("start-position::" + previous_name).update(name: @tag.name)
-          Tag.find_by_full_name("end-position::" + previous_name).update(name: @tag.name)
+    @tag.transaction do
+      begin
+        if(@tag.category == "position")
+          previous_name = @tag.name
         end
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tag }
-      else
-        format.html { render :edit }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
+        @tag.update!(tag_params)
+        if(previous_name != nil)
+          Tag.find_by_full_name("start-position::" + previous_name).update!(name: @tag.name)
+          Tag.find_by_full_name("end-position::" + previous_name).update!(name: @tag.name)
+        end
+        respond_to do |format|
+          format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
+          format.json { render :show, status: :ok, location: @tag }
+        end
+      rescue ActiveRecord::RecordInvalid
+        respond_to do |format|
+          format.html { render :edit }
+          format.json { render json: @tag.errors, status: :unprocessable_entity }
+        end
       end
     end
+
   end
 
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
     authorize @tag
-    if @tag.category == "position"
-      Tag.find_by_full_name("start-position::" + @tag.name).destroy
-      Tag.find_by_full_name("end-position::" + @tag.name).destroy
-      @tag.destroy
-      flash[:notice] = "Position tag and all it's relative position have benn successfully removed."
-    elsif @tag.category == "start-position" || @tag.category == "end-position"
-      flash[:alert] = "To delete this tag, you must delete position::" + @tag.name
-    else
-      @tag.destroy
-      flash[:notice] = 'Tag was successfully removed.'
+    @tag.transaction do
+      begin
+        if @tag.category == "position"
+          Tag.find_by_full_name("start-position::" + @tag.name).destroy!
+          Tag.find_by_full_name("end-position::" + @tag.name).destroy!
+          @tag.destroy!
+          flash[:notice] = "Position tag and all it's relative position have been successfully removed."
+        elsif @tag.category == "start-position" || @tag.category == "end-position"
+          flash[:alert] = "To delete this tag, you must delete position::" + @tag.name
+        else
+          @tag.destroy!
+          flash[:notice] = 'Tag was successfully removed.'
+        end
+      rescue ActiveRecord::RecordNotDestroyed
+        flash[:alert] = 'There was a problem destroying the tag!'
+      end
+      respond_to do |format|
+        format.html { redirect_to tags_url }
+        format.json { head :no_content }
+      end
     end
     
-
-    respond_to do |format|
-      format.html { redirect_to tags_url }
-      format.json { head :no_content }
-    end
   end
 
   private
