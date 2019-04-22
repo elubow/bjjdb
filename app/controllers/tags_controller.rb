@@ -42,7 +42,8 @@ class TagsController < ApplicationController
       begin
         @tag.save!
         if(@tag.category == "position")
-          start_position, end_position = Tag.new(tag_params)
+          start_position = Tag.new(tag_params)
+          end_position = Tag.new(tag_params)
           start_position.category = "start-position"
           end_position.category = "end-position"
           start_position.save!
@@ -54,6 +55,7 @@ class TagsController < ApplicationController
         end
       rescue ActiveRecord::RecordInvalid
         respond_to do |format| 
+          flash[:alert] = 'There was a problem saving the tag!'
           format.html { render :new }
           format.json { render json: @tag.errors, status: :unprocessable_entity }
         end
@@ -83,6 +85,7 @@ class TagsController < ApplicationController
         end
       rescue ActiveRecord::RecordInvalid
         respond_to do |format|
+          flash[:alert] = 'There was a problem editing the tag!'
           format.html { render :edit }
           format.json { render json: @tag.errors, status: :unprocessable_entity }
         end
@@ -116,7 +119,7 @@ class TagsController < ApplicationController
         format.json { head :no_content }
       end
     end
-    
+
   end
 
   private
