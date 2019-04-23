@@ -31,7 +31,7 @@ class Tag < ApplicationRecord
     start_tag.description = "Starting at #{self.description}"
     start_tag.created_at = ts
     start_tag.updated_at = ts
-    start_tag.save
+    start_tag.save!
 
     end_tag = Tag.new
     end_tag.id = self.id + 2000
@@ -40,7 +40,7 @@ class Tag < ApplicationRecord
     end_tag.description = "Ending at #{self.description}"
     end_tag.created_at = ts
     end_tag.updated_at = ts
-    end_tag.save
+    end_tag.save!
   end
 
   private
