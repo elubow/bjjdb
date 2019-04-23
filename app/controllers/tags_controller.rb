@@ -40,14 +40,17 @@ class TagsController < ApplicationController
 
     @tag.transaction do
       begin
+        if @tag.category == "start-position" || @tag.category == "end-position"
+          respond_to do |format| 
+            flash[:alert] = 'To create a start/end-position tag you must instead create a position tag!'
+            format.html { render :new }
+            format.json { render json: @tag.errors, status: :unprocessable_entity }
+          end
+          return
+        end
         @tag.save!
-        if(@tag.category == "position")
-          start_position = Tag.new(tag_params)
-          end_position = Tag.new(tag_params)
-          start_position.category = "start-position"
-          end_position.category = "end-position"
-          start_position.save!
-          end_position.save!
+        if @tag.category == "position"
+          @tag.create_start_end_position_tags
         end
         respond_to do |format| 
           format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
