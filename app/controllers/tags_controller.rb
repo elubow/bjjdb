@@ -81,8 +81,8 @@ class TagsController < ApplicationController
         if(previous_name != nil)
           start_position = Tag.find_by_full_name("start-position::" + previous_name)
           end_position = Tag.find_by_full_name("end-position::" + previous_name)
-          start_position.update!(name: @tag.name) if start_position != nil
-          end_position.update!(name: @tag.name) if end_position != nil
+          start_position.update!(name: @tag.name, description = "Starting at #{@tag.name}") if start_position != nil
+          end_position.update!(name: @tag.name, description = "Ending at #{@tag.name}") if end_position != nil
         end
         respond_to do |format|
           format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
