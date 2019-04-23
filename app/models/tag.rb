@@ -25,7 +25,6 @@ class Tag < ApplicationRecord
     ts = Time.now
 
     start_tag = Tag.new
-    start_tag.id = self.id + 1000
     start_tag.category = 'start-position'
     start_tag.name = self.name
     start_tag.description = "Starting at #{self.description}"
@@ -34,7 +33,6 @@ class Tag < ApplicationRecord
     start_tag.save!
 
     end_tag = Tag.new
-    end_tag.id = self.id + 2000
     end_tag.category = 'end-position'
     end_tag.name = self.name
     end_tag.description = "Ending at #{self.description}"
