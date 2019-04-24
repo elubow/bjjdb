@@ -2,7 +2,7 @@
   <h1 class="mt-4">Translations</h1>
 
   <p>
-    Choose a source language and a translation language.
+    Choose a source language and a translation language. English is shown no matter which languages are chosen.
   </p>
 
   <%= form_with(url: translations_charts_path, local: true, method: :get) do |form| %>
@@ -10,7 +10,7 @@
     <div class="form-group form-row">
       <%= form.label :src, class: 'col-form-label-lg' %>
       <%= form.select :src,
-        TranslationTerm::LANGUAGES.sort.map{|lng, language|  ["#{lng} - #{language}", lng]},
+        TranslationTerm::LANGUAGES.sort.map{|lng, language|  ["#{lng} - #{language}", lng] unless lng == :en},
         {required: true},
         id: 'translation_src'
       %>
@@ -19,7 +19,7 @@
     <div class="form-group form-row">
       <%= form.label :dst, class: 'col-form-label-lg' %>
       <%= form.select :dst,
-        TranslationTerm::LANGUAGES.sort.map{|lng, language|  ["#{lng} - #{language}", lng]},
+        TranslationTerm::LANGUAGES.sort.map{|lng, language|  ["#{lng} - #{language}", lng] unless lng == :en},
         {required: true},
         id: 'translation_dst'
       %>

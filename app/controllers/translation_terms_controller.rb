@@ -19,8 +19,7 @@ class TranslationTermsController < ApplicationController
   # GET /translations_charts
   # GET /translations_charts.json
   def charts
-    @src = TranslationTerm.get_chart(params[:src])
-    @dst = TranslationTerm.get_chart(params[:dst])
+    @chart = TranslationTerm.get_chart(params[:src], params[:dst])
     @translation_term = TranslationTerm.new
     authorize @translation_term
   end

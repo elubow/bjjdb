@@ -1,26 +1,19 @@
 <div class="col">
   <h1 class="mt-4">Translations</h1>
 
-  <h3 class="mt-4">Src</h3>
-  <% @src.each do |term| %>
-    <span><%= term %>
-  <% end %>
+  <div class="container border">
+    <div class="row border-bottom-0">
+      <div class="col text-center"><h3><%= TranslationTerm::LANGUAGES[params[:src].to_sym] %></h3></div>
+      <div class="col text-center"><h3>English</h3></div>
+      <div class="col text-center"><h3><%= TranslationTerm::LANGUAGES[params[:dst].to_sym] %></h3></div>
+    </div>
 
-  <h3 class="mt-4">Dst</h3>
-  <table>
-    <thead>
-      <th>Source Language</th>
-      <th>Source Body</th>
-      <th>Destination Language</th>
-      <th>Destination Body</th>
-    </thead>
-  <% @dst.each do |term| %>
-    <tr>
-      <td><%= term["src_language"] %></td>
-      <td><%= term["src_body"] %></td>
-      <td><%= term["dst_language"] %></td>
-      <td><%= term["dst_body"] %></td>
-    </tr>
-  <% end %>
-  </table>
+    <% @chart.each do |term| %>
+      <div class="row border-top">
+        <div class="col text-center"> <%= term["src_body"] %> </div>
+        <div class="col text-center border-left border-right"> <%= term["en_body"] %> </div>
+        <div class="col text-center"> <%= term["dst_body"] %> </div>
+      </div>
+    <% end %>
+
 </div>

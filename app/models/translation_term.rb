@@ -41,7 +41,11 @@ class TranslationTerm < ApplicationRecord
     TranslationTerm.where(base_term_id: self.id).count
   end
 
-  def self.get_chart(dst)
-    TranslationTerm.connection.select_all("SELECT t1.id AS src_id, t1.body AS src_body, t1.language AS src_language, t1.base_term_id AS src_base_term_id, t2.id AS dst_id, t2.body AS dst_body, t2.language AS dst_language, t2.base_term_id AS dst_base_term_id FROM translation_terms t1 LEFT OUTER JOIN translation_terms t2 ON (t1.id = t2.base_term_id) WHERE t1.language = 'en' AND (t2.language = '#{dst}') ORDER BY src_body").to_hash
+  def self.get_chart(src, dst)
+    TranslationTerm.connection.select_all("SELECT en.id AS en_id, en.body AS en_body, en.base_term_id AS en_base_term_id, src.id AS src_id, src.body AS src_body, src.language AS src_language, src.base_term_id AS src_base_term_id, dst.id AS dst_id, dst.body AS dst_body, dst.language AS dst_language, dst.base_term_id AS dst_base_term_id
+        FROM translation_terms en
+                LEFT OUTER JOIN translation_terms src ON (en.id = src.base_term_id)
+                LEFT OUTER JOIN translation_terms dst ON (en.id = dst.base_term_id)
+       WHERE en.language = 'en' AND (src.language = '#{src}') AND (dst.language = '#{dst}')").to_hash
   end
 end
