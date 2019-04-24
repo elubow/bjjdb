@@ -1,27 +1,23 @@
 <div class="col">
-<h1 class="mt-4">My Notebook</h1>
-<table "table table-hover">
-  <thead>
-    <tr>
-      <th scope=col">Link</th>
-      <th>Title</th>
-      <th>Body</th>
-      <th colspan="2">Actions</th>
-    </tr>
-  </thead>
+  <h1 class="mt-4">My Notebook</h1>
+<% @private_notes.each do |private_note| %>
+<%# XXX use this link_to private_note.link.title, private_note.link %>
+<div class="notebook-paper mb-2">
+  <div class="notebook-content">
+    <div class="notebook-header">
+      <h3 class="notebook-title"><%= link_to private_note.title, private_note_path(private_note) %></h3>
+      <h6 class="notebook-title"><%= link_to private_note.link.title, link_path(private_note.link) %></h6>
+    </div>
+    <p><%= private_note.body %></p>
+  </div>
+</div>
 
-  <tbody>
-    <% @private_notes.each do |private_note| %>
-      <tr>
-        <td><%= link_to private_note.link.title, private_note.link %></td>
-        <td><%= private_note.title %></td>
-        <td><%= private_note.body %></td>
+  <!--
         <td><%= link_to 'Edit', edit_private_note_path(private_note), class: 'btn btn-primary' %></td>
         <td><%= link_to 'Delete', private_note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  -->
+
+<% end %>
 
   <div class="row">
     <div class="col">

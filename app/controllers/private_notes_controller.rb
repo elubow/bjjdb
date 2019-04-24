@@ -6,7 +6,7 @@ class PrivateNotesController < ApplicationController
   # GET /notebook
   # GET /notebook.json
   def notebook
-    @pagy, @private_notes = pagy(PrivateNote.where(user: current_user).order(created_at: :desc), items: 25)
+    @pagy, @private_notes = pagy(PrivateNote.where(user: current_user).order(created_at: :desc), items: 5)
     authorize @private_notes
   end
 
