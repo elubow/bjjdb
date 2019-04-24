@@ -3,6 +3,7 @@ l = Link.create!(
   title: "Winter Camp 2018: 60 Minutes Wrestling Crash Course with Christian Graugart",
   url: 'https://www.bjjglobetrotters.com/winter-camp-2018-60-minutes-wrestling-crash-course-with-christian-graugart/',
   user_id: 42,
+  instructors: [Instructor.where(name: 'Christian Graugart').first],
   tags: [100, 1000].map{|t|  Tag.find(t)}
 )
 
