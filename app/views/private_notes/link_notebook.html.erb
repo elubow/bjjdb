@@ -15,7 +15,7 @@
           <% @private_notes.each do |note| %>
             <li class="list-group-item">
               <div class="card my-2">
-                <h6 class="card-header"><%= note.title %></h6>
+                <h6 class="card-header"><%= link_to note.title, private_note_path(note) %></h6>
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
@@ -23,11 +23,12 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-4">
-                      <%= link_to 'Delete', note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+                    <div class="col-6">
+                      <%= link_to 'View', note, class: 'btn btn-dark' %>
+                      <%= link_to 'Edit', edit_private_note_path(note), class: 'btn btn-primary' %>
                     </div>
-                    <div class="col-8 text-right">
-                    <%= note.created_at.strftime("%Y-%b-%d") %>
+                    <div class="col-6 text-right">
+                    <%= link_to note.created_at.strftime("%Y-%b-%d"), private_note_path(note) %>
                   </div>
                 </div>
               </div>
