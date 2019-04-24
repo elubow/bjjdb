@@ -44,7 +44,7 @@ puts '  Build Types'
     id: 201,
     name: 'big-boy',
     description: 'BJJ for big bois'
-  }
+  },
   {
     id: 202,
     name: 'long-boy',

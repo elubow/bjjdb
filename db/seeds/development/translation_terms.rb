@@ -8,23 +8,20 @@ TranslationTerm.create!(
 )
 
 TranslationTerm.create!(
-  id: 2,
   user_id: 42,
-  base_term_id: 1,
+  base_term_id: TranslationTerm.where(body: 'knee'),
   language: 'de',
   body: 'knie'
 )
 
 TranslationTerm.create!(
-  id: 3,
   user_id: 42,
-  base_term_id: 1,
+  base_term_id: TranslationTerm.where(body: 'knee'),
   language: 'fr',
   body: 'genou'
 )
 
 TranslationTerm.create!(
-  id: 4,
   user_id: 42,
   base_term_id: 0,
   language: 'en',
@@ -32,17 +29,29 @@ TranslationTerm.create!(
 )
 
 TranslationTerm.create!(
-  id: 5,
   user_id: 42,
-  base_term_id: 4,
+  base_term_id: TranslationTerm.where(body: 'head'),
   language: 'de',
   body: 'kopf'
 )
 
 TranslationTerm.create!(
-  id: 6,
   user_id: 42,
   base_term_id: 0,
   language: 'en',
   body: 'mats'
+)
+
+TranslationTerm.create!(
+  user_id: 42,
+  base_term_id: 0,
+  language: 'en',
+  body: 'leg'
+)
+
+TranslationTerm.create!(
+  user_id: 42,
+  base_term_id: TranslationTerm.where(body: 'leg'),
+  language: 'fr',
+  body: 'jambe'
 )
