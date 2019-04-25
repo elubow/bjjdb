@@ -1,48 +1,37 @@
-Bjjdb
+Need BJJ Help
 ================
-
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
-
-Rails Composer is supported by developers who purchase our RailsApps tutorials.
-
-Problems? Issues?
------------
-
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
-
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
-
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
+This application was built to organize all the public BJJ videos available on the internet. The better the organization, the more useful the site becomes.
 
 Ruby on Rails
 -------------
 
 This application requires:
 
-- Ruby 2.5.1
+- Ruby 2.5.3
 - Rails 5.2.1
-
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
 
 Getting Started
 ---------------
+Install Ruby and then create a gemset:
+* Run `bundle install`
 
-Documentation and Support
--------------------------
+
+Get the docker environment up with Postgres and Redis:
+* `docker-compose up`
+
+Create the data to work with:
+* `rake db:create db:seed`
+
+Enjoy.
+
+Testing
+-------------
+They are very few tests in this project. Please feel free to add them.
 
 Issues
 -------------
-
-Similar Projects
-----------------
+Use Github issues to file any issues that you find with the site. Suggestions are taken as well.
 
 Contributing
 ------------
-
-Credits
--------
-
-License
--------
+If you want to contribute, pick up a ticket that is labeled `Help Wanted` or `Good First Issue` and create a pull request. 
