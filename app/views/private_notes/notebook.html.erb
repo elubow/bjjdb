@@ -1,27 +1,16 @@
 <div class="col">
   <h1 class="mt-4">My Notebook</h1>
-<% @private_notes.each do |private_note| %>
-<%# XXX use this link_to private_note.link.title, private_note.link %>
-<div class="notebook-paper mb-2">
-  <div class="notebook-content">
-    <div class="notebook-header">
-      <h3 class="notebook-title"><%= link_to private_note.title, private_note_path(private_note) %></h3>
-      <h6 class="notebook-title"><%= link_to private_note.link.title, link_path(private_note.link) %></h6>
-    </div>
-    <p><%= private_note.body %></p>
-  </div>
-</div>
 
-  <!--
-        <td><%= link_to 'Edit', edit_private_note_path(private_note), class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Delete', private_note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
-  -->
+    <%= form_with url: search_private_notes_path, method: :get do |f|%>
+      <h6>Search My Notebook &nbsp; <%= f.text_field :private_note_search %></h6>
+    <div style="display:none;"><%= f.submit id: 'submit-search' %></div>
+  <% end %>
 
-<% end %>
+  <div id="private_note-display"><%= render partial: 'private_notes/notebook_list', locals: { private_notes: @private_notes } %></div>
 
   <div class="row">
     <div class="col">
-      <div class="d-flex justify-content-center">
+      <div id="pagy-div" class="d-flex justify-content-center">
         <%== pagy_nav_bootstrap(@pagy) %>
       </div>
     </div>

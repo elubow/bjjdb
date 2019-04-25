@@ -4,6 +4,11 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
+  resources :private_notes do
+    collection do
+      get 'search'
+    end
+  end
   get :search, controller: :search, action: :input
   post :search, controller: :search, action: :advanced
   get 'search/a', controller: :search, action: :autocomplete
@@ -18,7 +23,6 @@ Rails.application.routes.draw do
   get 'validate/url', to: 'validations#url'
   
   resources :comments
-  resources :private_notes
   get 'notebook', controller: :private_notes, action: :notebook
   resources :tags
   resources :links do

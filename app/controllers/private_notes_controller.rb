@@ -17,6 +17,22 @@ class PrivateNotesController < ApplicationController
     authorize @private_notes
   end
 
+  def search
+    authorize PrivateNote
+    @pagy, @private_notes_search = pagy(
+      PrivateNote.where(user_id: current_user.id).ransack(
+        body_cont: params[:private_note_search],
+        title_cont: params[:private_note_search],
+        m: 'or'
+      ).result(distinct: true),
+      items: 10,
+      link_extra: 'data-remote="true"'
+    )
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /private_notes/1
   # GET /private_notes/1.json
   def show

@@ -14,6 +14,10 @@ class PrivateNotePolicy
     !@current_user.nil? and @current_user.admin?
   end
 
+  def search?
+    !@current_user.nil?
+  end
+
   def show?
     !@current_user.nil? and @current_user.admin?
   end
