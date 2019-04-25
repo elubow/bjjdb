@@ -9,4 +9,6 @@ Dir[Rails.root.join('db', 'seeds', 'common', '*.rb')].each {|file| load file }
 load 'db/seeds/development/aaa_first.rb'
 load 'db/seeds/development/instructors.rb'
 load 'db/seeds/development/links.rb'
+load 'db/seeds/development/ratings.rb'
 load 'db/seeds/development/private_notes.rb'
+load 'db/seeds/development/comments.rb'

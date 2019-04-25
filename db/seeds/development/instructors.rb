@@ -9,3 +9,9 @@ Instructor.create!(
   name: 'Bernardo Faria',
   description: 'BJJ Fanatics'
 )
+
+Instructor.create!(
+  name: 'David George',
+  nickname: 'Morcegao',
+  description: 'None'
+)
