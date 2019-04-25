@@ -9,15 +9,7 @@
       <div class="container">
         <div class="row mt-5">
           <div class="col-12">
-
-            <div class="notebook-paper mb-2">
-              <div class="notebook-content">
-                <div class="notebook-header">
-                  <h3 class="notebook-title"><%= @private_note.title %></h3>
-                </div>
-                <p><%= @private_note.body %></p>
-              </div>
-            </div>
+            <%= render partial: 'private_notes/note', locals: { private_note: @private_note } %>
           </div>
           <div class="col-5">
           </div>
