@@ -1,10 +1,17 @@
 <div class="col">
   <h1 class="mt-4">My Notebook</h1>
 
-    <%= form_with url: search_private_notes_path, method: :get do |f|%>
-      <h6>Search My Notebook &nbsp; <%= f.text_field :private_note_search %></h6>
-    <div style="display:none;"><%= f.submit id: 'submit-search' %></div>
-  <% end %>
+      <%= form_with url: search_private_notes_path, method: :get do |f|%>
+        <div class="form-group row">
+          <label class="col-form-label col-2 text-right"><h6>Search My Notebook</h6></label>
+          <div class="col-3">
+            <%= f.text_field :private_note_search, class: 'form-control' %></h6>
+            <div style="display:none;"><%= f.submit id: 'submit-search' %></div>
+          </div>
+          <div class="col-7">
+          </div>
+        </div>
+      <% end %>
 
   <div id="private_note-display"><%= render partial: 'private_notes/notebook_list', locals: { private_notes: @private_notes } %></div>
 
