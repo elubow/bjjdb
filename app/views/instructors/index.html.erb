@@ -6,8 +6,15 @@
   <% end %>
 
   <%= form_with url: search_instructors_path, method: :get do |f|%>
-    <h6>Search &nbsp; <%= f.text_field :instructor_search %></h6>
-    <div style="display:none;"><%= f.submit id: 'submit-search' %></div>
+    <div class="form-group row">
+      <label class="col-form-label col-1 text-right"><h6>Search</h6></label>
+      <div class="col-3">
+        <%= f.text_field :instructor_search, class: 'form-control' %>
+        <div style="display:none;"><%= f.submit id: 'submit-search' %></div>
+      </div>
+      <div class="col-9">
+      </div>
+    </div>
   <% end %>
   
   <div id="instructor-display"><%= render partial: 'instructors/list', locals: { instructors: @instructors } %></div>
