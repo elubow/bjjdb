@@ -8,7 +8,7 @@
           <h3 class="notebook-title"><%= link_to private_note.title, private_note_path(private_note) %></h3>
           <h6 class="notebook-title"><%= link_to private_note.link.title, link_path(private_note.link) %></h6>
         </div>
-        <p><%= private_note.body %></p>
+        <p><%= truncate(private_note.body, length: 250) %></p>
       </div>
     </div>
  

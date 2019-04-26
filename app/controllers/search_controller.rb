@@ -12,7 +12,16 @@ class SearchController < ApplicationController
     @tags = Tag.ransack(full_tag_cont: params[:q]).result(distinct: true)
     @links = Link.ransack(title_cont: params[:q]).result(distinct: true).order(created_at: :desc)
     @instructors = Instructor.ransack(all_names_cont: params[:q]).result(distinct: true)
-    @total_results = @links.count + @tags.count + @instructors.count
+    @private_notes = if current_user
+                       PrivateNote.where(user_id: current_user.id).ransack(
+        body_cont: params[:q],
+        title_cont: params[:q],
+        m: 'or'
+    ).result(distinct: true)
+                     else
+                       []
+                     end
+    @total_results = @links.size + @tags.size + @instructors.size + @private_notes.size
   end
 
   def advanced

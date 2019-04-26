@@ -1,0 +1,11 @@
+<div class="card border-0">
+            <div class="notebook-paper mb-2">
+              <div class="notebook-content">
+                <div class="notebook-header">
+                  <h3 class="notebook-title"><%= truncate(note.title, length: 20) %></h3>
+                  <h6 class="notebook-title"><%= link_to truncate(note.link.title, length: 28), link_path(note.link) %></h6>
+                </div>
+                <p><%= truncate(note.body, length: 100) %></p>
+              </div>
+            </div>
+</div>
