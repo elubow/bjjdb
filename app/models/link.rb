@@ -142,7 +142,7 @@ class Link < ApplicationRecord
   end
 
   def get_end_position_id
-    self.tags.select {|t|  t.category == "end-position"}.first.id
+    self.tags.select {|t|  t.category == "end-position"}.reject{|t|  t.name == "in-submission"}.first.id
   end
 
   def videos_starting_from_end_position(limit=5)
