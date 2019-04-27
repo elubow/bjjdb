@@ -204,6 +204,14 @@ class Link < ApplicationRecord
     Link.by_tags(tag_list).order(created_at: :desc).limit(limit+1)
   end
 
+  def has_videos_starting_from_submission?
+    tag_list = []
+    tag_list << Tag.find_by_full_name("start-position::in-submission")
+    tag_list << Tag.find_by_full_name("move::escape")
+    tag_list << Tag.find_by_full_name(Tag.find(self.submission_id).full_name)
+    Link.by_tags(tag_list).reject{|l|  l.id == self.id}.count > 0
+  end
+
   # END related videos
 
   #Ratings related

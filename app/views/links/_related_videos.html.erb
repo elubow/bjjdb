@@ -51,7 +51,7 @@
     </div>
   <% end %>
 
-  <% if @link.has_end_position? and @link.has_escape_from_submission? %>
+  <% if @link.submission? and @link.has_videos_starting_from_submission? %>
     <div class="card my-4">
       <h5 class="card-header">Escapes from <%= Tag.find(@link.submission_id).clean_name %></h5>
       <div class="card-body">
