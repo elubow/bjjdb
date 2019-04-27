@@ -52,4 +52,58 @@ Link.create!(
   tags: [101, 1001, 1050, 1106, Tag.where(category: 'start-position').where(name: 'have-guard').first.id, Tag.where(category: 'end-position').where(name: 'back-mount').first.id].map{|t|  Tag.find(t)}
 )
 
+
+# BEGIN Used for testing "in-submission" code
+Link.create!(
+  title: "Omaplata Escape to Front Headlock",
+  url: "https://www.instagram.com/asaf_mich/p/BwaK6VeAzzg/",
+  user_id: 42,
+  tags: [
+    Tag.find_by_full_name("start-position::in-submission"),
+    Tag.find_by_full_name("end-position::kneeling"),
+    Tag.find_by_full_name("move::escape"),
+    Tag.find_by_full_name("submission::omaplata"),
+    Tag.find_by_full_name("art::bjj")
+  ]
+)
+
+Link.create!(
+  title: "Inverted Kimura",
+  url: "https://www.instagram.com/p/BwgIkfYAvZ6/",
+  user_id: 42,
+  tags: [
+    Tag.find_by_full_name("start-position::in-submission"),
+    Tag.find_by_full_name("move::submission"),
+    Tag.find_by_full_name("submission::kimura"),
+    Tag.find_by_full_name("art::bjj")
+  ]
+)
+
+Link.create!(
+  title: "Omaplata Escape",
+  url: "https://www.instagram.com/p/BubkWJxgjCy/",
+  user_id: 42,
+  tags: [
+    Tag.find_by_full_name("start-position::in-submission"),
+    Tag.find_by_full_name("end-position::side-mount"),
+    Tag.find_by_full_name("move::escape"),
+    Tag.find_by_full_name("submission::omaplata"),
+    Tag.find_by_full_name("art::bjj")
+  ]
+)
+
+Link.create!(
+  title: "Omaplata From Single Leg Attempt",
+  url: "https://www.instagram.com/p/Bu2IXZqguxO/",
+  user_id: 42,
+  tags: [
+    Tag.find_by_full_name("start-position::in-submission"),
+    Tag.find_by_full_name("end-position::in-submission"),
+    Tag.find_by_full_name("move::counter"),
+    Tag.find_by_full_name("submission::omaplata"),
+    Tag.find_by_full_name("art::bjj")
+  ]
+)
+# END Used for testing "in-submission" code
+
 Link.enqueue_thumbnails unless Rails.env.development?

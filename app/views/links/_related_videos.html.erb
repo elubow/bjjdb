@@ -12,7 +12,7 @@
     </div>
   <% end %>
 
-  <% if @link.has_start_position? and @link.has_end_position_same_as_start_position_videos? %>
+  <% if @link.has_start_position_not_in_submission? and @link.has_end_position_same_as_start_position_videos? %>
     <div class="card my-4">
       <h5 class="card-header">How To Get Here</h5>
       <div class="card-body">
@@ -25,7 +25,7 @@
     </div>
   <% end %>
 
-  <% if @link.has_start_position? and @link.has_same_start_position_videos? %>
+  <% if @link.has_start_position_not_in_submission? and @link.has_same_start_position_videos? %>
     <div class="card my-4">
       <h5 class="card-header">Similar Starting Position</h5>
       <div class="card-body">
@@ -38,7 +38,7 @@
     </div>
   <% end %>
 
-  <% if @link.has_end_position? and @link.has_videos_starting_from_end_position? %>
+  <% if @link.has_end_position_not_in_submission? and @link.has_videos_starting_from_end_position? %>
     <div class="card my-4">
       <h5 class="card-header">Next Steps from <%= Tag.find(@link.get_end_position_id).clean_name %></h5>
       <div class="card-body">
@@ -51,12 +51,12 @@
     </div>
   <% end %>
 
-  <% if @link.has_drills? %>
+  <% if @link.has_end_position? and @link.has_escape_from_submission? %>
     <div class="card my-4">
-      <h5 class="card-header">Drills for <%= Tag.find(@link.get_end_position_id).clean_name %></h5>
+      <h5 class="card-header">Escapes from <%= Tag.find(@link.submission_id).clean_name %></h5>
       <div class="card-body">
         <ul>
-          <% same_end_position(@link).each do |l| %>
+          <% @link.videos_starting_from_submission.each do |l| %>
             <li><%= link_to l.title, l %></li>
           <% end %>
         </ul>

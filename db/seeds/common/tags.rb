@@ -388,6 +388,11 @@ positions = [
     name: 'pocket-guard',
     description: 'pocket guard'
   },
+  {
+    id: 2035,
+    name: 'in-submission',
+    description: 'having or being in a submission'
+  }
 ]
 
 # position 2XXX

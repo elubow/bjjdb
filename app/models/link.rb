@@ -107,12 +107,18 @@ class Link < ApplicationRecord
     tags.collect(&:category).uniq.include?("submission") && Tag.find(submission_id).links.count > 0
   end
 
+  # any tags that should be skipped should go here so they don't need to be repeated for other start_position_* methods
   def get_start_position_id
-    self.tags.select {|t|  t.category == "start-position"}.first.id
+    self.tags.select {|t|  t.category == "start-position"}.reject{|t|  t.name == "in-submission"}.first.id
   end
 
   def has_start_position?
     self.tags.collect(&:category).uniq.include?("start-position") and Tag.find(self.get_start_position_id).links.count > 0
+  end
+
+  def has_start_position_not_in_submission?
+    in_submission_id = Tag.find_by_full_name("start-position::in-submission").id
+    self.tags.reject{|t|  t.id == in_submission_id}.collect(&:category).uniq.include?("start-position") and Tag.find(self.get_start_position_id).links.count > 0
   end
 
   # find videos where the end-position of previous video
@@ -141,6 +147,12 @@ class Link < ApplicationRecord
     self.tags.collect(&:category).uniq.include?("end-position")
   end
 
+  def has_end_position_not_in_submission?
+    in_submission_id = Tag.find_by_full_name("end-position::in-submission").id
+    self.tags.reject{|t|  t.id == in_submission_id}.collect(&:category).uniq.include?("end-position") and Tag.find(self.get_end_position_id).links.count > 0
+  end
+
+  # any tags that should be skipped should go here so they don't need to be repeated for other end_position_* methods
   def get_end_position_id
     self.tags.select {|t|  t.category == "end-position"}.reject{|t|  t.name == "in-submission"}.first.id
   end
@@ -161,7 +173,7 @@ class Link < ApplicationRecord
 
     flow_drill = Link.left_joins(:tags).group(:id, :tag_id).where("tag_id IN (?)", [flow_id,drill_id]).reject{|l|  l.id == id}
 
-    start_pos_id = get_start_position_id if has_start_position?
+    start_pos_id = get_start_position_id if has_start_position_not_in_submission?
     position_id = get_position_id if has_position?
     submission_id = submission_id if submission?
 
@@ -175,11 +187,21 @@ class Link < ApplicationRecord
     return related_drill_videos
   end
 
-  # drills exist for getting into start-position or about 
-  # the position or getting into the specified submssion 
-  def has_drills?
-    # TODO false until there are drill videos to test with
-    false
+  def has_escape_from_submission?
+    self.in_submission? and self.submission?
+  end
+
+  def in_submission?
+    self.tags.select {|t|  t.category == "end-position" and t.name == "in-submission"}.size > 0
+  end
+
+  # All videos tagged with "start-position::in-submission", "move::escape", AND "submission::#{name}"
+  def videos_starting_from_submission(limit=5)
+    tag_list = []
+    tag_list << Tag.find_by_full_name("start-position::in-submission")
+    tag_list << Tag.find_by_full_name("move::escape")
+    tag_list << Tag.find_by_full_name(Tag.find(self.submission_id).full_name)
+    Link.by_tags(tag_list).order(created_at: :desc).limit(limit+1)
   end
 
   # END related videos
