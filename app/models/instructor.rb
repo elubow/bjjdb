@@ -16,13 +16,19 @@ class Instructor < ApplicationRecord
     self.links.count
   end
 
-  def display_name
+  def form_display_name
     rv = "#{self.name}"
     if self.instagram.present?
       rv = rv + " (#{self.instagram})"
     elsif self.nickname.present?
       rv = rv + " (#{self.nickname})"
     end
+    return rv
+  end
+
+  def display_name
+    rv = "#{self.name}"
+    rv = rv + " (#{self.nickname})" if self.nickname.present?
     return rv
   end
 

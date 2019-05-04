@@ -13,6 +13,10 @@
     <%= @instructor.display_name %>
   </h1>
 
+  <h4 class="ml-4 mb-3">
+    <%= social_media_helper_short(@instructor) %>
+  </h4>
+
   <% if @instructor.has_videos? %>
     <%= image_tag(@instructor.links.first.thumbnail_image_location(), alt: @instructor.display_name, class: 'link_image') %>
   <% end %>

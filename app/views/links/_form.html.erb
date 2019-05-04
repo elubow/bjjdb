@@ -30,7 +30,7 @@
   <div class="form-group form-row">
     <%= form.label :instructors, class: 'col-form-label-lg' %>
     <%= form.select :instructor_ids,
-      Instructor.all.map {|t|  [t.display_name, t.id]}.sort,
+      Instructor.all.map {|t|  [t.form_display_name, t.id]}.sort,
       { include_blank: true },
       { multiple: true }
     %>
