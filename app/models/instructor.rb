@@ -18,7 +18,11 @@ class Instructor < ApplicationRecord
 
   def display_name
     rv = "#{self.name}"
-    rv = rv + " (#{self.nickname})" if self.nickname.present?
+    if self.instagram.present?
+      rv = rv + " (#{self.instagram})"
+    elsif self.nickname.present?
+      rv = rv + " (#{self.nickname})"
+    end
     return rv
   end
 
