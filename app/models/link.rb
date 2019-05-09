@@ -9,7 +9,7 @@ class Link < ApplicationRecord
   has_and_belongs_to_many :instructors
   has_and_belongs_to_many :tags
   has_one :thumbnail, dependent: :destroy
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
 
   after_validation :set_location, on: [:create, :update]
   after_commit { GetVideoMetadataJob.perform_later self}
