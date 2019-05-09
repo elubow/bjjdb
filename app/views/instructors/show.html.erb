@@ -47,7 +47,7 @@
     <%= render partial: 'links/list', locals: {links: @instructor.links} %>
   <% else %>
     <p>
-      There are no videos for this instructor. 
+    If you can believe it, <strong><%= @instructor.name %></strong> hasn't put out a single video.
     </p>
     <p>
       <% if current_user %>
