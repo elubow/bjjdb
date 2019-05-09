@@ -43,7 +43,7 @@
   <% end %>
 
   <% if @instructor.has_videos? %>
-    <h4><%= pluralize(@instructor.video_count, "Videos").titleize %></h4>
+    <h4 class="mt-2"><%= pluralize(@instructor.video_count, "Videos").titleize %></h4>
     <%= render partial: 'links/list', locals: {links: @instructor.links} %>
   <% else %>
     <p>
