@@ -613,6 +613,11 @@ puts '  Submissions'
     name: 'north-south-choke',
     description: 'North South Choke'
   },
+  {
+    id: 10064,
+    name: 'crank',
+    description: 'all of the blood to the pain with all the pain to go with it'
+  },
 ].each do |t|
   Tag.create!(
     id: t[:id],

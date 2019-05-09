@@ -106,4 +106,19 @@ Link.create!(
 )
 # END Used for testing "in-submission" code
 
+Link.create!(
+  title: "Kimura from Turtle Guard",
+  url: "https://www.instagram.com/p/BxD3qNvAUU_/",
+  user_id: 42,
+  instructors: [Instructor.where(name: 'Neil Melanson').first, Instructor.where(name: 'Bernardo Faria').first],
+  tags: [
+    Tag.find_by_full_name("start-position::turtle"),
+    Tag.find_by_full_name("end-position::in-submission"),
+    Tag.find_by_full_name("move::submission"),
+    Tag.find_by_full_name("submission::kimura"),
+    Tag.find_by_full_name("difficulty::purple"),
+    Tag.find_by_full_name("art::bjj")
+  ]
+)
+
 Link.enqueue_thumbnails unless Rails.env.development?

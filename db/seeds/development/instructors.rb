@@ -19,3 +19,14 @@ Instructor.create!(
   nickname: 'Morcegao',
   description: 'None'
 )
+
+Instructor.create!(
+  name: 'Neil Melanson',
+  description: 'a big human'
+)
+
+Instructor.create!(
+  name: 'No Videos Guy',
+  instagram: '@example',
+  description: 'This guy just made no videos and is a base case for funsies.'
+)
