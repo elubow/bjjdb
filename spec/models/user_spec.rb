@@ -6,6 +6,7 @@ describe User do
 
   context 'associations' do
     it do
+      should have_many(:links)
     end
   end
 end

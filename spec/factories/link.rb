@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :link do
     title       { Faker::Company.bs }
     description { Faker::Lorem.words(50) }
+    url         { Faker::Internet.url }
     user
   end
 
