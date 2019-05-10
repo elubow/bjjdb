@@ -4,6 +4,9 @@ class Tag < ApplicationRecord
 
   scope :with_tag, -> (id) { where(id: id) }
 
+  validates :category, presence: true
+  validates :name, presence: true
+
   has_and_belongs_to_many :links
 
   after_validation :create_full_name, on: [:create, :update]

@@ -17,5 +17,25 @@ FactoryBot.define do
 
     factory :instagram_link, traits: [:from_instagram]
     factory :youtube_link, traits: [:from_youtube]
+
+    factory :with_tags do
+      transient do
+        tags_count { 7 }
+      end
+
+      after(:create) do |link, evaluator|
+        create_list(:tag, evaluator.tag_count, links: [link])
+      end
+    end
+
+    factory :with_instructors do
+      transient do
+        instructors_count { 1 }
+      end
+
+      after(:create) do |link, evaluator|
+        create_list(:instructor, evaluator.instructor_count, instructors: [instructor])
+      end
+    end
   end
 end
