@@ -8,6 +8,7 @@ describe Link do
     it { should belong_to(:user) }
     it { should have_many(:comments) }
     it { should have_many(:private_notes) }
+    it { should have_and_belong_to_many(:instructors) }
   end
 
   context 'validations' do
