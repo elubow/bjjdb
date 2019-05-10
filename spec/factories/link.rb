@@ -14,8 +14,8 @@ FactoryBot.define do
       url         { Faker::Internet.url('instagram.com') }
       location    { 'Instagram' }
     end
-  end
 
-  factory :instagram_link, traits: [:from_instagram]
-  factory :youtube_link, traits: [:from_youtube]
+    factory :instagram_link, traits: [:from_instagram]
+    factory :youtube_link, traits: [:from_youtube]
+  end
 end

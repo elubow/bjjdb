@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe Link do
 
-  subject { build(:link) }
+  subject { create(:link) }
 
   context 'associations' do
-    it { should belong_to :user }
+    it { should belong_to(:user) }
     it { should have_many(:comments) }
     it { should have_many(:private_notes) }
   end
