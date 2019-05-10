@@ -1,6 +1,6 @@
 Need BJJ Help
 ================
-This application was built to organize all the public BJJ videos available on the internet. The better the organization, the more useful the site becomes.
+This application was built to organize all the public BJJ videos available on the internet. The better the organization, the more useful the site becomes. The live application is available on https://need.bjj.help/.
 
 Ruby on Rails
 -------------
@@ -26,7 +26,7 @@ Enjoy.
 
 Testing
 -------------
-They are very few tests in this project. Please feel free to add them.
+There are very few tests in this project. Please feel free to add them. What little testing there is has been done with FactoryBot and Rspec.
 
 Issues
 -------------
