@@ -7,12 +7,12 @@ FactoryBot.define do
 
     trait :from_youtube do
       url         { Faker::Internet.url('youtube.com') }
-      location    { 'YouTube' }
+      location    { 'youtube.com' }
     end
 
     trait :from_instagram do
       url         { Faker::Internet.url('instagram.com') }
-      location    { 'Instagram' }
+      location    { 'instagram.com' }
     end
 
     factory :instagram_link, traits: [:from_instagram]
