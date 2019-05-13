@@ -12,6 +12,7 @@ class Link < ApplicationRecord
   has_many :ratings, dependent: :destroy
 
   after_validation :set_location, on: [:create, :update]
+  after_validation :clean_url_parameters, on: [:create, :update]
   after_commit { GetVideoMetadataJob.perform_later self}
 
   validates :user_id, presence: true
@@ -238,5 +239,27 @@ class Link < ApplicationRecord
     def set_location
       self.location = URI.parse(self.url).host.downcase
       self.location.sub!('www.', '') if self.location.starts_with?('www.')
+    end
+
+    def clean_url_parameters
+      url = URI.parse(self.url)
+      return if url.query.nil?
+
+      # convert the path into a hash
+      url_param_hash = Hash[URI.decode_www_form(url.query)]
+      # remove the utm_* params
+      url_param_hash.delete_if { |key, value| key.to_s.match(/utm_.+/) }
+
+      case self.location
+      when 'youtube.com'
+        # get rid of all parameters except 'v'ideo id and s't'art time
+        url_param_hash.slice!('v', 't')
+      when 'instagram.com'
+        # remove all the url params
+        url_param_hash = {}
+      #else
+      end
+      url.query = url_param_hash.to_query
+      self.url = url.to_s.chomp('?')
     end
 end
