@@ -1,10 +1,21 @@
 class SearchController < ApplicationController
-  before_action :force_json, only: :autocomplete
+  before_action :force_json, only: [:autocomplete, :tags_for]
 
   def autocomplete
     @tags = Tag.ransack(full_tag_cont: params[:q]).result(distinct: true).limit(5)
     @links = Link.ransack(title_cont: params[:q]).result(distinct: true).limit(5)
     @instructors = Instructor.ransack(all_names_cont: params[:q]).result(distinct: true).limit(5)
+  end
+
+  def tags_for
+    @tags = case params[:iwant]
+    when 'escape', 'defend', 'counter', 'learn', 'flow'
+      Tag.position_submission
+    when 'submit', 'pass'
+      Tag.positions
+    else
+      Tag.all
+    end
   end
 
   def input

@@ -1,0 +1,44 @@
+<hr />
+
+<%= form_tag(search_path, method: :post, class: 'form-inline') do %>
+  <div class="row">
+    <div class="col-2">
+      <span class="text-right align-baseline">I want to</span>
+    </div>
+
+    <div class="col-2">
+      <%= select_tag "iwant", options_for_select(["counter", "escape", "submit", "defend", "pass", "learn", "flow"], "submit") %>
+    </div>
+
+    <div class="col-1">
+      <strong><span id="part_of_speech" class="text-center align-baseline">from</span></strong>
+    </div>
+
+    <div class="col-4">
+      <%= select_tag :tag_ids,
+        options_for_select(Tag.positions.map {|t|  [t.search_name, t.id]}.sort),
+        { multiple: true, id: 'iwant_search_tag_ids' }
+      %>
+    </div>
+
+    <div class="col-1">
+      <strong><span class="text-center align-baseline">in</strong>
+    </div>
+
+    <div class="col-1 justify-content-start">
+      <div class="form-check justify-content-start">
+        <%= check_box_tag "nogi", true, true, class: 'form-check-input' %>
+        <%= label_tag "nogi", "nogi", class: 'form-check-label' %>
+      </div>
+      <div class="form-check justify-content-start">
+        <%= check_box_tag "gi", true, true, class: 'form-check-input' %>
+        <%= label_tag "gi", "gi", class: 'form-check-label' %>
+      </div>
+    </div>
+    <div class="col-1">
+      <%= submit_tag 'Search', class: 'form-control btn btn-light' %>
+    </div>
+  </div>
+<% end %>
+
+<hr />
