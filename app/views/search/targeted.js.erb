@@ -1,0 +1,4 @@
+$(function(){
+    $('#main-cards').html(`<%= render partial: 'links/cards', locals: { links: @links } %>`);
+    $('#pagy-div').html('<%== pagy_nav_bootstrap(@pagy) %>');
+});

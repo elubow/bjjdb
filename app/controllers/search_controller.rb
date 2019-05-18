@@ -18,6 +18,15 @@ class SearchController < ApplicationController
     end
   end
 
+  def targeted
+    # FIXME this doesn't work
+    @pagy, @links = pagy(Link.order(created_at: :desc), items: 1)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def input
     render 'new' if params[:q].blank? or params[:q].length < 2
     @tags = Tag.ransack(full_tag_cont: params[:q]).result(distinct: true)
