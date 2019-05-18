@@ -20,42 +20,25 @@ class SearchController < ApplicationController
 
   def targeted
     pajama_status = get_pajama_status(params[:gi], params[:nogi])
-    tags_to_search = params[:tag_ids] + pajama_status
+    tags_to_search = [params[:tag_ids] + pajama_status].flatten
 
-    case params[:iwant]
-    when 'counter'
-      # FIXME should include escape and defend
-      counter = Tag.where(full_name: 'move::counter').limit(1).first.id
-      @pagy, @links = pagy(Link.by_tags([tags_to_search, counter].flatten).order(created_at: :desc), items: 25)
-    when 'escape'
-      # FIXME should include counter and defend
-      escape = Tag.where(full_name: 'move::escape').limit(1).first.id
-      @pagy, @links = pagy(Link.by_tags([tags_to_search, escape].flatten).order(created_at: :desc), items: 25)
+    want_tags = case params[:iwant]
+    when 'counter', 'escape', 'defend'
+      Tag.where(full_name: ['move::counter', 'move::escape', 'move::defense']).ids
     when 'submit'
-      submission = Tag.where(full_name: 'move::submission').limit(1).first.id
-      @pagy, @links = pagy(Link.by_tags([tags_to_search, submission].flatten).order(created_at: :desc), items: 25)
-    when 'drill'
-      drill = Tag.where(full_name: 'move::drill').limit(1).first.id
-      @pagy, @links = pagy(Link.by_tags([tags_to_search, drill].flatten).order(created_at: :desc), items: 25)
-    when 'defend'
-      # FIXME should include counter and escape
-      defense = Tag.where(full_name: 'move::defense').limit(1).first.id
-      @pagy, @links = pagy(Link.by_tags([tags_to_search, defense].flatten).order(created_at: :desc), items: 25)
+      Tag.where(full_name: ['move::submission']).ids
+    when 'drill', 'flow'
+      Tag.where(full_name: ['move::drill', 'move::flow', 'move::warmup']).ids
     when 'learn'
-      # FIXME should include move::drill
-      learn = Tag.where(full_name: 'move::theory').limit(1).first.id
-      @pagy, @links = pagy(Link.by_tags([tags_to_search, learn].flatten).order(created_at: :desc), items: 25)
-    when 'flow'
-      # FIXME should include move::warmup
-      flow = Tag.where(full_name: 'move::flow').limit(1).first.id
-      @pagy, @links = pagy(Link.by_tags([tags_to_search, flow].flatten).order(created_at: :desc), items: 25)
+      Tag.where(full_name: ['move::drill', 'move::theory']).ids
     when 'pass'
-      pass = Tag.where(full_name: 'move::pass').limit(1).first.id
-      @pagy, @links = pagy(Link.by_tags([tags_to_search, pass].flatten).order(created_at: :desc), items: 25)
+      Tag.where(full_name: ['move::pass', 'move::sweep']).ids
     else
-      # we should never get here, but let's run a search just in case
-      @pagy, @links = pagy(Link.by_tags([tags_to_search].flatten).order(created_at: :desc), items: 25)
+      # we should never get here, but let's have tags just in case
+      Tag.all
     end
+
+    @pagy, @links = pagy(Link.joins(:tags).where("tags.id" => want_tags).by_tags(tags_to_search).order(created_at: :desc), items: 25)
 
     respond_to do |format|
       format.js
