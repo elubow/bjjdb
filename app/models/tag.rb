@@ -18,6 +18,10 @@ class Tag < ApplicationRecord
   ransack_alias :full_tag, :category_or_name_or_full_name
 
   TAG_SEPARATOR = '::'
+  TARGETED_SEARCH_OPTIONS = %w(
+    counter submit defend drill
+    escape learn flow pass
+  )
 
   def self.send_chain(methods)
     methods.inject(self, :send)

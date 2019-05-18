@@ -54,6 +54,9 @@ document.addEventListener("turbolinks:load", function() {
       case 'flow':
         part_of_speech.text("with");
         break;
+      case 'drill':
+        part_of_speech.text("some");
+        break;
     }
     
     $.ajax({
@@ -87,7 +90,4 @@ document.addEventListener("turbolinks:load", function() {
       }
     });
   });
-});
-
-document.addEventListener("turbolinks:load", function() {
 });

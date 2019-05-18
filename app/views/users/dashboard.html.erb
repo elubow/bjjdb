@@ -2,5 +2,5 @@
 <div class="col">
   <%= render partial: 'search/search_bar' %>
 
-  <%= render partial: 'shared/dashboard_cards', locals: { links: @links } %>
+  <%= render partial: 'shared/dashboard_cards', locals: { links: @links, pagy: @pagy} %>
 </div>

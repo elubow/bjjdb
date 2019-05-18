@@ -7,7 +7,7 @@
     </div>
 
     <div class="col-2">
-      <%= select_tag "iwant", options_for_select(["counter", "escape", "submit", "defend", "pass", "learn", "flow"], "submit") %>
+      <%= select_tag "iwant", options_for_select(Tag::TARGETED_SEARCH_OPTIONS.sort, "submit") %>
     </div>
 
     <div class="col-1">
@@ -42,3 +42,9 @@
 <% end %>
 
 <hr />
+
+<div id="search-results" class="row hidden">
+  <div class="col">
+    <span id="results-text"></span>
+  </div>
+</div>
