@@ -1,0 +1,8 @@
+<div class="text-center pr-2 pl-2">
+  <% if @links.empty? %>
+    <h5 class="mb-2">We Ain't Found Shit!</h5>
+    <%= image_tag 'we-aint-found-shit.jpg', class: 'img-fluid' %>
+  <% else %>
+    <h5><%= pluralize(@links.count, "video") %></h5>
+  <% end %>
+</div>

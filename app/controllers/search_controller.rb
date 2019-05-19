@@ -20,7 +20,9 @@ class SearchController < ApplicationController
 
   def targeted
     pajama_status = get_pajama_status(params[:gi], params[:nogi])
-    tags_to_search = [params[:tag_ids] + pajama_status].flatten
+    tags_to_search = params[:tag_ids].present? ?
+      [params[:tag_ids] + pajama_status].flatten :
+      pajama_status
 
     want_tags = case params[:iwant]
     when 'counter', 'escape', 'defend'
@@ -38,8 +40,17 @@ class SearchController < ApplicationController
       Tag.all
     end
 
-    @pagy, @links = pagy(Link.joins(:tags).where("tags.id" => want_tags).by_tags(tags_to_search).order(created_at: :desc), items: 25)
-
+    if params[:tag_ids].present?
+      @pagy, @links = pagy(Link.joins(:tags).where("tags.id" => want_tags).by_tags(tags_to_search).order(created_at: :desc), items: 25)
+    else
+      if tags_to_search.empty?
+        @pagy, @links = pagy(Link.joins(:tags).where("tags.id" => want_tags).distinct('links.id').order(created_at: :desc), items: 25)
+      else
+        # FIXME this query doesn't work properly. It needs to actually do an OR of tuples where the tuple is like (nogi, pass) OR (nogi, sweep) I think.
+        @pagy, @links = pagy(Link.joins(:tags).where("tags.id" => want_tags).where("tags.id" => tags_to_search).distinct('links.id').order(created_at: :desc), items: 25)
+      end
+    end
+  
     respond_to do |format|
       format.js
     end
