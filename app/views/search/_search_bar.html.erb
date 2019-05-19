@@ -2,30 +2,30 @@
 
 <%= form_tag(search_targeted_path, method: :post, class: 'form-inline', remote: true) do %>
   <div class="row w-100">
-    <div class="col-2">
+    <div class="col-sm-1 col-md-1 col-lg-2 col-xl-2">
       <span class="text-right align-baseline">I want to</span>
     </div>
 
-    <div class="col-2">
+    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
       <%= select_tag "iwant", options_for_select(Tag::TARGETED_SEARCH_OPTIONS.sort, "submit") %>
     </div>
 
-    <div class="col-1">
+    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
       <strong><span id="part_of_speech" class="text-center align-baseline">from</span></strong>
     </div>
 
-    <div class="col-4">
+    <div class="col-sm-2 col-md-3 col-lg-4 col-xl-4">
       <%= select_tag :tag_ids,
         options_for_select(Tag.positions.map {|t|  [t.search_name, t.id]}.sort),
         { multiple: true, id: 'iwant_search_tag_ids' }
       %>
     </div>
 
-    <div class="col-1">
+    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
       <strong><span class="text-center align-baseline">in</strong>
     </div>
 
-    <div class="col-1 justify-content-start">
+    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1 justify-content-start">
       <div class="form-check justify-content-start">
         <%= check_box_tag "nogi", true, true, class: 'form-check-input' %>
         <%= label_tag "nogi", "nogi", class: 'form-check-label' %>
@@ -35,7 +35,7 @@
         <%= label_tag "gi", "gi", class: 'form-check-label' %>
       </div>
     </div>
-    <div class="col-1">
+    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
       <%= submit_tag 'Search', id: 'specialty-search', class: 'form-control btn btn-light' %>
     </div>
   </div>
