@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
+  get 'search/tags_for', controller: :search, action: :tags_for
+  post 'search/targeted', controller: :search, action: :targeted
   get :search, controller: :search, action: :input
   post :search, controller: :search, action: :advanced
   get 'search/a', controller: :search, action: :autocomplete

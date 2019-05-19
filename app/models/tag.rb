@@ -11,9 +11,17 @@ class Tag < ApplicationRecord
 
   after_validation :create_full_name, on: [:create, :update]
 
+  scope :positions, -> { where(category: 'start-position') }
+  scope :submissions, -> { where(category: 'submission') }
+  scope :position_submission, -> { positions.or(submissions) }
+
   ransack_alias :full_tag, :category_or_name_or_full_name
 
   TAG_SEPARATOR = '::'
+  TARGETED_SEARCH_OPTIONS = %w(
+    counter submit defend drill
+    escape learn flow pass
+  )
 
   def self.send_chain(methods)
     methods.inject(self, :send)
@@ -42,6 +50,20 @@ class Tag < ApplicationRecord
     end_tag.created_at = ts
     end_tag.updated_at = ts
     end_tag.save!
+  end
+
+  def search_name
+    rv = case self.category
+         when 'start-position', 'end-position', 'position'
+           '[P]'
+         when 'submission'
+           '[S]'
+         when 'uniform'
+           '[U]'
+         when 'difficulty'
+           '[B]' # belt
+         end
+    return "#{rv} #{self.name}"
   end
 
   private

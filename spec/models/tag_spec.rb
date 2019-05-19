@@ -13,4 +13,22 @@ describe Tag do
     it { should validate_presence_of :name }
   end
 
+  context 'ensure correct search_name' do
+    it "has a P for position" do
+      tag = Tag.create!(
+        category: 'start-position',
+        name: 'guard'
+      )
+      expect(tag.search_name).to eq("[P] guard")
+    end
+
+    it "has an S for submission" do
+      tag = Tag.create!(
+        category: 'submission',
+        name: 'kimura'
+      )
+      expect(tag.search_name).to eq("[S] kimura")
+    end
+  end
+
 end
