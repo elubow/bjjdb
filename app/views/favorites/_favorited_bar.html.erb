@@ -1,5 +1,5 @@
 <% if user.favorited?(link) %>
-  <%= link_to 'Unfavorite', link_favorite_path(@link), method: :delete %>
+  <%= link_to 'Unfavorite', link_favorite_path(@link), method: :delete,remote: true, id:"unfav-link" %>
 <% else %>
-  <%= link_to 'Favorite',  link_favorite_path(@link), method: :post %>
+  <%= link_to 'Favorite',  link_favorite_path(@link), method: :post,remote: true, id:"fav-link" %>
 <% end %>

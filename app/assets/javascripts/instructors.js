@@ -5,3 +5,10 @@ document.addEventListener("turbolinks:load", function() {
     width: '100%'
   })
 });
+$(document).ready(function(){
+  $('#instructor_search').on('input', function(){
+    if(document.getElementById("instructor_search").value.length >= 3){
+      $('#submit-search').click()
+    }
+  })
+})

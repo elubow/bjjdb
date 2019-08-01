@@ -1,0 +1,2 @@
+$('#favorited-bar').html("<%= j (render partial: 'favorites/favorited_bar', locals: { link: @link, user: @current_user }) %>");
+$('#favorites-count').html("<%= pluralize(@link.favorites_count, 'favorite') %>");

@@ -13,12 +13,16 @@
     <%= @instructor.display_name %>
   </h1>
 
+  <h4 class="ml-4 mb-3">
+    <%= social_media_helper_short(@instructor) %>
+  </h4>
+
   <% if @instructor.has_videos? %>
     <%= image_tag(@instructor.links.first.thumbnail_image_location(), alt: @instructor.display_name, class: 'link_image') %>
   <% end %>
   
   <% if @instructor.description? %>
-  <p>
+  <p class="mt-2">
     <%= @instructor.description %>
   </p>
   <% end %>
@@ -39,11 +43,11 @@
   <% end %>
 
   <% if @instructor.has_videos? %>
-    <h4><%= pluralize(@instructor.video_count, "Videos").titleize %></h4>
+    <h4 class="mt-2"><%= pluralize(@instructor.video_count, "Videos").titleize %></h4>
     <%= render partial: 'links/list', locals: {links: @instructor.links} %>
   <% else %>
     <p>
-      There are no videos for this instructor. 
+    If you can believe it, <strong><%= @instructor.name %></strong> hasn't put out a single video.
     </p>
     <p>
       <% if current_user %>

@@ -1,0 +1,21 @@
+<% if private_notes.size > 0 %>
+
+  <% private_notes.each do |private_note| %>
+
+    <div class="notebook-paper mb-2">
+      <div class="notebook-content">
+        <div class="notebook-header">
+          <h3 class="notebook-title"><%= link_to private_note.title, private_note_path(private_note) %></h3>
+          <h6 class="notebook-title"><%= link_to private_note.link.title, link_path(private_note.link) %></h6>
+        </div>
+        <p><%= truncate(private_note.body, length: 250) %></p>
+      </div>
+    </div>
+ 
+  <% end %>
+
+<% else %>
+
+  <h5>No entries match <span class="text-primary"><%= params[:private_note_search] %></span></h5>
+
+<% end %>

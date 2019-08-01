@@ -9,9 +9,10 @@ class Link < ApplicationRecord
   has_and_belongs_to_many :instructors
   has_and_belongs_to_many :tags
   has_one :thumbnail, dependent: :destroy
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
 
   after_validation :set_location, on: [:create, :update]
+  after_validation :clean_url_parameters, on: [:create, :update]
   after_commit { GetVideoMetadataJob.perform_later self}
 
   validates :user_id, presence: true
@@ -99,12 +100,26 @@ class Link < ApplicationRecord
     self.tags.select {|t|  t.category == "position"}.first.id
   end
 
+  def submission_id
+    tags.select { |t| t.category == "submission" }.first.id
+  end
+
+  def submission?
+    tags.collect(&:category).uniq.include?("submission") && Tag.find(submission_id).links.count > 0
+  end
+
+  # any tags that should be skipped should go here so they don't need to be repeated for other start_position_* methods
   def get_start_position_id
-    self.tags.select {|t|  t.category == "start-position"}.first.id
+    self.tags.select {|t|  t.category == "start-position"}.reject{|t|  t.name == "in-submission"}.first.id
   end
 
   def has_start_position?
     self.tags.collect(&:category).uniq.include?("start-position") and Tag.find(self.get_start_position_id).links.count > 0
+  end
+
+  def has_start_position_not_in_submission?
+    in_submission_id = Tag.find_by_full_name("start-position::in-submission").id
+    self.tags.reject{|t|  t.id == in_submission_id}.collect(&:category).uniq.include?("start-position") and Tag.find(self.get_start_position_id).links.count > 0
   end
 
   # find videos where the end-position of previous video
@@ -133,8 +148,14 @@ class Link < ApplicationRecord
     self.tags.collect(&:category).uniq.include?("end-position")
   end
 
+  def has_end_position_not_in_submission?
+    in_submission_id = Tag.find_by_full_name("end-position::in-submission").id
+    self.tags.reject{|t|  t.id == in_submission_id}.collect(&:category).uniq.include?("end-position") and Tag.find(self.get_end_position_id).links.count > 0
+  end
+
+  # any tags that should be skipped should go here so they don't need to be repeated for other end_position_* methods
   def get_end_position_id
-    self.tags.select {|t|  t.category == "end-position"}.first.id
+    self.tags.select {|t|  t.category == "end-position"}.reject{|t|  t.name == "in-submission"}.first.id
   end
 
   def videos_starting_from_end_position(limit=5)
@@ -147,11 +168,49 @@ class Link < ApplicationRecord
     Tag.find_by_full_name("start-position::#{Tag.find(end_pos_id).name}").links.order(created_at: :desc).limit(limit+1).reject{|l|  l.id == self.id}.count > 0
   end
 
-  # drills exist for getting into start-position or about 
-  # the position or getting into the specified submssion 
-  def has_drills?
-    # TODO false until there are drill videos to test with
-    false
+  def has_related_drills(limit=5)
+    flow_id = Tag.find_by_full_name("move::flow").id
+    drill_id = Tag.find_by_full_name("move::drill").id
+
+    flow_drill = Link.left_joins(:tags).group(:id, :tag_id).where("tag_id IN (?)", [flow_id,drill_id]).reject{|l|  l.id == id}
+
+    start_pos_id = get_start_position_id if has_start_position_not_in_submission?
+    position_id = get_position_id if has_position?
+    submission_id = submission_id if submission?
+
+    filter_tags = [start_pos_id, position_id, submission_id].reject{ |tag| tag == nil }
+    if filter_tags.empty?
+      return []
+    end
+    
+    related_drill_videos = Link.left_joins(:tags).group(:id, :tag_id).where("links.id IN (?) AND tags.id IN (?)",flow_drill, filter_tags).uniq.take(limit)
+    
+    return related_drill_videos
+  end
+
+  def has_escape_from_submission?
+    self.in_submission? and self.submission?
+  end
+
+  def in_submission?
+    self.tags.select {|t|  t.category == "end-position" and t.name == "in-submission"}.size > 0
+  end
+
+  # All videos tagged with "start-position::in-submission", "move::escape", AND "submission::#{name}"
+  def videos_starting_from_submission(limit=5)
+    tag_list = []
+    tag_list << Tag.find_by_full_name("start-position::in-submission")
+    tag_list << Tag.find_by_full_name("move::escape")
+    tag_list << Tag.find_by_full_name(Tag.find(self.submission_id).full_name)
+    Link.by_tags(tag_list).order(created_at: :desc).limit(limit+1)
+  end
+
+  def has_videos_starting_from_submission?
+    tag_list = []
+    tag_list << Tag.find_by_full_name("start-position::in-submission")
+    tag_list << Tag.find_by_full_name("move::escape")
+    tag_list << Tag.find_by_full_name(Tag.find(self.submission_id).full_name)
+    Link.by_tags(tag_list).reject{|l|  l.id == self.id}.count > 0
   end
 
   # END related videos
@@ -180,5 +239,27 @@ class Link < ApplicationRecord
     def set_location
       self.location = URI.parse(self.url).host.downcase
       self.location.sub!('www.', '') if self.location.starts_with?('www.')
+    end
+
+    def clean_url_parameters
+      url = URI.parse(self.url)
+      return if url.query.nil?
+
+      # convert the path into a hash
+      url_param_hash = Hash[URI.decode_www_form(url.query)]
+      # remove the utm_* params
+      url_param_hash.delete_if { |key, value| key.to_s.match(/utm_.+/) }
+
+      case self.location
+      when 'youtube.com'
+        # get rid of all parameters except 'v'ideo id and s't'art time
+        url_param_hash.slice!('v', 't')
+      when 'instagram.com'
+        # remove all the url params
+        url_param_hash = {}
+      #else
+      end
+      url.query = url_param_hash.to_query
+      self.url = url.to_s.chomp('?')
     end
 end

@@ -33,9 +33,9 @@
     </div>
     <div class="col-6 text-right mt-auto">
       <% if @current_user %>
-        <%= render partial: 'favorites/favorited_bar', locals: { link: @link, user: @current_user } %>
+        <span id="favorited-bar"><%= render partial: 'favorites/favorited_bar', locals: { link: @link, user: @current_user } %></span>
         |
-        <%= render partial: 'ratings/form' %>
+        <%= render partial: 'ratings/rate' %>
         |
       <% end %>
 
@@ -54,12 +54,12 @@
   on <%= @link.created_at.strftime("%Y-%b-%d") %>
     </div>
     <div class="col-5 text-right">
-      <%= pluralize(@link.favorites_count, "favorite") %>
+      <span id="favorites-count" onClick="document.getElementById('favorited-bar').childNodes[1].click()"><%= pluralize(@link.favorites_count, "favorite") %></span>
       |
       <%= pluralize(@link.impressions.count, "view") %>
       |
 
-      <%= @link.get_current_rating %> stars (<%= pluralize(@link.ratings.count, "rating") %>)
+      <span id="ratings-display"><%= @link.get_current_rating %></span> stars (<span id="total-ratings"><%= pluralize(@link.ratings.count, "rating") %></span>)
     </div>
   </div>
   
@@ -69,21 +69,32 @@
     <%= link_url_helper(@link) %>
   </p>
 
-  <p>
-    <strong>via</strong>
-    <% if @link.has_favicon? %>
-      <%= image_tag(@link.thumbnail.favicon, height: '32px', width: '32px', alt: @link.description) %>
-    <% else %>
-      <%= @link.location %>
-    <% end %>
-  </p>
+  <div class="row mb-3 ml-3 mr-3">
+    <div class="col-3 pl-1">
+      <strong>via</strong>
+      <% if @link.has_favicon? %>
+        <%= image_tag(@link.thumbnail.favicon, height: '32px', width: '32px', alt: @link.description) %>
+      <% else %>
+        <%= @link.location %>
+      <% end %>
+    </div>
+    <div class="col-6">
+    </div>
+    <div class="col-3 text-right pr-1">
+      <%= link_to "Original Video", @link.url, target: '_blank' %>
+    </div>
+  </div>
   
-  <p>
-    <strong>Tags:</strong>
-    <% @link.tags.each do |tag| %>
-      <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
+  <div class="row mb-3 ml-3 mr-3">
+    <strong class="mt-1 mr-2">Tags:</strong>
+    <% if @link.tags.size > 0 %>
+      <% @link.tags.each do |tag| %>
+        <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
+      <% end %>
+    <% else %>
+      <em class="mt-1">None</em>
     <% end %>
-  </p>
+  </div>
   
   <% if @link.description_exists? %>
     <hr />
@@ -102,7 +113,8 @@
   <% if current_user %>
     <%= render partial: 'comments/form', locals: { comment: @comment } %>
   <% else %>
-    Must be logged in to comment.
+    Must be logged in to comment.<br />
+    <br />
   <% end %>
   
   <% @comments.each do |c| %>
@@ -130,5 +142,5 @@
     <%= render template: 'private_notes/link_notebook', locals: { private_note: @private_note, link: @link, private_notes: @private_notes } %>
   <% end %>
 
-  <%= render partial: 'links/related_videos', locals: { link: @link } %>
+  <%= render partial: 'links/related_videos', locals: { link: @link, related_drill_videos: @related_drill_videos } %>
 </div>

@@ -1,24 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="col">
+  <h1 class="mt-4">
+    <%= link_to 'My Notebook', notebook_path %>
+    &gt;
+    <%= @private_note.title %>
+  </h1>
+  <div class="row mt-4">
+    <div class="col-7">
+      <div class="container">
+        <div class="row mt-5">
+          <div class="col-12">
+            <%= render partial: 'private_notes/note', locals: { private_note: @private_note } %>
+          </div>
+          <div class="col-5">
+          </div>
+          <div class="col-3">
+            <div class="center">
+              <%= link_to 'Edit', edit_private_note_path(@private_note), class: 'btn btn-primary' %>
+              <%= link_to 'Delete', @private_note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            </div>
+          </div>
+          <div class="col-4">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="container">
+        <%= render partial: 'private_notes/link', locals: { link: @private_note.link } %>
+      </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @private_note.user %>
-</p>
-
-<p>
-  <strong>Link:</strong>
-  <%= @private_note.link %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @private_note.body %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @private_note.title %>
-</p>
-
-<%= link_to 'Edit', edit_private_note_path(@private_note) %> |
-<%= link_to 'Back', private_notes_path %>
+    </div>
+  </div>
+</div>

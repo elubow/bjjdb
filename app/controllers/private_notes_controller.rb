@@ -6,7 +6,7 @@ class PrivateNotesController < ApplicationController
   # GET /notebook
   # GET /notebook.json
   def notebook
-    @pagy, @private_notes = pagy(PrivateNote.where(user: current_user).order(created_at: :desc), items: 25)
+    @pagy, @private_notes = pagy(PrivateNote.where(user: current_user).order(created_at: :desc), items: 5)
     authorize @private_notes
   end
 
@@ -15,6 +15,22 @@ class PrivateNotesController < ApplicationController
   def index
     @pagy, @private_notes = pagy(PrivateNote.order(created_at: :desc), items: 25)
     authorize @private_notes
+  end
+
+  def search
+    authorize PrivateNote
+    @pagy, @private_notes_search = pagy(
+      PrivateNote.where(user_id: current_user.id).ransack(
+        body_cont: params[:private_note_search],
+        title_cont: params[:private_note_search],
+        m: 'or'
+      ).result(distinct: true),
+      items: 10,
+      link_extra: 'data-remote="true"'
+    )
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /private_notes/1

@@ -44,6 +44,7 @@ group :development do
   gem 'rails_layout'
   gem "dotenv-rails"
   gem 'web-console', '>= 3.3.0'
+  gem 'rubocop-performance'
 end
 
 group :test do
@@ -54,9 +55,15 @@ end
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'pry-rails'
   gem 'pry-rescue'
+  gem 'rspec-rails'
   gem 'rubocop'
+  gem 'rails-controller-testing'
+  gem 'shoulda-matchers'
+  gem 'simplecov'
 end
 
 source 'https://rails-assets.org' do

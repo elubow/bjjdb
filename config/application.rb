@@ -18,5 +18,17 @@ module Bjjdb
 
     # throw the Rails 403 if forbidden
     config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
+
+    # Make sure rspec works as a testing framework
+    config.generators do |g|
+      g.test_framework :rspec,
+        :fixtures => true,
+        :view_specs => false,
+        :helper_specs => true,
+        :routing_specs => false,
+        :controler_specs => true,
+        :request_specs => true
+      g.fixture_replacement :factory_girl, :dir => "spec/factories"
+    end
   end
 end

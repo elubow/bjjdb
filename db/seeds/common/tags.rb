@@ -416,6 +416,11 @@ positions = [
     name: 'pocket-guard',
     description: 'pocket guard'
   },
+  {
+    id: 2035,
+    name: 'in-submission',
+    description: 'having or being in a submission'
+  }
 ]
 
 # position 2XXX
@@ -635,6 +640,11 @@ puts '  Submissions'
     id: 10063,
     name: 'north-south-choke',
     description: 'North South Choke'
+  },
+  {
+    id: 10064,
+    name: 'crank',
+    description: 'all of the blood to the pain with all the pain to go with it'
   },
 ].each do |t|
   Tag.create!(

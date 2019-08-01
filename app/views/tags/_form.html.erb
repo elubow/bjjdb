@@ -13,9 +13,15 @@
 
   <div class="form-group form-row">
     <%= form.label :category, class: 'col-form-label-lg' %>
-    <%= form.select :category,
-      Tag.distinct.pluck(:category).sort.map{|t|  [t, t]},
-      {required: true} %>
+    <% if tag.category == 'position' %>
+      <%= form.select :category,
+        Tag.distinct.pluck(:category).sort.map{|t|  [t, t]}, {},
+        {required: true, disabled: true} %>
+    <% else %>
+      <%= form.select :category,
+        Tag.distinct.pluck(:category).sort.map{|t|  [t, t]},
+        {required: true} %>
+    <% end %>
     <small id="tag_category_help" class="form-text text-muted">High level category of the tag.</small>
   </div>
 

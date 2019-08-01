@@ -5,42 +5,23 @@
     <%= link_to 'New Instructor', new_instructor_path, class: 'btn btn-secondary float-right mb-2' %>
   <% end %>
 
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Videos</th>
-        <th>Name</th>
-        <th>Nickname</th>
-        <th>Description</th>
-        <% if current_user %>
-          <th colspan="3">Actions</th>
-        <% end %>
-      </tr>
-    </thead>
+  <%= form_with url: search_instructors_path, method: :get do |f|%>
+    <div class="form-group row">
+      <label class="col-form-label col-1 text-right"><h6>Search</h6></label>
+      <div class="col-3">
+        <%= f.text_field :instructor_search, class: 'form-control' %>
+        <div style="display:none;"><%= f.submit id: 'submit-search' %></div>
+      </div>
+      <div class="col-9">
+      </div>
+    </div>
+  <% end %>
   
-    <tbody>
-      <% @instructors.each do |instructor| %>
-        <tr>
-          <td><%= link_to instructor.links.count, instructor %></td>
-          <td><%= link_to instructor.name, instructor %></td>
-          <td><%= instructor.nickname %></td>
-          <td><%= instructor.description %></td>
-          <% if current_user %>
-            <% if current_user.moderator? or current_user.admin? %>
-              <td><%= link_to 'Edit', edit_instructor_path(instructor), class: 'btn btn-primary' %></td>
-            <% end %>
-            <% if current_user.admin? %>
-              <td><%= link_to 'Delete', instructor, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
-            <% end %>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div id="instructor-display"><%= render partial: 'instructors/list', locals: { instructors: @instructors } %></div>
 
   <div class="row">
     <div class="col">
-      <div class="d-flex justify-content-center">
+      <div id="pagy-div" class="d-flex justify-content-center">
         <%== pagy_nav_bootstrap(@pagy) %>
       </div>
     </div>

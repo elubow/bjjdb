@@ -1,0 +1,27 @@
+<h4><%= link_to link.title, link_path(link) %></h4>
+
+<%= link_url_helper(link) %>
+
+<% if link.has_instructors? %>
+  <ul class="list-inline mt-2">
+    <% link.instructors.each do |i| %>
+      <li class="list-inline-item">
+        <%= link_to i.display_name, i, class: 'btn btn-light btn-sm' %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<p class="mt-1">
+  <% link.tags.each do |tag| %>
+    <%= link_to "#{tag.category}::#{tag.name}", tag, class: 'tag' %>
+  <% end %>
+</p>
+
+<% if link.description_exists? %>
+  <hr />
+  
+  <p class="mt-1">
+    <%= link.show_description %>
+  </p>
+<% end %>

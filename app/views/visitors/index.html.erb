@@ -1,21 +1,12 @@
 <% title "Need BJJ Help Home" %>
 <div class="col">
-  <h1 class="mt-4">Welcome to Need BJJ Help</h1>
+  <h1 class="mt-4">Need BJJ Help</h1>
 
-  <p>
-  These are the most recently added videos to our library.
-  For a better experience, either <%= link_to "Sign In", new_user_session_path %> to your existing account or <%= link_to "Register", new_user_registration_path %> for a new account.
+  <p class="pl-2 pr-3">
+  Who doesn't? #amirite These are the best things we've got so far. For all the cool personalized stuff like notebooks, favorites, or adding your own videos, either <%= link_to "Sign In", new_user_session_path %>  or <%= link_to "Register", new_user_registration_path %> for a new account. 
   </p>
 
-  <div class="card-columns">
-    <%= render partial: 'links/cards', locals: { links: @links } %>
-  </div>
+  <%= render partial: 'search/search_bar' %>
 
-  <div class="row">
-    <div class="col">
-      <div class="d-flex justify-content-center">
-        <%== pagy_nav_bootstrap(@pagy) %>
-      </div>
-    </div>
-  </div>
+  <%= render partial: 'shared/dashboard_cards', locals: { links: @links, pagy: @pagy} %>
 </div>

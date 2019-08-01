@@ -1,0 +1,4 @@
+$(function(){
+    $('#private_note-display').html(`<%= render partial: 'private_notes/notebook_list', locals: { private_notes: @private_notes_search } %>`);
+    $('#pagy-div').html('<%== pagy_nav_bootstrap(@pagy) %>');
+});

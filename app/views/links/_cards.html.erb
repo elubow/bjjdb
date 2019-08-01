@@ -37,7 +37,7 @@
           <div class="col-6 text-right">
             <% if link.comments.count > 0 %>
               <p class="card-text">
-                <%= link_to pluralize(link.comments.count, "opinion"), link.url %>
+                <%= link_to pluralize(link.comments.count, "opinion"), link_path(link) %>
               </p>
             <% end %>
           </div>

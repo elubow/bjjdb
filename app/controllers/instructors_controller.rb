@@ -2,12 +2,33 @@ class InstructorsController < ApplicationController
   before_action :set_instructor, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
   impressionist :actions => [:show]
+  respond_to :js, :html
 
   # GET /instructors
   # GET /instructors.json
   def index
     @pagy, @instructors = pagy(Instructor.order(name: :asc), items: 25)
     authorize @instructors
+  end
+
+  def search
+    authorize Instructor
+    @pagy, @instructor_search = pagy(
+      Instructor.ransack(
+        name_cont: params[:instructor_search],
+        nickname_cont: params[:instructor_search],
+        description_cont: params[:instructor_search],
+        instagram_cont: params[:instructor_search],
+        youtube_cont: params[:instructor_search],
+        twitter_cont: params[:instructor_search],
+        facebook_cont: params[:instructor_search],m:'or'
+        ).result(distinct: true), 
+      items:25, 
+      link_extra: 'data-remote="true"'
+    )
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /instructors/1
