@@ -1,6 +1,5 @@
 puts 'Creating Translation Terms'
 TranslationTerm.create!(
-  id: 1,
   user_id: 42,
   base_term_id: 0,
   language: 'en',
@@ -9,14 +8,14 @@ TranslationTerm.create!(
 
 TranslationTerm.create!(
   user_id: 42,
-  base_term_id: TranslationTerm.where(body: 'knee'),
+  base_term_id: TranslationTerm.where(body: 'knee', language: 'en').first.id,
   language: 'de',
   body: 'knie'
 )
 
 TranslationTerm.create!(
   user_id: 42,
-  base_term_id: TranslationTerm.where(body: 'knee'),
+  base_term_id: TranslationTerm.where(body: 'knee', language: 'en').first.id,
   language: 'fr',
   body: 'genou'
 )
@@ -30,7 +29,7 @@ TranslationTerm.create!(
 
 TranslationTerm.create!(
   user_id: 42,
-  base_term_id: TranslationTerm.where(body: 'head'),
+  base_term_id: TranslationTerm.where(body: 'head', language: 'en').first.id,
   language: 'de',
   body: 'kopf'
 )
@@ -51,7 +50,21 @@ TranslationTerm.create!(
 
 TranslationTerm.create!(
   user_id: 42,
-  base_term_id: TranslationTerm.where(body: 'leg'),
+  base_term_id: TranslationTerm.where(body: 'leg', language: 'en').first.id,
   language: 'fr',
   body: 'jambe'
+)
+
+TranslationTerm.create!(
+  user_id: 42,
+  base_term_id: TranslationTerm.where(body: 'leg', language: 'en').first.id,
+  language: 'de',
+  body: 'bein'
+)
+
+TranslationTerm.create!(
+  user_id: 42,
+  base_term_id: TranslationTerm.where(body: 'mat', language: 'en').first.id,
+  language: 'de',
+  body: 'matte'
 )

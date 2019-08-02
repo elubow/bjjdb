@@ -10,7 +10,7 @@
     <div class="form-group form-row">
       <%= form.label :src, class: 'col-form-label-lg' %>
       <%= form.select :src,
-        TranslationTerm::LANGUAGES.sort.map{|lng, language|  ["#{lng} - #{language}", lng] unless lng == :en},
+        TranslationTerm::LANGUAGES.sort.map{|lng, language|  ["#{lng} - #{language}", lng]},
         {required: true},
         id: 'translation_src'
       %>
@@ -19,7 +19,7 @@
     <div class="form-group form-row">
       <%= form.label :dst, class: 'col-form-label-lg' %>
       <%= form.select :dst,
-        TranslationTerm::LANGUAGES.sort.map{|lng, language|  ["#{lng} - #{language}", lng] unless lng == :en},
+        TranslationTerm::LANGUAGES.sort.map{|lng, language|  ["#{lng} - #{language}", lng]},
         {required: true},
         id: 'translation_dst'
       %>

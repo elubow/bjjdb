@@ -12,3 +12,6 @@ load 'db/seeds/development/links.rb'
 load 'db/seeds/development/ratings.rb'
 load 'db/seeds/development/private_notes.rb'
 load 'db/seeds/development/comments.rb'
+
+# order irrespective loading
+load 'db/seeds/development/translation_terms.rb'

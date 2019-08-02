@@ -7,6 +7,6 @@ class CreateTranslationTerms < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_column :translation_terms, :base_term_id, :integer, default: 0, null: false, index: true
+    add_column :translation_terms, :base_term_id, :integer, default: 0, index: true
   end
 end

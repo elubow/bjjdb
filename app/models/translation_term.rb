@@ -42,10 +42,23 @@ class TranslationTerm < ApplicationRecord
   end
 
   def self.get_chart(src, dst)
-    TranslationTerm.connection.select_all("SELECT en.id AS en_id, en.body AS en_body, en.base_term_id AS en_base_term_id, src.id AS src_id, src.body AS src_body, src.language AS src_language, src.base_term_id AS src_base_term_id, dst.id AS dst_id, dst.body AS dst_body, dst.language AS dst_language, dst.base_term_id AS dst_base_term_id
+    if src != 'en' and dst != 'en'
+      TranslationTerm.connection.select_all("SELECT en.id AS en_id, en.body AS en_body, en.base_term_id AS en_base_term_id, src.id AS src_id, src.body AS src_body, src.language AS src_language, src.base_term_id AS src_base_term_id, dst.id AS dst_id, dst.body AS dst_body, dst.language AS dst_language, dst.base_term_id AS dst_base_term_id
         FROM translation_terms en
                 LEFT OUTER JOIN translation_terms src ON (en.id = src.base_term_id)
                 LEFT OUTER JOIN translation_terms dst ON (en.id = dst.base_term_id)
        WHERE en.language = 'en' AND (src.language = '#{src}') AND (dst.language = '#{dst}')").to_hash
+    elsif src == 'en' or dst == 'en'
+      # NOTE if English is the dst, we need to swap the source/dest vars for the query
+      # NOTE we ensure the proper ordering on the views based on the params
+      if dst == 'en'
+        dst = src
+        src = 'en'
+      end
+      TranslationTerm.connection.select_all("SELECT en.id AS en_id, en.body AS en_body, en.base_term_id AS en_base_term_id, dst.id AS dst_id, dst.body AS dst_body, dst.language AS dst_language, dst.base_term_id AS dst_base_term_id
+        FROM translation_terms en
+                LEFT OUTER JOIN translation_terms dst ON (en.id = dst.base_term_id)
+       WHERE en.language = 'en' AND (dst.language = '#{dst}')").to_hash
+    end
   end
 end
