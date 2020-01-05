@@ -9,4 +9,19 @@ class GymsController < ApplicationController
     authorize @gyms
   end
 
+  # GET /gyms/1
+  # GET /gyms/1.json
+  def show
+    authorize @gym
+
+    # Reviews
+    @reviews = @gym.reviews.all.order(created_at: :desc)
+  end
+
+  private
+
+    def set_gym
+      @gym = Gym.find(params[:id])
+    end
+
 end

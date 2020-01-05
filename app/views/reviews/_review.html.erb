@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-8 ml-2">
+    <strong>Stars</strong>: <%= review.stars %><br />
+    <strong>Posted by</strong>:
+      <%= link_to review.user.name, review.user %>,
+      <%= review.user.gender if review.user.gender %>
+      <%= review.user.belt if review.user.belt %>
+    <p><strong>Review</strong>: <%= review.body %></p>
+  </div>
+</div>
