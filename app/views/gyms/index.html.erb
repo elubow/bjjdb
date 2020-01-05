@@ -1,0 +1,13 @@
+<div class="col">
+  <h1 class="mt-4">Gyms</h1>
+  <div><%= render partial: 'gyms/list', locals: { gyms: @gyms } %></div>
+
+  <div id="pages-nav" class="d-flex justify-content-center">
+    <%== pagy_nav_bootstrap(@pagy) %>
+  </div>
+  
+  <% if @current_user %>
+    <%= link_to 'New Video', new_link_path, class: 'btn btn-primary btn-large mt-1' %>
+  <% end %>
+
+</div>

@@ -1,0 +1,17 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Gym Name</th>
+      <th>Stars</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% gyms.each do |gym| %>
+      <tr>
+        <td><%= link_to gym.name, gym %></td>
+        <td><%= gym.average_stars %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
