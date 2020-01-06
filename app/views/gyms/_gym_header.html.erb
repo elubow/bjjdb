@@ -1,4 +1,10 @@
   <div class="row">
+    <div class="col-4">
+      <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) / <%= pluralize(gym.reviews.count, 'review') %>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-4 mt-auto">
       <%= "Phone: #{gym.phone}" if gym.phone.present? %><br />
       <%= "Email: #{gym.email}" if gym.phone.present? %><br />

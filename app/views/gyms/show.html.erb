@@ -2,12 +2,12 @@
 <% description truncate(@gym.name, length: 254, separator: /\w+/) %>
 
 <div class="col-lg-8">
-  <h1 class="mt-4"><%= gym.name %></h1>
+  <h1 class="mt-4"><%= @gym.name %></h1>
 
   <%= render partial: 'gyms/gym_header', locals: { gym: @gym } %>
   <hr />
 
-  <h2 class="mt-4"><%= pluralize(@reviews.count, 'Reviews') %></h2>
+  <h2 class="mt-4"><%= pluralize(@reviews.count, 'Review') %></h2>
   <% if current_user %>
     <% if @gym.reviewed_by?(current_user) %>
       You have already reviewed this gym. Would you like to <%= link_to 'update your review', edit_review_path(@gym.current_user_review_id(current_user)) %>?

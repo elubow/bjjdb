@@ -15,6 +15,10 @@ class ReviewPolicy
       (@current_user.admin? or @current_user.moderator?)
   end
 
+  def create?
+    !@current_user.nil?
+  end
+
   def update?
     !@current_user.nil? and
       (@current_user.admin? or @current_user.moderator?)
@@ -22,6 +26,11 @@ class ReviewPolicy
 
   def show?
     true
+  end
+
+  def destroy?
+    !@current_user.nil? and
+      (@current_user.id == @review.user_id)
   end
 
 end

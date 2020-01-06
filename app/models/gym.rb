@@ -5,6 +5,10 @@ class Gym < ApplicationRecord
     self.reviews.average(:stars) rescue 0
   end
 
+  def total_times_rated
+    self.reviews.where('stars > 0').count
+  end
+
   def current_user_review_id(user)
     self.reviews.where(user: user).limit(1).first.id
   end

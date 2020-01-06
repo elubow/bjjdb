@@ -23,6 +23,19 @@ class ReviewsController < ApplicationController
     @gym = @review.gym
   end
 
+  # DELETE /reviews/1
+  # DELETE /reviews/1.json
+  def destroy
+    authorize @review
+    @gym = Gym.find(@review.gym_id)
+    @review.destroy
+
+    respond_to do |format|
+      format.html { redirect_to @gym, notice: 'Review removed.' }
+      format.json { head :no_content }
+    end
+  end
+
   # PATCH/PUT /reviews/1
   # PATCH/PUT /reviews/1.json
   def update
@@ -38,14 +51,33 @@ class ReviewsController < ApplicationController
     end
   end
 
-  private
+  # POST /reviews
+  # POST /reviews.json
+  def create
+    @gym = Gym.find(params[:review][:gym_id])
+    @review = @gym.reviews.new(review_params)
+    authorize @review
+    @review.user_id = current_user.id
+
+    respond_to do |format|
+      if @review.save
+        format.html { redirect_to @gym, notice: 'Thanks for your review. It is currently in moderation and should appear soon.' }
+        format.json { render :show, status: :created, location: @gym }
+      else
+        format.html { redirect_to @gym, notice: 'Review add failed.' }
+        format.json { render json: @review.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+private
     
     def set_review
       @review = Review.find(params[:id])
     end
 
     def review_params
-      params.require(:review).permit(:star, :body)
+      params.require(:review).permit(:stars, :body)
     end
 
 end
