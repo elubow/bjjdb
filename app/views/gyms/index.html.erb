@@ -1,5 +1,15 @@
 <div class="col">
-  <h1 class="mt-4">Gyms</h1>
+  <h1 class="mt-4">Grip Advisor</h1>
+  <p>
+    Grip Advisor is a place where you can review gyms and add your own personal feel.
+    We want to help travelers find out what visitng a gym might be like for them.
+  </p>
+  <% if current_user %>
+    <p>
+      Don't see the gym you visited, add it <%= link_to 'here', new_gym_path %>.
+      There will be a short waiting period while the moderators ensure validity.
+    </p>
+  <% end %>
   <div><%= render partial: 'gyms/list', locals: { gyms: @gyms } %></div>
 
   <div id="pages-nav" class="d-flex justify-content-center">

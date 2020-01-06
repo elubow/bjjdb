@@ -27,9 +27,8 @@ Rails.application.routes.draw do
   resources :comments
   get 'notebook', controller: :private_notes, action: :notebook
   resources :tags
-  resources :gyms do
-    resources :reviews
-  end
+  resources :reviews
+  resources :gyms
   resources :links do
     post :ratings, to: 'ratings#rate'
     patch :ratings, to: 'ratings#rate'

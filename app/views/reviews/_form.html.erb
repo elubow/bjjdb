@@ -1,0 +1,39 @@
+<%= form_with(model: review, local: true) do |form| %>
+  <% if review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="card my-4">
+    <h5 class="card-header">Share your Thoughts</h5>
+    <div class="card-body">
+      <div class="form-group form-check form-check-inline">
+        <strong>Rating</strong>(<small>5 is best</small>)
+        &nbsp; <%= form.radio_button :star, '1', :class => 'form-check-input' %> 1
+        &nbsp; <%= form.radio_button :star, '2', :class => 'form-check-input' %> 2
+        &nbsp; <%= form.radio_button :star, '3', :class => 'form-check-input' %> 3
+        &nbsp; <%= form.radio_button :star, '4', :class => 'form-check-input' %> 4
+        &nbsp; <%= form.radio_button :star, '5', :class => 'form-check-input' %> 5
+      </div>
+
+      <div class="form-group">
+        <strong>Body</strong>
+        <%= form.text_area :body, id: :review_body, class: 'form-control' %>
+      </div>
+
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      <%= form.hidden_field :gym_id, value: @gym.id %>
+
+      <div class="form-group">
+        <%= form.submit :Submit, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -16,6 +16,7 @@ class GymsController < ApplicationController
 
     # Reviews
     @reviews = @gym.reviews.all.order(created_at: :desc)
+    @review = @gym.reviews.build
   end
 
   private

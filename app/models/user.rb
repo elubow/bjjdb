@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   enum role: {user: 0, moderator: 5, admin: 10}
+  enum belt: {na: 0, white: 1, gray: 10, yellow: 20, orange: 30, green: 40, blue: 50, purple: 60, brown: 70, black: 80, black_1: 81, black_2: 82, black_3: 83, black_4: 84, black_5: 85, black_6: 86, red_black_7: 90, red_white_8: 95, red: 100}, _prefix: :belt
   after_initialize :set_default_role, :if => :new_record?
 
   has_many :comments, dependent: :destroy
@@ -7,6 +8,8 @@ class User < ApplicationRecord
   has_many :links
   has_many :login_activities, as: :user
   has_many :favorites, dependent: :destroy
+  has_many :reviews
+
   #Ratings
   has_many :ratings
 

@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th>Gym Name</th>
-      <th>Stars</th>
+      <th>Rating</th>
     </tr>
   </thead>
 
@@ -10,7 +10,7 @@
     <% gyms.each do |gym| %>
       <tr>
         <td><%= link_to gym.name, gym %></td>
-        <td><%= gym.average_stars %></td>
+        <td><%= gym.average_stars %> stars / <%= pluralize(gym.reviews.count, 'review') %></td>
       </tr>
     <% end %>
   </tbody>

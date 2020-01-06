@@ -2,30 +2,26 @@
 <% description truncate(@gym.name, length: 254, separator: /\w+/) %>
 
 <div class="col-lg-8">
-  <h1 class="mt-4"><%= @gym.name %></h1>
+  <h1 class="mt-4"><%= gym.name %></h1>
 
-  <div class="row">
-    <div class="col-4 mt-auto">
-      <%= "Phone: #{@gym.phone}" if @gym.phone.present? %><br />
-      <%= "Email: #{@gym.email}" if @gym.phone.present? %><br />
-      <%= link_to @gym.website if @gym.website.present? %>
-    </div>
-    <div class="col-8 mt-auto">
-      <p>
-        <%= @gym.address_1 if @gym.address_1 %><br />
-        <%= @gym.address_2 if @gym.address_2 %>
-        <%= @gym.city if @gym.city %>, 
-          <%= @gym.state if @gym.state %>
-          <%= @gym.postal_code if @gym.postal_code %><br />
-          <%= @gym.country if @gym.country %>
-      </p>
-    </div>
-  </div>
+  <%= render partial: 'gyms/gym_header', locals: { gym: @gym } %>
+  <hr />
+
+  <h2 class="mt-4"><%= pluralize(@reviews.count, 'Reviews') %></h2>
+  <% if current_user %>
+    <% if @gym.reviewed_by?(current_user) %>
+      You have already reviewed this gym. Would you like to <%= link_to 'update your review', edit_review_path(@gym.current_user_review_id(current_user)) %>?
+    <% else %>
+      <%= render partial: 'reviews/form', locals: { review: @review } %>
+    <% end %>
+  <% else %>
+    Must be logged in to review a gym.<br />
+    <br />
+  <% end %>
 
   <hr />
 
-  <h2 class="mt-4">Reviews</h2>
-    <% @reviews.each do |review| %>
+     <% @reviews.each do |review| %>
       <%= render partial: 'reviews/review', locals: { review: review } %>
       <hr />
     <% end %>
