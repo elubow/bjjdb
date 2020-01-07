@@ -1,0 +1,80 @@
+<div class="col">
+  <h1 class="mt-4">Translations</h1>
+
+  <h2 class="ml-2">
+    <%= TranslationTerm::LANGUAGES[params[:src].to_sym] %>
+    to
+    <%= TranslationTerm::LANGUAGES[params[:dst].to_sym] %>
+  </h2>
+
+  <%- if params[:src] != 'en' and params[:dst] != 'en' %>
+    <label><input type="checkbox" value="1" name="Show English" checked="checked"><span>Show English</span></label>
+  <%- end %>
+
+    <script>
+      $("input:checkbox:not(:checked)").each(function() {
+        $(".lang_en").hide();
+      });
+
+      $("input:checkbox").click(function(){
+        $(".lang_en").toggle();
+      });
+    </script>
+
+<%- if params[:src] == 'en' and params[:dst] == 'en' %>
+  We can do better than that.
+  <% controller.redirect_to translations_path %>
+
+<%- elsif params[:src] == 'en' %>
+  <div class="container border">
+    <div class="row border-bottom-0">
+      <div class="col text-center"><h3><%= TranslationTerm::LANGUAGES[params[:src].to_sym] %></h3></div>
+      <div class="col text-center"><h3><%= TranslationTerm::LANGUAGES[params[:dst].to_sym] %></h3></div>
+    </div>
+
+    <% @chart.each do |term| %>
+      <div class="row border-top">
+        <div class="col text-center lang_src"> <%= term["en_body"] %> </div>
+        <div class="col text-center lang_dst"> <%= term["dst_body"] %> </div>
+      </div>
+    <% end %>
+
+<%- elsif params[:dst] == 'en' %>
+
+  <div class="container border">
+    <div class="row border-bottom-0">
+      <div class="col text-center"><h3><%= TranslationTerm::LANGUAGES[params[:src].to_sym] %></h3></div>
+      <div class="col text-center"><h3><%= TranslationTerm::LANGUAGES[params[:dst].to_sym] %></h3></div>
+    </div>
+
+    <% @chart.each do |term| %>
+      <div class="row border-top">
+        <div class="col text-center lang_src"> <%= term["dst_body"] %> </div>
+        <div class="col text-center lang_dst"> <%= term["en_body"] %> </div>
+      </div>
+    <% end %>
+
+<%- else %>
+  <div class="container border">
+    <div class="row border-bottom-0">
+      <div class="col text-center"><h3><%= TranslationTerm::LANGUAGES[params[:src].to_sym] %></h3></div>
+      <div class="col text-center lang_en"><h3>English</h3></div>
+      <div class="col text-center"><h3><%= TranslationTerm::LANGUAGES[params[:dst].to_sym] %></h3></div>
+    </div>
+
+    <% @chart.each do |term| %>
+      <div class="row border-top">
+        <div class="col text-center lang_src"> <%= term["src_body"] %> </div>
+        <div class="col text-center border-left border-right lang_en"> <%= term["en_body"] %> </div>
+        <div class="col text-center lang_dst"> <%= term["dst_body"] %> </div>
+      </div>
+    <% end %>
+
+<%- end %>
+
+  <%- if params[:src] == 'en' or params[:dst] == 'en' %>
+    <script>
+      $(".lang_en").hide();
+    </script>
+  <% end %>
+</div>

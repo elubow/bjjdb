@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_09_122644) do
+ActiveRecord::Schema.define(version: 2019_08_01_202038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,17 @@ ActiveRecord::Schema.define(version: 2019_05_09_122644) do
     t.index ["link_id"], name: "index_thumbnails_on_link_id"
   end
 
+  create_table "translation_terms", force: :cascade do |t|
+    t.text "body"
+    t.text "language"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "base_term_id"
+    t.string "transliteration"
+    t.index ["user_id"], name: "index_translation_terms_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -194,4 +205,5 @@ ActiveRecord::Schema.define(version: 2019_05_09_122644) do
   add_foreign_key "ratings", "links"
   add_foreign_key "ratings", "users"
   add_foreign_key "thumbnails", "links"
+  add_foreign_key "translation_terms", "users"
 end

@@ -33,6 +33,34 @@ puts '  Art Types'
   )
 end
 
+puts '  Build Types'
+[
+  {
+    id: 200,
+    name: 'little-people',
+    description: 'BJJ for smol people'
+  },
+  {
+    id: 201,
+    name: 'big-boy',
+    description: 'BJJ for big bois'
+  },
+  {
+    id: 202,
+    name: 'long-boy',
+    description: 'moves that work best for the lanky'
+  }
+].each do |t|
+  Tag.create!(
+    id: t[:id],
+    name: t[:name],
+    description: t[:description],
+    category: 'art',
+    created_at: initial_timestamp,
+    updated_at: initial_timestamp
+  )
+end
+
 puts '  Pajama status'
 [
   {

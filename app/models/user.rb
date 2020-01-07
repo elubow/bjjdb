@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :links
   has_many :login_activities, as: :user
   has_many :favorites, dependent: :destroy
-  #Ratings
+  has_many :translation_terms
   has_many :ratings
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "only allows valid emails" }
