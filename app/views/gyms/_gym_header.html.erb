@@ -20,12 +20,28 @@
 
   <div class="row">
     <div class="col-4">
-      <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) / <%= pluralize(gym.reviews.count, 'review') %>
+      Rating: <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) <br />
+      Roll Type: <%= gym.roll_type %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) <br />
+      <small>Closer to 1 flow rolls and closer to 5 is hard rolls</small>
     </div>
 
     <div class="col-4">
       <% if gym.languages.present? %>
-      <strong>Languages</strong>: <%= gym.languages.join(', ') %>
+      <strong>Languages</strong>:
+        <% gym.languages_counter.sort_by {|k,v| v}.reverse.each do |k,v| %>
+          <button type="button" class="btn btn-secondary pl-2">
+            <%= k %> <small>x</small> <span class="badge badge-light"><%= v %></span>
+          </button>
+        <% end %>
+      <% end %>
+      <br />
+      <% if gym.tags.present? %>
+      <strong>Tags</strong>:
+        <% gym.tags_counter.sort_by {|k,v| v}.reverse.each do |k,v| %>
+          <button type="button" class="btn btn-secondary pl-2">
+            <%= k %> <small>x</small> <span class="badge badge-light"><%= v %></span>
+          </button>
+        <% end %>
       <% end %>
     </div>
   </div>

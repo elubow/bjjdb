@@ -77,7 +77,7 @@ private
     end
 
     def review_params
-      params.require(:review).permit(:stars, :home_gym, :body, :user_id, :gym_id, :languages => [])
+      params.require(:review).permit(:stars, :home_gym, :body, :roll_type, :user_id, :gym_id, :languages => [], :tags => [])
     end
 
 end

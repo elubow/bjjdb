@@ -25,6 +25,12 @@
       </p>
     <% end %>
 
+    <% if review.tags.length > 0 %>
+      <p>
+        <strong>Tags</strong>: <%= review.tags.join(', ') %>
+      </p>
+    <% end %>
+
     <p><strong>Review</strong>: <%= review.body %></p>
     <p>last updated <%= time_ago_in_words(review.updated_at) %> ago</p>
   </div>

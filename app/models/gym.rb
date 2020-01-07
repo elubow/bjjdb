@@ -1,6 +1,10 @@
 class Gym < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
+  def roll_type
+    self.reviews.average(:roll_type) rescue 0
+  end
+
   def average_stars
     self.reviews.average(:stars) rescue 0
   end
@@ -19,6 +23,26 @@ class Gym < ApplicationRecord
   end
 
   def languages
-    self.reviews.pluck(:languages).flatten.uniq.reject(&:empty?)
+    self.reviews.pluck(:languages).flatten.reject(&:empty?)
+  end
+
+  def languages_counter
+    self.languages.inject(Hash.new(0)) {|h,v| h[v] += 1; h }
+  end
+
+  def languages_unique
+    self.languages.uniq
+  end
+
+  def tags
+    self.reviews.pluck(:tags).flatten.reject(&:empty?)
+  end
+
+  def tags_counter
+    self.tags.inject(Hash.new(0)) {|h,v| h[v] += 1; h }
+  end
+
+  def tags_unique
+    self.tags.uniq
   end
 end

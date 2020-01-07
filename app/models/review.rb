@@ -2,6 +2,9 @@ class Review < ApplicationRecord
   belongs_to :user
   belongs_to :gym
 
+  validates :stars, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
+  validates :roll_type, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
+
   Languages = [
     "Abkhazian",
     "Afar",
@@ -139,6 +142,23 @@ class Review < ApplicationRecord
     "Yiddish",
     "Yoruba",
     "Zulu"
+  ].freeze
+
+
+  # XXX 'drop in fee',
+
+  Tags = [
+    'gi',
+    'nogi',
+    'gi color requirement',
+    'family friendly',
+    'drop in friendly',
+
+    'hobbyist gym',
+    'competition gym',
+    'traditional gym',
+
+    'leglock friendly'
   ].freeze
 
   def pretty_languages
