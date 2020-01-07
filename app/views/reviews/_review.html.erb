@@ -10,6 +10,9 @@
       </div>
     <% end %>
 
+    <% if review.home_gym == true %>
+      <strong>Home Gym</strong><br />
+    <% end %>
     <strong>Stars</strong>: <%= review.stars %><br />
     <strong>Posted by</strong>:
       <%= link_to review.user.name, review.user %>,

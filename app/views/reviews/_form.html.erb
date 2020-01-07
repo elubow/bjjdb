@@ -14,6 +14,11 @@
   <div class="card my-4">
     <h5 class="card-header">Share your Thoughts</h5>
     <div class="card-body">
+      <div class="form-group form-check">
+        <p>
+          <%= form.check_box :home_gym, :class => 'form-check-input' %> Check this box if this is your home gym<br />
+        </p>
+      </div>
       <div class="form-group form-check form-check-inline">
         <strong>Rating</strong>(<small>5 is best</small>)
         &nbsp; <%= form.radio_button :stars, '1', :class => 'form-check-input' %> 1

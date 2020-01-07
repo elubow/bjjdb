@@ -77,7 +77,7 @@ private
     end
 
     def review_params
-      params.require(:review).permit(:stars, :body)
+      params.require(:review).permit(:stars, :home_gym, :body)
     end
 
 end
