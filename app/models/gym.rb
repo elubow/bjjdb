@@ -17,4 +17,8 @@ class Gym < ApplicationRecord
     self.reviews.where(user: user).count > 0 ?
       true : false
   end
+
+  def languages
+    self.reviews.pluck(:languages).flatten.uniq.reject(&:empty?)
+  end
 end

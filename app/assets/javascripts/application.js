@@ -14,6 +14,7 @@
 //= require chosen
 //= require multiselect
 //= require instructors
+//= require reviews
 //= require private_notes
 //= require validations
 //= require ratings

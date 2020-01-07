@@ -18,6 +18,13 @@
       <%= link_to review.user.name, review.user %>,
       <%= review.user.gender if review.user.gender %>
       <%= review.user.belt if review.user.belt %>
+
+    <% if review.languages.length > 0 %>
+      <p>
+        <strong>Languages</strong>: <%= review.languages.join(', ') %>
+      </p>
+    <% end %>
+
     <p><strong>Review</strong>: <%= review.body %></p>
     <p>last updated <%= time_ago_in_words(review.updated_at) %> ago</p>
   </div>

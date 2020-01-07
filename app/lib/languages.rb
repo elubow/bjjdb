@@ -28,7 +28,7 @@ module Languages
     "CS" => "Czech",
     "DA" => "Danish",
     "NL" => "Dutch",
-    "EN" => "English, American",
+    "EN" => "English",
     "EO" => "Esperanto",
     "ET" => "Estonian",
     "FO" => "Faeroese",

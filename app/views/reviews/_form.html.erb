@@ -16,7 +16,7 @@
     <div class="card-body">
       <div class="form-group form-check">
         <p>
-          <%= form.check_box :home_gym, :class => 'form-check-input' %> Check this box if this is your home gym<br />
+          <%= form.check_box :home_gym, :class => 'form-check-input' %> I train here regularly<br />
         </p>
       </div>
       <div class="form-group form-check form-check-inline">
@@ -26,6 +26,17 @@
         &nbsp; <%= form.radio_button :stars, '3', :class => 'form-check-input' %> 3
         &nbsp; <%= form.radio_button :stars, '4', :class => 'form-check-input' %> 4
         &nbsp; <%= form.radio_button :stars, '5', :class => 'form-check-input' %> 5
+      </div>
+
+      <div class="form-group form-row">
+        <%= form.label :languages, class: 'col-form-label-lg' %>
+        <%= form.select :languages,
+          Review::Languages.sort,
+            { include_blank: true },
+            { multiple: true }
+          %>
+        <small id="review_language_help" class="form-text text-muted">Add a list of languages that the instructors speak/teach class in.</small>
+        
       </div>
 
       <div class="form-group">
