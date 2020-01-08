@@ -2,8 +2,18 @@ class Review < ApplicationRecord
   belongs_to :user
   belongs_to :gym
 
+  monetize :drop_in_fee_cents, allow_nil: true
+
   validates :stars, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
   validates :roll_type, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
+
+  def self.currency_codes
+    currencies = []
+    Money::Currency.table.values.each do |currency|
+      currencies = currencies + [[currency[:name] + ' (' + currency[:iso_code] + ')', currency[:iso_code]]]
+    end
+    currencies.sort
+  end
 
   Languages = [
     "Abkhazian",
@@ -143,9 +153,6 @@ class Review < ApplicationRecord
     "Yoruba",
     "Zulu"
   ].freeze
-
-
-  # XXX 'drop in fee',
 
   Tags = [
     'gi',

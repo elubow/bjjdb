@@ -9,6 +9,10 @@ class Gym < ApplicationRecord
     self.reviews.average(:stars) rescue 0
   end
 
+  def drop_in_fee_reported
+    self.reviews.where('drop_in_fee_cents > 0')
+  end
+
   def total_times_rated
     self.reviews.where('stars > 0').count
   end

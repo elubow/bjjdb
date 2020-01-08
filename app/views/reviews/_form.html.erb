@@ -13,15 +13,29 @@
 
   <div class="card my-4">
     <h5 class="card-header">Share your Thoughts</h5>
+
     <div class="card-body">
       <div class="form-group form-check">
         <p>
           <%= form.check_box :home_gym, :class => 'form-check-input' %> I train here regularly<br />
         </p>
+        <p>
+          <strong>When were you here?</strong>
+          <%= form.date_field :drop_in_date %>
+        </p>
+      </div>
+
+      <div class="form-group form-check">
+        <p>
+          <strong>Drop-in fee?</strong>
+          <%= form.select :drop_in_fee_currency, Review.currency_codes %>
+          <%= form.text_field :drop_in_fee, :class => 'form-check-input' %>
+          <small class="ml-2">Leave blank for none</small>
+        </p>
       </div>
 
       <div class="form-group form-check form-check-inline">
-        <strong>Rating</strong>(<small>5 is best</small>)
+        <strong>How was the gym?</strong>(<small>5 is best</small>)
         &nbsp; <%= form.radio_button :stars, '1', :class => 'form-check-input' %> 1
         &nbsp; <%= form.radio_button :stars, '2', :class => 'form-check-input' %> 2
         &nbsp; <%= form.radio_button :stars, '3', :class => 'form-check-input' %> 3
@@ -32,7 +46,7 @@
       <br />
 
       <div class="form-group form-check form-check-inline">
-        <strong>Roll Type</strong>
+        <strong>How were the rolls?</strong>
         <small class="ml-2 mr-1">Flow Rolls</small>
         &nbsp; <%= form.radio_button :roll_type, '1', :class => 'form-check-input' %> 1
         &nbsp; <%= form.radio_button :roll_type, '2', :class => 'form-check-input' %> 2

@@ -23,6 +23,9 @@
       Rating: <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) <br />
       Roll Type: <%= gym.roll_type %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) <br />
       <small>Closer to 1 flow rolls and closer to 5 is hard rolls</small>
+      <% if gym.drop_in_fee_reported.present? %>
+        <%= pluralize(gym.drop_in_fee_reported.size, "person") %> reported a drop in fee.
+      <% end %>
     </div>
 
     <div class="col-4">
