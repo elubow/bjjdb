@@ -30,23 +30,19 @@ class LinkPolicy
   end
 
   def new?
-    !@current_user.nil? and
-      (@current_user.admin? or @current_user.moderator?)
+    !@current_user.nil?
   end
 
   def create?
-    !@current_user.nil? and
-      (@current_user.admin? or @current_user.moderator?)
+    !@current_user.nil?
   end
 
   def edit?
-    !@current_user.nil? and
-      (@current_user.admin? or @current_user.moderator?)
+    !@current_user.nil?
   end
 
   def update?
-    !@current_user.nil? and
-      (@current_user.admin? or @current_user.moderator?)
+    !@current_user.nil?
   end
 
   def destroy?
