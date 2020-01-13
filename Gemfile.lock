@@ -133,6 +133,8 @@ GEM
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
+    figaro (1.1.1)
+      thor (~> 0.14)
     fog-aws (3.4.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
@@ -485,7 +487,9 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  figaro
   fog-aws
+  geocoder
   high_voltage
   hub
   impressionist

@@ -19,10 +19,39 @@ class GymsController < ApplicationController
     @review = @gym.reviews.build
   end
 
+  # GET /gyms/new
+  def new
+    @gym = Gym.new
+    authorize @gym
+  end
+
+  # POST /gyms
+  # POST /gyms.json
+  def create
+    @gym = Gym.new(gym_params)
+    authorize @gym
+
+    respond_to do |format|
+      if @gym.save
+        format.html { redirect_to root_path, notice: 'Gym added.' }
+        format.json { render :show, status: :created, location: @gym }
+      else
+        format.html { render :new }
+        format.json { render json: @gym.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+
   private
 
     def set_gym
       @gym = Gym.find(params[:id])
+    end
+
+    def gym_params
+      params.require(:gym).permit(:name, :address_full, :address_1, :address_2, :city, :state, :postal_code, :country, :website, :phone, :email, :affiliation)
     end
 
 end

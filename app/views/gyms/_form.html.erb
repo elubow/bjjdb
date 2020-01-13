@@ -1,0 +1,66 @@
+<%= form_with(model: gym, local: true) do |form| %>
+  <% if gym.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(gym.errors.count, "error") %> prohibited this gym from being saved:</h2>
+
+      <ul>
+      <% gym.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group form-row">
+    <%= form.label :name, class: 'col-form-label-lg' %>
+    <%= form.text_field :name, class: 'form-control', required: true %>
+    <small id="gym_name_help" class="form-text text-muted">Every Gym has a name.</small>
+    <div class="invalid-feedback">
+      Gym must have a name.
+    </div>
+  </div>
+
+  <div class="form-group form-row">
+    <%= form.label :address, class: 'col-form-label-lg' %>
+    <%= form.text_field :address_full, class: 'form-control', required: false, placeholder: 'Enter gym address', id: :autocomplete_address %>
+    <small id="gym_address_full_help" class="form-text text-muted">Use this field to pick an address from Google's auto-complete.</small>
+    <%= form.text_field :address_1, id: :address_1, style: 'display: none;' %>
+    <%= form.text_field :city, id: :address_city, style: 'display: none;' %>
+    <%= form.text_field :state, id: :address_state, style: 'display: none;' %>
+    <%= form.text_field :postal_code, id: :address_postal_code, style: 'display: none;' %>
+    <%= form.text_field :country, id: :address_country, style: 'display: none;' %>
+  </div>
+
+  <div class="form-group form-row">
+    <%= form.label :website, class: 'col-form-label-lg' %>
+    <%= form.text_field :website, class: 'form-control', required: false %>
+    <small id="gym_website_help" class="form-text text-muted">Website of the gym.</small>
+    <div id="gym_website_validation"></div>
+  </div>
+
+  <div class="form-group form-row">
+    <%= form.label :phone, class: 'col-form-label-lg' %>
+    <%= form.text_field :phone, class: 'form-control', required: false %>
+    <small id="gym_phone_help" class="form-text text-muted">Phone number of the gym.</small>
+    <div id="gym_phone_validation"></div>
+  </div>
+
+  <div class="form-group form-row">
+    <%= form.label :email, class: 'col-form-label-lg' %>
+    <%= form.text_field :email, class: 'form-control', required: false %>
+    <small id="gym_email_help" class="form-text text-muted">Email of the gym.</small>
+    <div id="gym_email_validation"></div>
+  </div>
+
+  <div class="form-group form-row">
+    <%= form.label :affiliation, class: 'col-form-label-lg' %>
+    <%= form.text_field :affiliation, class: 'form-control', required: false %>
+    <small id="gym_affiliation_help" class="form-text text-muted">Affiliation of the gym.</small>
+    <div id="gym_email_validation"></div>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit 'Save Gym', class: 'btn btn-primary' %>
+  </div>
+<% end %>

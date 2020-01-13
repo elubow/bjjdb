@@ -13,4 +13,14 @@ class GymPolicy
   def show?
     true
   end
+
+  def new?
+    !@current_user.nil?
+  end
+
+  def create?
+    !@current_user.nil?
+  end
+
+
 end

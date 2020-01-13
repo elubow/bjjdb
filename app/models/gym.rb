@@ -1,6 +1,10 @@
 class Gym < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
+  geocoded_by :address_full
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :geocode, if: ->(obj){ obj.address_full.present? and obj.address_full_changed? }
+  
   def roll_type
     self.reviews.average(:roll_type) rescue 0
   end
@@ -48,5 +52,10 @@ class Gym < ApplicationRecord
 
   def tags_unique
     self.tags.uniq
+  end
+
+  def has_coordinates?
+    return true if self.latitude.present? and self.longitude.present?
+    false
   end
 end
