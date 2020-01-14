@@ -15,6 +15,7 @@
 //= require multiselect
 //= require instructors
 //= require reviews
+//= require gyms
 //= require private_notes
 //= require validations
 //= require ratings
