@@ -44,6 +44,11 @@ document.addEventListener("turbolinks:load", function() {
     var autocomplete_address = document.getElementById("autocomplete_address");
     if (autocomplete_address) {
       initializeAutocomplete('autocomplete_address');   
+      google.maps.event.addDomListener(autocomplete_address, 'keydown', function(e) { 
+        if (e.keyCode == 13 && $('.pac-container:visible').length) { 
+        e.preventDefault(); 
+      }
+}); 
     }
   }); 
 }); 
