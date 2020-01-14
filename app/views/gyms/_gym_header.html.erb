@@ -17,7 +17,15 @@
     <div class="col-4 mt-auto">
       <p>
       <% if gym.has_coordinates? %>
-        <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&center=#{gym.latitude},#{gym.longitude}&key=#{Geocoder.config.api_key}", alt: "Map" %>
+        <div id="map" style="width: 600px;height:400px;">
+        <% provide :head_tags do %>
+            <meta name='turbolinks-visit-control' content='reload'>
+            <script>
+              document.addEventListener("DOMContentLoaded", function(){
+                initGymMapWithMarker("<%= gym.name.html_safe %>", <%= gym.latitude %>, <%= gym.longitude %>)
+    });
+            </script>
+        <% end %>
       <% end %>
       </p>
     </div>
@@ -55,5 +63,3 @@
       <% end %>
     </div>
   </div>
-
-
