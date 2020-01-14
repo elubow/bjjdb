@@ -28,7 +28,14 @@ Rails.application.routes.draw do
   get 'notebook', controller: :private_notes, action: :notebook
   resources :tags
   resources :reviews
-  resources :gyms
+  get 'gyms/admin_index', controller: :gyms, action: :admin_index
+  resources :gyms do
+    put :publish
+    put :unpublish
+    put :flag
+    put :reject
+    put :verify
+  end
   resources :links do
     post :ratings, to: 'ratings#rate'
     patch :ratings, to: 'ratings#rate'

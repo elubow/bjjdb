@@ -10,6 +10,11 @@ class GymPolicy
     true
   end
 
+  def admin_index?
+    !@current_user.nil? and current_user.admin?
+  end
+
+
   def show?
     true
   end
@@ -21,6 +26,16 @@ class GymPolicy
   def create?
     !@current_user.nil?
   end
+
+  # Begin AASM state methods
+  def publish?
+    !@current_user.nil? and current_user.admin?
+  end
+
+  def flag?
+    !@current_user.nil?
+  end
+  # End AASM state methods
 
 
 end

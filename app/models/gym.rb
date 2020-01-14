@@ -1,10 +1,46 @@
 class Gym < ApplicationRecord
+  include AASM
   has_many :reviews, dependent: :destroy
 
   geocoded_by :address_full
   reverse_geocoded_by :latitude, :longitude
   after_validation :geocode, if: ->(obj){ obj.address_full.present? and obj.address_full_changed? }
   
+  aasm do
+    # initial state of a gym that someone created
+    state :unverified, initial: true
+    # everything's good, just don't want it public for a moment
+    state :verified
+    # These can probably be deleted at some point
+    state :rejected
+    # someone flagged the gym for some reason
+    state :flagged
+    # everything is good and gym is visible
+    state :published
+
+    after_all_transitions :log_status_change
+
+    event :verify do
+      transitions from: [:unverified], to: :verified
+    end
+
+    event :reject do
+      transitions from: [:unverified, :published], to: :rejected
+    end
+
+    event :publish do
+      transitions from: [:unverified, :verified, :flagged], to: :published
+    end
+
+    event :unpublish do
+      transitions from: [:published], to: :verified
+    end
+  end
+
+  def log_status_change
+    Rails.logger.info "Changing #{self.name} (#{self.id}) from #{aasm.from_state} to #{aasm.to_state}"
+  end
+
   def roll_type
     self.reviews.average(:roll_type) rescue 0
   end

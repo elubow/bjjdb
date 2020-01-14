@@ -1,10 +1,16 @@
 class GymsController < ApplicationController
   before_action :set_gym, only: [:show, :edit, :update, :destroy]
+  before_action :set_aasm_gym, only: [:publish, :flag]
   after_action :verify_authorized
 
   # GET /gyms
   # GET /gyms.json
   def index
+    @pagy, @gyms = pagy(Gym.published.order(created_at: :desc), items: 25)
+    authorize @gyms
+  end
+
+  def admin_index
     @pagy, @gyms = pagy(Gym.order(created_at: :desc), items: 25)
     authorize @gyms
   end
@@ -42,9 +48,22 @@ class GymsController < ApplicationController
     end
   end
 
+  # Begin AASM state methods
+  def publish
+    @gym.publish!
+  end
+
+  def flag
+    @gym.flag!
+  end
+  # End AASM state methods
 
 
   private
+
+    def set_aasm_gym
+      @gym = Gym.find(params[:gym_id])
+    end
 
     def set_gym
       @gym = Gym.find(params[:id])
