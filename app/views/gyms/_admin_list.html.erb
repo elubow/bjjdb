@@ -16,8 +16,8 @@
         <td><%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) / <%= pluralize(gym.reviews.count, 'review') %></td>
         <td>
           <%= button_to 'Publish', gym_publish_path(gym.id), method: :put unless gym.published? %>
-          <%= button_to 'Unpublish', gym_unpublish_path(gym.id) if gym.published? %>
-          <%= button_to 'Flag', gym_unpublish_path(gym.id) unless gym.flagged? %>
+          <%= button_to 'Unpublish', gym_unpublish_path(gym.id), method: :put if gym.published? %>
+          <%= button_to 'Flag', gym_unpublish_path(gym.id), method: :put unless gym.flagged? %>
         </td>
       </tr>
     <% end %>

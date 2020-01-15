@@ -32,10 +32,13 @@ class GymPolicy
     !@current_user.nil? and current_user.admin?
   end
 
+  def unpublish?
+    !@current_user.nil? and current_user.admin?
+  end
+
   def flag?
     !@current_user.nil?
   end
   # End AASM state methods
-
 
 end

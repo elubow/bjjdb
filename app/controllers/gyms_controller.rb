@@ -1,6 +1,6 @@
 class GymsController < ApplicationController
   before_action :set_gym, only: [:show, :edit, :update, :destroy]
-  before_action :set_aasm_gym, only: [:publish, :flag]
+  before_action :set_aasm_gym, only: [:publish, :unpublish, :flag]
   after_action :verify_authorized
 
   # GET /gyms
@@ -51,10 +51,17 @@ class GymsController < ApplicationController
   # Begin AASM state methods
   def publish
     @gym.publish!
+    redirect_back(fallback_location: root_path)
+  end
+
+  def unpublish
+    @gym.unpublish!
+    redirect_back(fallback_location: root_path)
   end
 
   def flag
     @gym.flag!
+    redirect_back(fallback_location: root_path)
   end
   # End AASM state methods
 
