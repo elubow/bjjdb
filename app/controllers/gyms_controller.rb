@@ -11,7 +11,10 @@ class GymsController < ApplicationController
   end
 
   def admin_index
-    @pagy, @gyms = pagy(Gym.order(created_at: :desc), items: 25)
+    @pagy, @gyms = (params[:gym].present? and params[:gym][:filters].present?) ?
+      pagy(Gym.send_chain(params[:gym][:filters]).order(created_at: :desc), items: 25) :
+      pagy(Gym.all.order(created_at: :desc), items: 25)
+
     authorize @gyms
   end
 
@@ -50,16 +53,19 @@ class GymsController < ApplicationController
 
   # Begin AASM state methods
   def publish
+    authorize @gym
     @gym.publish!
     redirect_back(fallback_location: root_path)
   end
 
   def unpublish
+    authorize @gym
     @gym.unpublish!
     redirect_back(fallback_location: root_path)
   end
 
   def flag
+    authorize @gym
     @gym.flag!
     redirect_back(fallback_location: root_path)
   end

@@ -1,9 +1,30 @@
 <div class="col">
   <h1 class="mt-4">Gym List</h1>
-  <p>
-  <%= link_to 'New Gym', new_gym_path, class: 'btn btn-primary btn-large mt-1' %>
-  </p>
-  <div><%= render partial: 'gyms/admin_list', locals: { gyms: @gyms } %></div>
+  <div class="row mb-3">
+    <div class="col-2">
+      <%= link_to 'New Gym', new_gym_path, class: 'btn btn-primary btn-large mt-1' %>
+    </div>
+    <div class="col-2 pt-2">
+      <%= link_to 'Total Gyms', gyms_admin_index_path %>: <%= @gyms.count %> <br />
+    </div>
+    <div class="col-2 pt-2">
+    <%= link_to 'Published Gyms', gyms_admin_index_path(gym: {filters: ['published']}) %>: <%= @gyms.published.count %> <br />
+    </div>
+    <div class="col-2 pt-2">
+    <%= link_to 'Unverified Gyms', gyms_admin_index_path(gym: {filters: ['unverified']}) %>: <%= @gyms.unverified.count %> <br />
+    </div>
+    <div class="col-2 pt-2">
+    <%= link_to 'Verified Gyms', gyms_admin_index_path(gym: {filters: ['verified']}) %>: <%= @gyms.verified.count %> <br />
+    </div>
+    <div class="col-2 pt-2">
+    <%= link_to 'Flagged Gyms', gyms_admin_index_path(gym: {filters: ['flagged']}) %>: <%= @gyms.flagged.count %> <br />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <%= render partial: 'gyms/admin_list', locals: { gyms: @gyms } %>
+    </div>
+  </div>
 
   <div id="pages-nav" class="d-flex justify-content-center">
     <%== pagy_nav_bootstrap(@pagy) %>

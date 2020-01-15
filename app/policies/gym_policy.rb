@@ -11,12 +11,13 @@ class GymPolicy
   end
 
   def admin_index?
-    !@current_user.nil? and current_user.admin?
+    !@current_user.nil? and @current_user.admin?
   end
 
 
   def show?
-    true
+    return true if @current_user.admin?
+    false unless @gym.published?
   end
 
   def new?
