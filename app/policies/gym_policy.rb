@@ -14,6 +14,9 @@ class GymPolicy
     !@current_user.nil? and @current_user.admin?
   end
 
+  def search?
+    true
+  end
 
   def show?
     return true if @current_user.admin?

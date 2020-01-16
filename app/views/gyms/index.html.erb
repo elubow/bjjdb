@@ -10,7 +10,20 @@
       There will be a short waiting period while the moderators ensure validity.
     </p>
   <% end %>
-  <div><%= render partial: 'gyms/list', locals: { gyms: @gyms } %></div>
+
+  <%= form_with url: search_gyms_path, method: :get do |f|%>
+    <div class="form-group row">
+      <label class="col-form-label col-1 text-right"><h6>Search</h6></label>
+      <div class="col-3">
+        <%= f.text_field :gym_search, class: 'form-control' %>
+        <div style="display:none;"><%= f.submit id: 'submit-search' %></div>
+      </div>
+      <div class="col-9">
+      </div>
+    </div>
+  <% end %>
+
+   <div id="gym-display"><%= render partial: 'gyms/list', locals: { gyms: @gyms } %></div>
 
   <div id="pages-nav" class="d-flex justify-content-center">
     <%== pagy_nav_bootstrap(@pagy) %>

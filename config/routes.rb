@@ -35,6 +35,9 @@ Rails.application.routes.draw do
     put :flag
     put :reject
     put :verify
+    collection do
+      get 'search'
+    end
   end
   resources :links do
     post :ratings, to: 'ratings#rate'

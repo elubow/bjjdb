@@ -6,7 +6,7 @@ class GymsController < ApplicationController
   # GET /gyms
   # GET /gyms.json
   def index
-    @pagy, @gyms = pagy(Gym.published.order(created_at: :desc), items: 25)
+    @pagy, @gyms = pagy(Gym.reviewable_gyms.order(created_at: :desc), items: 25)
     authorize @gyms
   end
 
@@ -16,6 +16,20 @@ class GymsController < ApplicationController
       pagy(Gym.all.order(created_at: :desc), items: 25)
 
     authorize @gyms
+  end
+
+  def search
+    authorize Gym
+    @pagy, @gym_search = pagy(
+      Gym.reviewable_gyms.ransack(
+        name_cont: params[:gym_search]
+      ).result(distinct: true),
+      items: 25,
+      link_extra: 'data-remote="true"'
+    )
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /gyms/1

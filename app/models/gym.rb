@@ -2,6 +2,10 @@ class Gym < ApplicationRecord
   include AASM
   has_many :reviews, dependent: :destroy
 
+  validates :name, presence: true, length: { minimum: 3 }
+  validates :website, format: {with: Regexp.new(URI::regexp(%w(http https)))}, allow_blank: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "only allows valid emails" }, allow_blank: true
+
   geocoded_by :address_full
   reverse_geocoded_by :latitude, :longitude
   after_validation :geocode, if: ->(obj){ obj.address_full.present? and obj.address_full_changed? }
@@ -36,6 +40,9 @@ class Gym < ApplicationRecord
       transitions from: [:published], to: :verified
     end
   end
+
+  scope :recently_created, -> {unverified.where(created_at: [24.hours.ago..Time.now]) }
+  scope :reviewable_gyms, -> {published.or(recently_created)}
 
   def log_status_change
     Rails.logger.info "Changing #{self.name} (#{self.id}) from #{aasm.from_state} to #{aasm.to_state}"

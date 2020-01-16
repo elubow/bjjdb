@@ -1,3 +1,11 @@
+$(document).ready(function(){
+  $('#gym_search').on('input', function(){
+    if(document.getElementById("gym_search").value.length >= 3){
+      $('#submit-search').click()
+    }
+  })
+})
+
 document.addEventListener("turbolinks:load", function() {
   function initializeAutocomplete(id) {
     var element = document.getElementById(id);
