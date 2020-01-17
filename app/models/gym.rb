@@ -44,6 +44,10 @@ class Gym < ApplicationRecord
   scope :recently_created, -> {unverified.where(created_at: [24.hours.ago..Time.now]) }
   scope :reviewable_gyms, -> {published.or(recently_created)}
 
+  def self.ransackable_scopes(auth_object = nil)
+    [:reviewable_gyms, :recently_created, :published, :unverified]
+  end
+
   def log_status_change
     Rails.logger.info "Changing #{self.name} (#{self.id}) from #{aasm.from_state} to #{aasm.to_state}"
   end

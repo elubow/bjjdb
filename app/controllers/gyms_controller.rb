@@ -22,7 +22,12 @@ class GymsController < ApplicationController
     authorize Gym
     @pagy, @gym_search = pagy(
       Gym.reviewable_gyms.ransack(
-        name_cont: params[:gym_search]
+        name_cont: params[:gym_search],
+        affiliation_cont: params[:gym_search],
+        city_cont: params[:gym_search],
+        state_cont: params[:gym_search],
+        country_cont: params[:gym_search],
+        m: 'or'
       ).result(distinct: true),
       items: 25,
       link_extra: 'data-remote="true"'
