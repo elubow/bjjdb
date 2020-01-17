@@ -105,4 +105,28 @@ class Gym < ApplicationRecord
     return true if self.latitude.present? and self.longitude.present?
     false
   end
+
+  def presentable_address
+    return self.address_full if self.address_full.present?
+    address = ""
+    if self.address_1.present?
+      address = self.address_1
+    end
+    if self.address_2.present?
+      address = "#{address}\n#{self.address_2}"
+    end
+    if self.city.present?
+      address = "#{address}\n#{self.city},"
+    end
+    if self.state.present?
+      address = "#{address} #{self.state}"
+    end
+    if self.postal_code.present?
+      address = "#{address} #{self.postal_code}"
+    end
+    if self.country.present?
+      address = "#{address}\n#{self.country}"
+    end
+    address
+  end
 end

@@ -11,7 +11,11 @@
     <% gyms.each do |gym| %>
       <tr>
         <td><%= link_to gym.name, gym %></td>
-        <td><%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) / <%= pluralize(gym.reviews.count, 'review') %></td>
+        <td>
+          <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>)
+          /
+          <%= pluralize(gym.reviews.count, 'review') %>
+        </td>
         <td>
           <%= gym.address_full if gym.address_full.present? %>
         </td>

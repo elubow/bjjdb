@@ -1,23 +1,61 @@
-  <div class="row">
-    <div class="col-4 mt-auto">
-      <%= "Phone: #{gym.phone}" if gym.phone.present? %><br />
-      <%= "Email: #{gym.email}" if gym.phone.present? %><br />
-      <%= link_to gym.website if gym.website.present? %>
+  <div class="row justify-content-between">
+
+    <div class="col-6">
+
+      <div class="row justify-content-between">
+        <div class="col-6 align-top">
+          <%= "Email: #{gym.email}" if gym.email.present? %><br />
+          <%= link_to gym.website if gym.website.present? %><br />
+        </div>
+        <div class="col-6 align-top">
+          <%= "Phone: #{gym.phone}" if gym.phone.present? %><br />
+          <%= link_to gym.presentable_address, "https://google.com/maps/search/#{gym.presentable_address}" %><br />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="w-100">
+          <hr />
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-6">
+          Rating: <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) <br />
+          Roll Type: <%= gym.roll_type %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) <br />
+          <small>Closer to 1 flow rolls and closer to 5 is hard rolls</small>
+          <% if gym.drop_in_fee_reported.present? %>
+            <%= pluralize(gym.drop_in_fee_reported.size, "person") %> reported a drop in fee.
+          <% end %>
+        </div>
+    
+        <div class="col-6">
+          <% if gym.languages.present? %>
+          <strong>Languages</strong>:
+            <% gym.languages_counter.sort_by {|k,v| v}.reverse.each do |k,v| %>
+              <button type="button" class="btn btn-secondary pl-2">
+                <%= k %> <small>x</small> <span class="badge badge-light"><%= v %></span>
+              </button>
+            <% end %>
+          <% end %>
+          <br />
+          <% if gym.tags.present? %>
+          <strong>Tags</strong>:
+            <% gym.tags_counter.sort_by {|k,v| v}.reverse.each do |k,v| %>
+              <button type="button" class="btn btn-secondary pl-2">
+                <%= k %> <small>x</small> <span class="badge badge-light"><%= v %></span>
+              </button>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <div class="col-4 mt-auto">
-      <p>
-        <%= gym.address_1 if gym.address_1 %><br />
-        <%= gym.address_2 if gym.address_2 %>
-        <%= gym.city if gym.city %>, 
-          <%= gym.state if gym.state %>
-          <%= gym.postal_code if gym.postal_code %><br />
-          <%= gym.country if gym.country %>
-      </p>
-    </div>
-    <div class="col-4 mt-auto">
+
+    <div class="col-6 text-right mt-auto">
       <p>
       <% if gym.has_coordinates? %>
-        <div id="map" style="width: 600px;height:400px;">
+        <div id="map" style="width: 100%;height:250px;">
         <% provide :head_tags do %>
             <meta name='turbolinks-visit-control' content='reload'>
             <script>
@@ -29,37 +67,9 @@
       <% end %>
       </p>
     </div>
+
   </div>
 
   <br />
 
-  <div class="row">
-    <div class="col-4">
-      Rating: <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) <br />
-      Roll Type: <%= gym.roll_type %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) <br />
-      <small>Closer to 1 flow rolls and closer to 5 is hard rolls</small>
-      <% if gym.drop_in_fee_reported.present? %>
-        <%= pluralize(gym.drop_in_fee_reported.size, "person") %> reported a drop in fee.
-      <% end %>
-    </div>
-
-    <div class="col-4">
-      <% if gym.languages.present? %>
-      <strong>Languages</strong>:
-        <% gym.languages_counter.sort_by {|k,v| v}.reverse.each do |k,v| %>
-          <button type="button" class="btn btn-secondary pl-2">
-            <%= k %> <small>x</small> <span class="badge badge-light"><%= v %></span>
-          </button>
-        <% end %>
-      <% end %>
-      <br />
-      <% if gym.tags.present? %>
-      <strong>Tags</strong>:
-        <% gym.tags_counter.sort_by {|k,v| v}.reverse.each do |k,v| %>
-          <button type="button" class="btn btn-secondary pl-2">
-            <%= k %> <small>x</small> <span class="badge badge-light"><%= v %></span>
-          </button>
-        <% end %>
-      <% end %>
-    </div>
   </div>
