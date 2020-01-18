@@ -5,7 +5,7 @@
       <div class="row justify-content-between">
         <div class="col-6 align-top">
           <%= "Phone: #{gym.phone}" if gym.phone.present? %><br />
-          <%= link_to gym.presentable_address, "https://google.com/maps/search/#{gym.presentable_address}" %><br />
+          <%= link_to gym.presentable_address, "https://google.com/maps/search/#{gym.presentable_address}" if gym.presentable_address.present? %><br />
         </div>
 
         <div class="col-6 align-top text-right">
@@ -22,6 +22,8 @@
 
       <div class="row">
         <div class="col">
+
+        <% unless @gym.reviews.count.zero? %>
           <div class="row">
             <div class="col-4"><h4>Rating</h4></div>
             <div class="col-8 pt-1">
@@ -75,6 +77,9 @@
           </div>
           <% end %>
 
+    <% else %>
+        No reviews yet. If you've been here, leave a review below.
+    <% end %>
         </div>
       </div>
     </div>
@@ -91,6 +96,7 @@
     });
             </script>
         <% end %>
+        </div>
       <% end %>
       </p>
     </div>
@@ -98,5 +104,3 @@
   </div>
 
   <br />
-
-  </div>
