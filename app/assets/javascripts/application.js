@@ -28,4 +28,5 @@
 //= require_self
 //= require_tree .
 //
+//= require "slider"
 //= require "easy-autocomplete/jquery.easy-autocomplete"
