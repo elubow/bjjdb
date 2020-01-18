@@ -23,17 +23,19 @@
       <div class="row">
         <div class="col">
           <div class="row">
-            <div class="col">
-              Rating: <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) <br />
+            <div class="col-4"><h4>Rating</h4></div>
+            <div class="col-8 pt-1">
+              <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) <br />
             </div>
           </div>
 
           <div class="row mt-2">
-            <div class="col-4">Roll Type:</div>
-            <div class="col-8 text-center">
-              <input id="roll_slider" type="range" mix="0" max="5" value="<%= gym.roll_type %>"><br />
-              <small>Closer to 1 flow rolls and closer to 5 is hard rolls</small>
+            <div class="col-4"><h4>Roll Type</h4></div>
+            <div class="col-1 pt-1"><strong>Flow</strong></div>
+            <div class="col-5 pt-1">
+              <input id="roll_slider" type="range" mix="0" max="5" value="<%= gym.roll_type %>" disabled>
             </div>
+            <div class="col-2 pt-1 text-left"><strong>Competition</strong></div>
           </div>
 
           <% if gym.drop_in_fee_reported.present? %>
