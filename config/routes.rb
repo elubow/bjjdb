@@ -27,6 +27,18 @@ Rails.application.routes.draw do
   resources :comments
   get 'notebook', controller: :private_notes, action: :notebook
   resources :tags
+  resources :reviews
+  get 'gyms/admin_index', controller: :gyms, action: :admin_index
+  resources :gyms do
+    put :publish
+    put :unpublish
+    put :flag
+    put :reject
+    put :verify
+    collection do
+      get 'search'
+    end
+  end
   resources :links do
     post :ratings, to: 'ratings#rate'
     patch :ratings, to: 'ratings#rate'

@@ -3,6 +3,8 @@
   <h1 class="mt-4">User</h1>
   <p>Name: <%= @user.name if @user.name %></p>
   <p>Email: <%= @user.email if @user.email %></p>
+  <p>Belt: <%= @user.belt if @user.belt %></p>
+  <p>Gender: <%= @user.gender if @user.gender %></p>
   <p>Level: <%= @user.role.capitalize %></p>
   <p>Favorites: <%= link_to @user.favorites.count, user_favorites_path(@user) %></p>
 

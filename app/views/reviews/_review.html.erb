@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-8 ml-2">
+    <% if current_user and current_user.id == review.user_id %>
+      <div>
+        <p>
+          Actions:
+          <%= link_to 'Edit', edit_review_path(review) %> | 
+          <%= link_to 'Delete', review_path(review), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </p>
+      </div>
+    <% end %>
+
+    <% if review.home_gym == true %>
+      <strong>Home Gym</strong><br />
+    <% end %>
+
+    <% if review.drop_in_date.present? %>
+      <strong>Dropped In On</strong>: <%= review.drop_in_date.strftime("%b %d, %Y") %> (<%= time_ago_in_words(review.drop_in_date) %> ago)<br />
+    <% end %>
+
+    <strong>Stars</strong>: <%= review.stars %><br />
+    <% if review.drop_in_fee.present? %>
+      <strong>Drop In Fee</strong>: <%= review.drop_in_fee.currency.symbol %> <%= review.drop_in_fee %> (<%= review.drop_in_fee.currency.iso_code %>)<br />
+    <% end %>
+    <strong>Posted by</strong>:
+      <%= link_to review.user.name, review.user %>,
+      <%= review.user.gender if review.user.gender %>
+      <%= review.user.belt if review.user.belt %>
+
+    <% if review.languages.length > 0 %>
+      <p>
+        <strong>Languages</strong>: <%= review.languages.join(', ') %>
+      </p>
+    <% end %>
+
+    <% if review.tags.length > 0 %>
+      <p>
+        <strong>Tags</strong>: <%= review.tags.join(', ') %>
+      </p>
+    <% end %>
+
+    <p><strong>Review</strong>: <%= review.body %></p>
+    <p>last updated <%= time_ago_in_words(review.updated_at) %> ago</p>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+  <div class="row justify-content-between">
+
+    <div class="col-6">
+
+      <div class="row justify-content-between">
+        <div class="col-6 align-top">
+          <%= "Phone: #{gym.phone}" if gym.phone.present? %><br />
+          <%= link_to gym.presentable_address, "https://google.com/maps/search/#{gym.presentable_address}" if gym.presentable_address.present? %><br />
+        </div>
+
+        <div class="col-6 align-top text-right">
+          <%= "Email: #{gym.email}" if gym.email.present? %><br />
+          <%= link_to gym.website if gym.website.present? %><br />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="w-100">
+          <hr />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+
+        <% unless gym.reviews.count.zero? %>
+          <div class="row">
+            <div class="col-4"><h4>Rating</h4></div>
+            <div class="col-8 pt-1">
+              <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>) <br />
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-4"><h4>Roll Type</h4></div>
+            <div class="col-1 pt-1"><strong>Flow</strong></div>
+            <div class="col-5 pt-1">
+              <input id="roll_slider" type="range" mix="0" max="5" value="<%= gym.roll_type %>" disabled>
+            </div>
+            <div class="col-2 pt-1 text-left"><strong>Competition</strong></div>
+          </div>
+
+          <% if gym.drop_in_fee_reported.present? %>
+          <div class="row mt-2">
+            <div class="col">
+            <%= pluralize(gym.drop_in_fee_reported.size, "person") %> reported a drop in fee.
+            </div>
+          </div>
+          <% end %>
+
+          <div class="row mt-auto">
+          </div>
+    
+          <% if gym.tags.present? %>
+          <div class="row align-items-start mt-2">
+            <div class="col">
+              <strong>Tags</strong>:
+                <% gym.tags_counter.sort_by {|k,v| v}.reverse.each do |k,v| %>
+                  <button type="button" class="btn btn-secondary pl-2">
+                    <%= k %> <small>x</small> <span class="badge badge-light"><%= v %></span>
+                  </button>
+                <% end %>
+            </div>
+          </div>
+          <% end %>
+
+          <% if gym.languages.present? %>
+          <div class="row align-items-end mt-2">
+            <div class="col">
+              <strong>Languages</strong>:
+                <% gym.languages_counter.sort_by {|k,v| v}.reverse.each do |k,v| %>
+                  <button type="button" class="btn btn-secondary pl-2">
+                    <%= k %> <small>x</small> <span class="badge badge-light"><%= v %></span>
+                  </button>
+            <% end %>
+            </div>
+          </div>
+          <% end %>
+
+    <% else %>
+        No reviews yet. If you've been here, leave a review below.
+    <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6 text-right mt-auto">
+      <p>
+      <% if gym.has_coordinates? %>
+        <div id="map" style="width:100%;height:350px;">
+        <% provide :head_tags do %>
+            <meta name='turbolinks-visit-control' content='reload'>
+            <script>
+              document.addEventListener("DOMContentLoaded", function(){
+                initGymMapWithMarker("<%= gym.name.html_safe %>", <%= gym.latitude %>, <%= gym.longitude %>)
+    });
+            </script>
+        <% end %>
+        </div>
+      <% end %>
+      </p>
+    </div>
+
+  </div>
+
+  <br />

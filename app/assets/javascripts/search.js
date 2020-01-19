@@ -20,6 +20,10 @@ document.addEventListener("turbolinks:load", function() {
       {
         listLocation: "instructors",
         header: "<span>Instructors</span>"
+      },
+      {
+        listLocation: "gyms",
+        header: "<span>Gyms</span>"
       }
     ],
     list: {

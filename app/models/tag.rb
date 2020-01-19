@@ -23,10 +23,6 @@ class Tag < ApplicationRecord
     escape learn flow pass
   )
 
-  def self.send_chain(methods)
-    methods.inject(self, :send)
-  end
-
   def clean_name
     self.name.gsub('-', ' ').titleize
   end

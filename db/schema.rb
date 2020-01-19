@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_09_122644) do
+ActiveRecord::Schema.define(version: 2020_01_14_214931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,26 @@ ActiveRecord::Schema.define(version: 2019_05_09_122644) do
     t.datetime "updated_at", null: false
     t.index ["link_id"], name: "index_favorites_on_link_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "gyms", force: :cascade do |t|
+    t.string "name"
+    t.string "website"
+    t.string "phone"
+    t.string "email"
+    t.string "affiliation"
+    t.string "address_1"
+    t.string "address_2"
+    t.string "city"
+    t.string "state"
+    t.string "postal_code"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "address_full"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.string "aasm_state"
   end
 
   create_table "impressions", force: :cascade do |t|
@@ -141,6 +161,24 @@ ActiveRecord::Schema.define(version: 2019_05_09_122644) do
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "stars"
+    t.text "body"
+    t.bigint "user_id"
+    t.bigint "gym_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "home_gym", default: false
+    t.text "languages", default: [], array: true
+    t.text "tags", default: [], array: true
+    t.integer "roll_type"
+    t.integer "drop_in_fee_cents"
+    t.string "drop_in_fee_currency", default: "USD", null: false
+    t.date "drop_in_date"
+    t.index ["gym_id"], name: "index_reviews_on_gym_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "category"
     t.string "name"
@@ -181,6 +219,8 @@ ActiveRecord::Schema.define(version: 2019_05_09_122644) do
     t.string "provider"
     t.string "uid"
     t.text "image"
+    t.string "gender"
+    t.integer "belt"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -193,5 +233,7 @@ ActiveRecord::Schema.define(version: 2019_05_09_122644) do
   add_foreign_key "private_notes", "users"
   add_foreign_key "ratings", "links"
   add_foreign_key "ratings", "users"
+  add_foreign_key "reviews", "gyms"
+  add_foreign_key "reviews", "users"
   add_foreign_key "thumbnails", "links"
 end

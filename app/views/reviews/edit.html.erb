@@ -1,0 +1,10 @@
+<div class="col">
+
+  <h1 class="mt-4">Edit Review</h1>
+
+  <%= link_to 'Show', @review %> |
+  <%= link_to 'Back', gym_path(@review.gym_id) %>
+
+  <%= render 'form', review: @review %>
+
+</div>
