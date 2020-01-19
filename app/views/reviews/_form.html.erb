@@ -15,72 +15,95 @@
     <h5 class="card-header">Share your Thoughts</h5>
 
     <div class="card-body">
-      <div class="form-group form-check">
-        <p>
-          <%= form.check_box :home_gym, :class => 'form-check-input' %> I train here regularly<br />
-        </p>
-        <p>
+      <div class="form-group form-check-inline row">
+        <div class="col-5">
           <strong>When were you here?</strong>
           <%= form.date_field :drop_in_date %>
-        </p>
+        </div>
+        <div class="col-2">
+          <strong>OR</strong>
+        </div>
+        <div class="col-5">
+          <%= form.check_box :home_gym, :class => 'form-check-input' %> I train here regularly
+        </div>
       </div>
 
-      <div class="form-group form-check">
-        <p>
-          <strong>Drop-in fee?</strong>
-          <%= form.select :drop_in_fee_currency, Review.currency_codes %>
-          <%= form.text_field :drop_in_fee, :class => 'form-check-input' %>
+      <div class="form-row">
+        <div class="col-2">
+          <strong>Drop-in fee?</strong><br />
           <small class="ml-2">Leave blank for none</small>
-        </p>
+        </div>
+        <div class="col-1">
+          <%= form.text_field :drop_in_fee, :class => 'form-control' %>
+        </div>
+        <div class="col mt-1">
+          <%= form.select :drop_in_fee_currency, Review.currency_codes %>
+        </div>
       </div>
 
-      <div class="form-group form-check form-check-inline">
-        <strong>How was the gym?</strong>(<small>5 is best</small>)
-        &nbsp; <%= form.radio_button :stars, '1', :class => 'form-check-input' %> 1
-        &nbsp; <%= form.radio_button :stars, '2', :class => 'form-check-input' %> 2
-        &nbsp; <%= form.radio_button :stars, '3', :class => 'form-check-input' %> 3
-        &nbsp; <%= form.radio_button :stars, '4', :class => 'form-check-input' %> 4
-        &nbsp; <%= form.radio_button :stars, '5', :class => 'form-check-input' %> 5
+      <div class="row form-group mt-2">
+        <div class="col-2">
+          <strong>How was the gym?</strong><br />
+          <small>5 is best</small>
+        </div>
+        <div class="col-2 starrating d-flex justify-content-start flex-row-reverse align-items-start mr-2">
+          <input type="radio" id="star5" name="review[stars]" value="5" /><label for="star5" title="5 star"></label>
+          <input type="radio" id="star4" name="review[stars]" value="4" /><label for="star4" title="4 star"></label>
+          <input type="radio" id="star3" name="review[stars]" value="3" /><label for="star3" title="3 star"></label>
+          <input type="radio" id="star2" name="review[stars]" value="2" /><label for="star2" title="2 star"></label>
+          <input type="radio" id="star1" name="review[stars]" value="1" /><label for="star1" title="1 star"></label>
+        </div>
+        <div class="col">&nbsp;</div>
       </div>
 
-      <br />
-
-      <div class="form-group form-check form-check-inline">
-        <strong>How were the rolls?</strong>
-        <small class="ml-2 mr-1">Flow Rolls</small>
-        &nbsp; <%= form.radio_button :roll_type, '1', :class => 'form-check-input' %> 1
-        &nbsp; <%= form.radio_button :roll_type, '2', :class => 'form-check-input' %> 2
-        &nbsp; <%= form.radio_button :roll_type, '3', :class => 'form-check-input' %> 3
-        &nbsp; <%= form.radio_button :roll_type, '4', :class => 'form-check-input' %> 4
-        &nbsp; <%= form.radio_button :roll_type, '5', :class => 'form-check-input' %> 5
-        <small class="ml-1">Competition Rolls</small>
+      <div class="form-group row">
+        <div class="col-2">
+          <strong>How were the rolls?</strong><br />
+          <small>What type of sparring did most people do?</small>
+        </div>
+        <div class="col form-check-inline">
+          <small class="ml-2 mr-1">Flow Rolls</small>
+          &nbsp; <%= form.radio_button :roll_type, '1', :class => 'form-check-input' %> 1
+          &nbsp; <%= form.radio_button :roll_type, '2', :class => 'form-check-input' %> 2
+          &nbsp; <%= form.radio_button :roll_type, '3', :class => 'form-check-input' %> 3
+          &nbsp; <%= form.radio_button :roll_type, '4', :class => 'form-check-input' %> 4
+          &nbsp; <%= form.radio_button :roll_type, '5', :class => 'form-check-input' %> 5
+          <small class="ml-1">Competition Rolls</small>
+        </div>
       </div>
 
-       <div class="form-group form-row">
-        <%= form.label :languages, class: 'col-form-label-lg' %>
-        <%= form.select :languages,
-          Review::Languages.sort,
-            { },
-            { multiple: true }
+      <div class="form-group row mt-3">
+        <div class="col-2">
+          <strong>Languages</strong><br />
+          <small>Which languages are used here?</small>
+        </div>
+        <div class="col-10">
+          <%= form.select :languages,
+            Review::Languages.sort,
+              { },
+              { multiple: true }
           %>
-        <small id="review_languages_help" class="form-text text-muted">Add a list of languages that the instructors speak/teach class in.</small>
-        
+        </div>
       </div>
 
-      <div class="form-group form-row">
-        <%= form.label :tags, class: 'col-form-label-lg' %>
-        <%= form.select :tags,
-          Review::Tags.sort,
-            { },
-            { multiple: true }
-          %>
-        <small id="review_tags_help" class="form-text text-muted">A list of tags that most applies to your experience at this gym.</small>
-        
+      <div class="form-group row mt-3">
+        <div class="col-2">
+          <strong>Languages</strong><br />
+          <small>Add some tags that describe the gym experience.</small>
+        </div>
+        <div class="col-10">
+          <%= form.select :tags,
+            Review::Tags.sort,
+              { },
+              { multiple: true }
+            %>
+        </div> 
       </div>
 
       <div class="form-group">
-        <strong>Body</strong>
-        <%= form.text_area :body, id: :review_body, class: 'form-control' %>
+        <strong>Review <small>(optional)</small></strong>
+        <small id="review_body_help" class="form-text text-muted">The review text is completely optional. Your review should be helpful to others.</small>
+        <%= form.text_area :body, id: :review_body, :rows => 4, class: 'form-control' %>
       </div>
 
       <%= form.hidden_field :user_id, value: current_user.id %>

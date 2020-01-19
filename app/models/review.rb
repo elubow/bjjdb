@@ -165,6 +165,9 @@ class Review < ApplicationRecord
     'competition gym',
     'traditional gym',
 
+    'shower',
+    'changing room',
+
     'leglock friendly'
   ].freeze
 

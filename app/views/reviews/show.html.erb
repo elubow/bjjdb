@@ -1,6 +1,7 @@
 <% title "#{@review.gym.name} review by #{@review.user.belt} belt #{@review.user.name}" %>
 
-<div class="col-lg-8">
+<div class="col">
+
   <h1 class="mt-4"><%= "#{@review.gym.name} review by #{@review.user.belt} belt #{@review.user.name}" %></h1>
   
     <%= render partial: 'gyms/gym_header', locals: { gym: @review.gym } %>
