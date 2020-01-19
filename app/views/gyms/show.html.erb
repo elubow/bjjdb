@@ -2,7 +2,10 @@
 <% description truncate(@gym.name, length: 254, separator: /\w+/) %>
 
 <div class="col-12">
-  <h1 class="mt-4"><%= @gym.name %></h1>
+
+  <%= link_to 'Back', gyms_path %>
+
+  <h1 class="mt-2"><%= @gym.name %></h1>
 
   <%= render partial: 'gyms/gym_header', locals: { gym: @gym } %>
   <hr />
