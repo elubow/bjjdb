@@ -3,7 +3,7 @@
     <tr>
       <th>Gym Name</th>
       <th>Rating</th>
-      <th>Primary Language</th>
+      <th>Primary Languages</th>
       <th>Affiliation</th>
       <th>Location</th>
     </tr>
@@ -14,9 +14,18 @@
       <tr>
         <td><%= link_to gym.name, gym %></td>
         <td>
-          <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>)
+          <% if !gym.reviews.empty? %>
+            <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>)
+          <% end %>
         </td>
-        <td><%= gym.primary_language if gym.primary_language.present? %></td>
+        <td>
+          <% if gym.primary_languages %>
+            <% gym.primary_languages.each do |lng| %>
+              <button type="button" class="btn btn-secondary pl-2 ml-1"><%= lng.first %></button>
+
+            <% end %>
+          <% end %>
+        </td>
         <td><%= gym.affiliation if gym.affiliation.present? %></td>
         <td>
           <%= gym.pretty_city_state_country if gym.pretty_city_state_country.present? %>

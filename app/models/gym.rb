@@ -77,8 +77,8 @@ class Gym < ApplicationRecord
       true : false
   end
 
-  def primary_language
-    self.reviews.pluck(:languages).flatten.group_by {|lng|  lng}.values.max_by(&:size).first rescue nil
+  def primary_languages
+    self.reviews.pluck(:languages).flatten.inject(Hash.new(0)) {|h,v|  h[v] += 1; h}.sort_by(&:values_at)[0..1]
   end
 
   def languages

@@ -59,9 +59,7 @@
       <div class="col">
         <strong>Tags</strong>:
           <% review.tags.sort_by {|k,v| v}.reverse.each do |k,v| %>
-            <button type="button" class="btn btn-secondary pl-2 ml-1 mb-1">
-              <%= k %> <small>x</small> <span class="badge badge-light"><%= v %></span>
-            </button>
+            <button type="button" class="btn btn-secondary pl-2 ml-1 mb-1"><%= k %></button>
           <% end %>
       </div>
     </div>
@@ -72,9 +70,7 @@
       <div class="col">
         <strong>Languages</strong>:
           <% review.languages.sort_by {|k,v| v}.reverse.each do |k,v| %>
-            <button type="button" class="btn btn-secondary pl-2 ml-1 mb-1">
-              <%= k %> <small>x</small> <span class="badge badge-light"><%= v %></span>
-            </button>
+            <button type="button" class="btn btn-secondary pl-2 ml-1 mb-1"><%= k %></button>
       <% end %>
       </div>
     </div>
