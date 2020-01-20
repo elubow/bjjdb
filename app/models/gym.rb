@@ -77,6 +77,10 @@ class Gym < ApplicationRecord
       true : false
   end
 
+  def primary_language
+    self.reviews.pluck(:languages).flatten.group_by {|lng|  lng}.values.max_by(&:size).first rescue nil
+  end
+
   def languages
     self.reviews.pluck(:languages).flatten.reject(&:empty?)
   end
@@ -104,6 +108,16 @@ class Gym < ApplicationRecord
   def has_coordinates?
     return true if self.latitude.present? and self.longitude.present?
     false
+  end
+
+  def pretty_city_state_country
+    if self.city.present? and self.state.present? and self.country.present?
+      "#{self.city}, #{self.state}, #{self.country}"
+    elsif self.city.present? and self.country.present?
+      "#{self.city}, #{self.country}"
+    elsif self.country.present?
+      self.country
+    end
   end
 
   def presentable_address
