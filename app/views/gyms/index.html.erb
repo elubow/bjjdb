@@ -13,7 +13,7 @@
 
   <%= form_with url: search_gyms_path, method: :get do |f|%>
     <div class="form-group row">
-      <label class="col-form-label col-1 text-right"><h6>Search</h6></label>
+      <label class="col-form-label col-1 text-right"><h5>Search</h5></label>
       <div class="col-3">
         <%= f.text_field :gym_search, class: 'form-control' %>
         <div style="display:none;"><%= f.submit id: 'submit-search' %></div>

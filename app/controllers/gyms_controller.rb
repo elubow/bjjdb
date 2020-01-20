@@ -61,7 +61,7 @@ class GymsController < ApplicationController
 
     respond_to do |format|
       if @gym.save
-        format.html { redirect_to gyms_path, notice: 'Gym added.' }
+        format.html { redirect_to gyms_path, notice: "#{@gym.name} has been added to our database. It will be temporarily live for you to add a review and then must be verified by the admins. Thank you for your support." }
         format.json { render :show, status: :created, location: @gym }
       else
         format.html { render :new }

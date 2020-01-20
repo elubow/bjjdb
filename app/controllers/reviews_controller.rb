@@ -61,7 +61,7 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @gym, notice: 'Thanks for your review. It is currently in moderation and should appear soon.' }
+        format.html { redirect_to @gym, notice: 'Thanks for your review.' }
         format.json { render :show, status: :created, location: @gym }
       else
         format.html { redirect_to @gym, notice: 'Review add failed.' }
