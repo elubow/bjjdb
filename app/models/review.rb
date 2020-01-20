@@ -7,6 +7,10 @@ class Review < ApplicationRecord
   validates :stars, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
   validates :roll_type, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
 
+  # I hate that I have to do this
+  before_save :clean_languages
+  before_save :clean_tags
+
   def self.currency_codes
     currencies = []
     Money::Currency.table.values.each do |currency|
@@ -178,4 +182,14 @@ class Review < ApplicationRecord
     end
     rv
   end
+
+  private
+
+    def clean_languages
+      self.languages = self.languages.delete_if {|lng|  lng.empty?}
+    end
+
+    def clean_tags
+      self.tags = self.tags.delete_if {|tag|  tag.empty?}
+    end
 end
