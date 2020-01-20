@@ -61,7 +61,7 @@ class GymsController < ApplicationController
 
     respond_to do |format|
       if @gym.save
-        format.html { redirect_to root_path, notice: 'Gym added.' }
+        format.html { redirect_to gyms_path, notice: 'Gym added.' }
         format.json { render :show, status: :created, location: @gym }
       else
         format.html { render :new }

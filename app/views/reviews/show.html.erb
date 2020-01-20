@@ -2,6 +2,12 @@
 
 <div class="col">
 
+  <%= link_to "Grip Advisor", gyms_path %>
+  &gt;
+  <%= link_to @review.gym.name, gym_path(@review.gym) %>
+  &gt;
+  My Review
+
   <h1 class="mt-4"><%= "#{@review.gym.name} review by #{@review.user.belt} belt #{@review.user.name}" %></h1>
   
     <%= render partial: 'gyms/gym_header', locals: { gym: @review.gym } %>

@@ -25,7 +25,8 @@ class ReviewPolicy
   end
 
   def show?
-    true
+    !@current_user.nil? and
+      (@current_user.admin? or @current_user.moderator?)
   end
 
   def destroy?

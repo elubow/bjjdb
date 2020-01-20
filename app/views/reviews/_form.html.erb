@@ -77,7 +77,7 @@
           <strong>Languages</strong><br />
           <small>Which languages are used here?</small>
         </div>
-        <div class="col-10">
+        <div class="col-10 mt-1">
           <%= form.select :languages,
             Review::Languages.sort,
               { },
@@ -88,10 +88,10 @@
 
       <div class="form-group row mt-3">
         <div class="col-2">
-          <strong>Languages</strong><br />
+          <strong>Tags</strong><br />
           <small>Add some tags that describe the gym experience.</small>
         </div>
-        <div class="col-10">
+        <div class="col-10 mt-3">
           <%= form.select :tags,
             Review::Tags.sort,
               { },

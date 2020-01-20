@@ -11,6 +11,11 @@
   <hr />
 
   <h2 class="mt-4"><%= pluralize(@reviews.count, 'Review') %></h2>
+  <p class="p-1" style="border:2px solid gray;width:60%;">
+  We aren't publically showing the actual review body text right now.
+  The goal is to get a general idea of the gym without getting specific bias.
+  The reviews may become public in the future.
+  </p>
   <% if current_user %>
     <% if @gym.reviewed_by?(current_user) %>
       You have already reviewed this gym. Would you like to <%= link_to 'update your review', edit_review_path(@gym.current_user_review_id(current_user)) %>?
