@@ -15,7 +15,7 @@
         <td><%= link_to gym.name, gym %></td>
         <td>
           <% if !gym.reviews.empty? %>
-            <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'ratings') %>)
+            <%= gym.average_stars %> stars (<%= pluralize(gym.total_times_rated, 'rating') %>)
           <% end %>
         </td>
         <td>
