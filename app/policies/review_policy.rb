@@ -7,12 +7,13 @@ class ReviewPolicy
   end
 
   def index?
-    true
+    !@current_user.nil? and
+      (@current_user.admin? or @current_user.moderator?)
   end
 
   def edit?
     !@current_user.nil? and
-      (@current_user.admin? or @current_user.moderator?)
+      (@current_user.admin? or @current_user.moderator? or @current_user.id = @review.user_id)
   end
 
   def create?
@@ -21,17 +22,17 @@ class ReviewPolicy
 
   def update?
     !@current_user.nil? and
-      (@current_user.admin? or @current_user.moderator?)
+      (@current_user.admin? or @current_user.moderator? or @current_user.id = @review.user_id)
   end
 
   def show?
     !@current_user.nil? and
-      (@current_user.admin? or @current_user.moderator?)
+      (@current_user.admin? or @current_user.moderator? or @current_user.id = @review.user_id)
   end
 
   def destroy?
     !@current_user.nil? and
-      (@current_user.id == @review.user_id)
+      (@current_user.admin? or (@current_user.id == @review.user_id))
   end
 
 end

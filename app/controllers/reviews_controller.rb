@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
   # GET /reviews
   # GET /reviews.json
   def index
-    @pagy, @reviews = pagy(Link.order(created_at: :desc), items: 25)
+    @pagy, @reviews = pagy(Review.order(created_at: :desc), items: 25)
     authorize @reviews
   end
 

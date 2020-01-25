@@ -1,0 +1,14 @@
+<div class="col">
+  <h1 class="mt-4">Reviews</h1>
+
+  <div class="row mb-4">
+    <div class="col">Total Reviews: <%= Review.count %></div>
+  </div>
+
+   <div id="review-display"><%= render partial: 'reviews/list', locals: { reviews: @reviews } %></div>
+
+  <div id="pages-nav" class="d-flex justify-content-center">
+    <%== pagy_nav_bootstrap(@pagy) %>
+  </div>
+  
+</div>
