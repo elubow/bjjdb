@@ -26,10 +26,13 @@ document.addEventListener("turbolinks:load", function() {
       components_by_type[c.types[0]] = c;
     }
   
-    var address_1 = document.getElementById('address_1');
-    if (address_1) {
-      address_1.value = components_by_type.street_number.long_name + " "  + components_by_type.route.long_name;
+    // country is first so we definitely get it in case of errors
+    var address_country = document.getElementById('address_country');
+    if (address_country) {
+      address_country.value = components_by_type.country.long_name;
     }
+
+    // then city
     var address_city = document.getElementById('address_city');
     if (address_city) {
       if (components_by_type.locality) {
@@ -38,6 +41,12 @@ document.addEventListener("turbolinks:load", function() {
         address_city.value = components_by_type.postal_town.long_name;
       }
     }
+
+    // then route/street
+    var address_1 = document.getElementById('address_1');
+    if (address_1) {
+      address_1.value = components_by_type.street_number.long_name + " "  + components_by_type.route.long_name;
+    }
     var address_state = document.getElementById('address_state');
     if (address_state) {
       address_state.value = components_by_type.administrative_area_level_1.long_name;
@@ -45,10 +54,6 @@ document.addEventListener("turbolinks:load", function() {
     var address_postal_code = document.getElementById('address_postal_code');
     if (address_postal_code) {
       address_postal_code.value = components_by_type.postal_code.long_name;
-    }
-    var address_country = document.getElementById('address_country');
-    if (address_country) {
-      address_country.value = components_by_type.country.long_name;
     }
   }
 
