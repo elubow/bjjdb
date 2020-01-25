@@ -47,6 +47,26 @@ class GymsController < ApplicationController
     @review = @gym.reviews.build
   end
 
+  # GET /gyms/1/edit
+  def edit
+    authorize @gym
+  end
+
+  # PATCH/PUT /gyms/1
+  # PATCH/PUT /gyms/1.json
+  def update
+    authorize @gym
+    respond_to do |format|
+      if @gym.update(gym_params)
+        format.html { redirect_to @gym, notice: 'Gym updated.' }
+        format.json { render :show, status: :ok, location: @gym }
+      else
+        format.html { render :edit }
+        format.json { render json: @gym.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # GET /gyms/new
   def new
     @gym = Gym.new
@@ -102,7 +122,7 @@ class GymsController < ApplicationController
     end
 
     def gym_params
-      params.require(:gym).permit(:name, :address_full, :address_1, :address_2, :city, :state, :postal_code, :country, :website, :phone, :email, :affiliation)
+      params.require(:gym).permit(:name, :address_full, :address_1, :address_2, :city, :state, :postal_code, :country, :latitude, :longitude, :website, :phone, :email, :affiliation)
     end
 
 end

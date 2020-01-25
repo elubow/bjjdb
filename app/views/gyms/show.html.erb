@@ -4,6 +4,9 @@
 <div class="col-12">
 
   <%= link_to 'Back', gyms_path %>
+  <% if current_user and current_user.admin? %>
+    | <%= link_to 'Edit', edit_gym_path(@gym) %>
+  <% end %>
 
   <h1 class="mt-2"><%= @gym.name %></h1>
 

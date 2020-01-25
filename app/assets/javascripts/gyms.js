@@ -32,7 +32,11 @@ document.addEventListener("turbolinks:load", function() {
     }
     var address_city = document.getElementById('address_city');
     if (address_city) {
-      address_city.value = components_by_type.locality.long_name;
+      if (components_by_type.locality) {
+        address_city.value = components_by_type.locality.long_name;
+      } else if (components_by_type.postal_town) {
+        address_city.value = components_by_type.postal_town.long_name;
+      }
     }
     var address_state = document.getElementById('address_state');
     if (address_state) {

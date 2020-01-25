@@ -23,6 +23,14 @@ class GymPolicy
     false unless @gym.published?
   end
 
+  def edit?
+    !@current_user.nil? and current_user.admin?
+  end
+
+  def update?
+    !@current_user.nil? and current_user.admin?
+  end
+
   def new?
     !@current_user.nil?
   end

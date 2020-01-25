@@ -21,14 +21,27 @@
   </div>
 
   <div class="form-group form-row">
-    <%= form.label :address, class: 'col-form-label-lg' %>
-    <%= form.text_field :address_full, class: 'form-control', required: false, placeholder: 'Enter gym address', id: :autocomplete_address %>
-    <small id="gym_address_full_help" class="form-text text-muted">Use this field to pick an address from Google's auto-complete.</small>
-    <%= form.text_field :address_1, id: :address_1, style: 'display: none;' %>
-    <%= form.text_field :city, id: :address_city, style: 'display: none;' %>
-    <%= form.text_field :state, id: :address_state, style: 'display: none;' %>
-    <%= form.text_field :postal_code, id: :address_postal_code, style: 'display: none;' %>
-    <%= form.text_field :country, id: :address_country, style: 'display: none;' %>
+    <div class="col">
+      <%= form.label :address, class: 'col-form-label-lg' %>
+      <%= form.text_field :address_full, class: 'form-control', required: false, placeholder: 'Enter gym address', id: :autocomplete_address %>
+      <small id="gym_address_full_help" class="form-text text-muted">Use this field to pick an address from Google's auto-complete.</small>
+      <% if current_user.admin? %>
+        <%= form.label :address_1 %> <%= form.text_field :address_1, id: :address_1 %>
+        <%= form.label :address_2 %> <%= form.text_field :address_2, id: :address_2 %>
+        <%= form.label :city %> <%= form.text_field :city, id: :address_city %>
+        <%= form.label :state %> <%= form.text_field :state, id: :address_state %>
+        <%= form.label :postal_code %> <%= form.text_field :postal_code, id: :address_postal_code %>
+        <%= form.label :country %> <%= form.text_field :country, id: :address_country %>
+        <%= form.label :latitude %> <%= form.text_field :latitude %>
+        <%= form.label :longitude %> <%= form.text_field :longitude %>
+      <% else %>
+        <%= form.text_field :address_1, id: :address_1, style: 'display: none;' %>
+        <%= form.text_field :city, id: :address_city, style: 'display: none;' %>
+        <%= form.text_field :state, id: :address_state, style: 'display: none;' %>
+        <%= form.text_field :postal_code, id: :address_postal_code, style: 'display: none;' %>
+        <%= form.text_field :country, id: :address_country, style: 'display: none;' %>
+      <% end %>
+    </div>
   </div>
 
   <div class="form-group form-row">
