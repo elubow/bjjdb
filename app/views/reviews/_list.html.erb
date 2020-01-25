@@ -1,7 +1,9 @@
 <table class="table">
   <thead>
     <tr>
+      <% if current_user.admin? %>
       <th>User</th>
+      <% end %>
       <th>Gym Name</th>
       <th>Rating</th>
       <th>Languages</th>
@@ -13,7 +15,9 @@
   <tbody>
     <% reviews.each do |review| %>
       <tr>
+        <% if current_user.admin? %>
         <td><%= link_to review.user.name, user_path(review.user) %></td>
+        <% end %>
         <td><%= link_to review.gym.name, gym_path(review.gym) %></td>
         <td>
           <% if !review.stars.zero? %>
