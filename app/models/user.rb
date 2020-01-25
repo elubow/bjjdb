@@ -81,4 +81,8 @@ class User < ApplicationRecord
   def favorited?(link)
     favorites.find_by(link_id: link.id).present?
   end
+
+  def has_reviews?
+    self.reviews.count > 0
+  end
 end

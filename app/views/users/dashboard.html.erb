@@ -1,5 +1,19 @@
 <% content_for :title do %>Dashboard<% end %>
 <div class="col">
+  <div class="row">
+    <div class="col">
+      <p class="ml-2 mr-2" style="font-size: 1.1rem">
+      There are lots of ways you can interact with the site.
+      You can search videos below by submission or position.
+      You can search for videos by <%= link_to 'instructors', instructors_path %>.
+      Review gyms with <%= link_to 'Grip Advisor', gyms_path %>.
+      <% if current_user.has_reviews? %>
+      See a map of all the gyms you have reviewed <%= link_to 'here', user_reviews_path(current_user) %>.
+      <% end %>
+      </p>
+    </div>
+  </div>
+
   <%= render partial: 'search/search_bar' %>
 
   <%= render partial: 'shared/dashboard_cards', locals: { links: @links, pagy: @pagy} %>
