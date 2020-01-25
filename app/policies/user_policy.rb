@@ -18,6 +18,10 @@ class UserPolicy
     @current_user == @user
   end
 
+  def reviews?
+    @current_user == @user
+  end
+
   def show?
     @current_user.admin? or @current_user == @user
   end

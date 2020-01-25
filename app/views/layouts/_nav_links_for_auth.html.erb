@@ -3,6 +3,7 @@
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
     <div class="dropdown-menu">
       <%= link_to 'My Profile', user_path(current_user.id), class: 'dropdown-item' %>
+      <%= link_to 'My Reviews', user_reviews_path(current_user.id), class: 'dropdown-item' %>
       <%= link_to 'My Favorites', user_favorites_path(current_user.id), class: 'dropdown-item' %>
       <%= link_to 'Edit Account', edit_user_registration_path, class: 'dropdown-item' %>
       <%= link_to 'Sign out', destroy_user_session_path, :method=>'delete', class: 'dropdown-item' %>

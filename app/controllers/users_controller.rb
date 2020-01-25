@@ -24,6 +24,12 @@ class UsersController < ApplicationController
     authorize @user
   end
 
+  def reviews
+    @user = User.find(params[:user_id])
+    @reviews = Review.where(user: @user)
+    authorize @user
+  end
+
   def update
     @user = User.find(params[:id])
     authorize @user

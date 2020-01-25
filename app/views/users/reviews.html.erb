@@ -1,0 +1,13 @@
+<% content_for :title do %><%= @user.name %> Reviews<% end %>
+<div class="col">
+  <h1 class="mt-4">My Reviews</h1>
+
+  <% if @reviews.count.zero? %>
+    <p>You haven't written any reviews. Review the gyms you've been to by going to <%= link_to 'Grip Advisor', gyms_path %> and finding your gym to write a review.</p>
+  <% else %>
+    <%= render partial: 'users/review_map', locals: { reviews: @reviews } %>
+    <%= render partial: 'reviews/list', locals: { reviews: @reviews } %>
+  <% end %>
+
+</div>
+
