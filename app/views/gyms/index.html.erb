@@ -5,6 +5,25 @@
     We want to help travelers find out what visitng a gym might be like for them.
     Languages, tags, ratings, and other non-address information is a result of user reviews.
   </p>
+
+  <div class="row mb-3">
+    <div class="col-1">&nbsp;</div>
+    <div class="col-10">
+      <div id="map" style="width:100%;height:350px;">
+      <% provide :head_tags do %>
+          <meta name='turbolinks-visit-control' content='reload'>
+          <script>
+            document.addEventListener("DOMContentLoaded", function(){
+              gymMarkers = <%= @all_gyms %>;
+              var map = initIndexMapWithMarkers();
+            });
+          </script>
+      <% end %>
+      </div>
+    </div>
+    <div class="col-1">&nbsp;</div>
+  </div> 
+
   <% if current_user %>
     <p>
       Don't see the gym you visited, add it <%= link_to 'here', new_gym_path %>.

@@ -87,4 +87,24 @@ function initGymMapWithMarker(gymName, lat, lng) {
   });
 }
 
+var gymMarkers = [];
+function initIndexMapWithMarkers() {
+  var mapOptions = {
+    center: new google.maps.LatLng(35,-45),
+    zoom: 2
+  };
+  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+  // Add markers to the map
+  // Set up markers based on the number of elements in the gymMarkers
+  for(var i=0; i<gymMarkers.length; i++){
+    new google.maps.Marker({
+        position: new google.maps.LatLng(gymMarkers[i][0], gymMarkers[i][1]),
+        map: map,
+        title: gymMarkers[i][2],
+        draggable: false
+      });
+  }
+
+  return map;
+}

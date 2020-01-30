@@ -6,6 +6,7 @@ class GymsController < ApplicationController
   # GET /gyms
   # GET /gyms.json
   def index
+    @all_gyms = Gym.all_for_map
     @pagy, @gyms = pagy(Gym.reviewable_gyms.order(created_at: :desc), items: 25)
     authorize @gyms
   end

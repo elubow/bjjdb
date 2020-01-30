@@ -44,8 +44,16 @@ class Gym < ApplicationRecord
   scope :recently_created, -> {unverified.where(created_at: [24.hours.ago..Time.now]) }
   scope :reviewable_gyms, -> {published.or(recently_created)}
 
+  scope :with_lat, -> { where.not(latitude: nil) }
+  scope :with_lng, -> { where.not(longitude: nil) }
+  scope :with_coordinates, -> { with_lat.with_lng }
+
   def self.ransackable_scopes(auth_object = nil)
     [:reviewable_gyms, :recently_created, :published, :unverified]
+  end
+
+  def self.all_for_map
+    reviewable_gyms.with_coordinates.pluck(:latitude, :longitude, :id)
   end
 
   def log_status_change
