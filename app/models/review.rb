@@ -54,6 +54,7 @@ class Review < ApplicationRecord
     "Faeroese",
     "Fiji",
     "Finnish",
+    "Flemish",
     "French",
     "Frisian",
     "Gaelic (Scots Gaelic)",
