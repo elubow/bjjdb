@@ -1,10 +1,14 @@
 <div class="col">
   <h1 class="mt-4">Grip Advisor</h1>
-  <p>
-    Grip Advisor is a place where you can review gyms and add your own personal feel.
-    We want to help travelers find out what visitng a gym might be like for them.
-    Languages, tags, ratings, and other non-address information is a result of user reviews.
-  </p>
+  <div class="row">
+    <div class="col">
+      <p>
+        Grip Advisor is a place where you can review gyms and add your own personal feel.
+        We want to help travelers find out what visitng a gym might be like for them.
+        Languages, tags, ratings, and other non-address information is a result of user reviews.
+      </p>
+    </div>
+  </div>
 
   <div class="row mb-3">
     <div class="col-1">&nbsp;</div>
@@ -24,26 +28,31 @@
     <div class="col-1">&nbsp;</div>
   </div> 
 
-  <% if current_user %>
-    <p>
-      Don't see the gym you visited, add it <%= link_to 'here', new_gym_path %>.
-      There will be a short waiting period while the moderators ensure validity.
-    </p>
-  <% end %>
-
-  <%= form_with url: search_gyms_path, method: :get do |f|%>
-    <div class="form-group row">
-      <label class="col-form-label col-1 text-right"><h5>Search</h5></label>
-      <div class="col-3">
-        <%= f.text_field :gym_search, class: 'form-control' %>
-        <div style="display:none;"><%= f.submit id: 'submit-search' %></div>
-      </div>
-      <div class="col-9">
-      </div>
+  <div class="row mt-2">
+    <div class="col">
+      <%= form_with url: search_gyms_path, method: :get do |f|%>
+        <div class="form-group row">
+          <div class="col-2">
+            <label class="col-form-label col-1 text-right"><h5>Search</h5></label>
+          </div>
+          <div class="col-10">
+            <%= f.text_field :gym_search, class: 'form-control' %>
+            <div style="display:none;"><%= f.submit id: 'submit-search' %></div>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+    <div class="col text-right pt-2">
+      <% if current_user %>
+        <p>
+          Don't see the gym you visited, <%= link_to 'Add It', new_gym_path, class: 'btn btn-primary btn-sm' %>.
+        </p>
+      <% end %>
+    </div>
+  </div>
 
-   <div id="gym-display"><%= render partial: 'gyms/list', locals: { gyms: @gyms } %></div>
+
+  <div id="gym-display"><%= render partial: 'gyms/list', locals: { gyms: @gyms } %></div>
 
   <div id="pages-nav" class="d-flex justify-content-center">
     <%== pagy_nav_bootstrap(@pagy) %>
