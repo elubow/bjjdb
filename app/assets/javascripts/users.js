@@ -9,7 +9,6 @@ function initUserReviewMapWithoutMarkers() {
 
 function addReviewMarkerToUserMap(map, gymName, lat, lng) {
   var gymMarker = new google.maps.Marker({
-    position: gymLatLng,
     position: new google.maps.LatLng(lat, lng),
     animation: google.maps.Animation.DROP,
     map: map,
