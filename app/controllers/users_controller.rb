@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def reviews
     @user = User.find(params[:user_id])
-    @reviews = Review.where(user: @user)
+    @reviews = Review.where(user: @user).order('created_at DESC')
     authorize @user
   end
 
