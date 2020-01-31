@@ -21,6 +21,9 @@
   </div>
 
   <div class="form-group form-row">
+    <% provide :head_tags do %>
+      <meta name='turbolinks-visit-control' content='reload'>
+    <% end %>
     <div class="col">
       <%= form.label :address, class: 'col-form-label-lg' %>
       <%= form.text_field :address_full, class: 'form-control', required: false, placeholder: 'Enter gym address', id: :autocomplete_address %>
