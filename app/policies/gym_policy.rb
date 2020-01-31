@@ -19,8 +19,7 @@ class GymPolicy
   end
 
   def show?
-    return true if @current_user.admin?
-    false unless @gym.published?
+    true if @gym.published?
   end
 
   def edit?
