@@ -6,7 +6,8 @@
     <p>You haven't written any reviews. Review the gyms you've been to by going to <%= link_to 'Grip Advisor', gyms_path %> and finding your gym to write a review.</p>
   <% else %>
     <%= render partial: 'users/review_map', locals: { reviews: @reviews } %>
-    <%= render partial: 'reviews/list', locals: { reviews: @reviews } %>
+    <%= render partial: 'users/review_stats', locals: { reviews: @reviews, this_year: @reviews_this_year, last_year: @reviews_last_year } %>
+    <%= render partial: 'users/review_list', locals: { reviews: @reviews } %>
   <% end %>
 
 </div>

@@ -1,0 +1,48 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Gym Name</th>
+      <th>Rating</th>
+      <th>Languages</th>
+      <th>Tags</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% reviews.each do |review| %>
+      <tr>
+        <td>
+          <%= review.gym.country if review.gym.country.present? %>
+        </td>
+        <td><%= link_to review.gym.name, gym_path(review.gym) %></td>
+        <td>
+          <% if !review.stars.zero? %>
+            <%= review.stars %> stars
+          <% end %>
+        </td>
+        <td>
+          <% if review.languages.present? %>
+            <% review.languages.each do |lng| %>
+              <button type="button" class="btn btn-secondary pl-2 ml-1"><%= lng %></button>
+
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% if review.tags.present? %>
+            <% review.tags.each do |tg| %>
+              <button type="button" class="btn btn-secondary pl-2 ml-1"><%= tg %></button>
+
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to 'Edit', edit_review_path(review), class: 'button' %>
+          <%= link_to 'Show', review_path(review), class: 'button' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

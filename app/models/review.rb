@@ -7,6 +7,9 @@ class Review < ApplicationRecord
   validates :stars, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
   validates :roll_type, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }
 
+  scope :dropped_in, -> { where.not(drop_in_date: nil) }
+  scope :by_year, -> (year) { dropped_in.where('EXTRACT(year FROM drop_in_date) = ?', year) }
+
   # I hate that I have to do this
   before_save :clean_languages
   before_save :clean_tags

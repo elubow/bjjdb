@@ -26,7 +26,9 @@ class UsersController < ApplicationController
 
   def reviews
     @user = User.find(params[:user_id])
-    @reviews = Review.where(user: @user).order('created_at DESC')
+    @reviews = @user.reviews.order('created_at DESC')
+    @reviews_this_year = @user.reviews.by_year(Date.current.year)
+    @reviews_last_year = @user.reviews.by_year(Date.current.year-1)
     authorize @user
   end
 
