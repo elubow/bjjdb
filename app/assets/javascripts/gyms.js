@@ -6,7 +6,7 @@ $(document).ready(function(){
   })
 })
 
-$(document).addEventListener("turbolinks:load", function() {
+document.addEventListener("turbolinks:load", function() {
   function initializeAutocomplete(id) {
     var element = document.getElementById(id);
     if (element) {
