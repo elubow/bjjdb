@@ -19,7 +19,7 @@ class GymPolicy
   end
 
   def show?
-    true if @gym.published?
+    true if @gym.is_reviewable?
   end
 
   def edit?

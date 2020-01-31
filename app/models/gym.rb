@@ -41,7 +41,7 @@ class Gym < ApplicationRecord
     end
   end
 
-  scope :recently_created, -> {unverified.where(created_at: [24.hours.ago..Time.now]) }
+  scope :recently_created, -> {unverified.where(created_at: [48.hours.ago..Time.now]) }
   scope :reviewable_gyms, -> {published.or(recently_created)}
 
   scope :with_lat, -> { where.not(latitude: nil) }
@@ -54,6 +54,10 @@ class Gym < ApplicationRecord
 
   def self.all_for_map
     reviewable_gyms.with_coordinates.pluck(:latitude, :longitude, :id)
+  end
+
+  def is_reviewable?
+    true if self.published? or self.created_at > 48.hours.ago
   end
 
   def log_status_change
